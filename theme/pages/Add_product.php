@@ -379,6 +379,7 @@
                 <li><a href="./home.php">Home</a></li>
                 <li><a href="./Admin_users.php">Users</a></li>
                 <li><a href="./products.php">Products</a></li>
+                <li><a href="./orders.php">Orders</a></li>
               </ul>
             </li>
             <li class="mega-menu mega-menu-sm">

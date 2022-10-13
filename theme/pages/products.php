@@ -649,7 +649,7 @@
                         <tr>
                           <td>Prod-00001</td>
                           <td>Weed master</td>
-                          <td>44545Y64</td>
+                          <td class="badge badge-pill">44545Y64</td>
                           <td>RUE4466564RTT56</td>
                           <td>25/06/2022</td>
                           <td>23/06/2023</td>
