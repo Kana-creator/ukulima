@@ -1,0 +1,43 @@
+
+$theme_color: #7d7;
+$error_color: #d35;
+
+.logo-link {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+
+    .logo {
+        width: 100px;
+        height: 100px;
+        position: absolute;
+        top: -10px;
+    }
+}
+
+.login-input {    
+
+    .form-group {
+        margin-bottom: 30px;
+        border-bottom: 1px solid $theme_color;
+        position: relative;
+        padding: 0 10px;
+
+        #show_password {
+                &:hover {
+                    color: $theme_color;
+                }
+            }
+    }
+
+    .form-group.active {
+        border: 1px solid $error_color;
+    }
+
+    #sign_in_btn{
+        background-color: $theme_color;
+    }
+
+}

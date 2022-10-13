@@ -1,0 +1,67 @@
+$theme_color: #7d7;
+$error_color: #d35;
+
+.logo-link{
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+
+    .logo{
+        width: 100px;
+        height: 100px;
+        position: absolute;
+        top: 10px;
+    }
+}
+
+.login-input{
+
+    .form-group {
+        margin-bottom: 30px;
+        border-bottom: 1px solid $theme_color;
+        position: relative;
+        padding: 0 10px;
+        display: flex;
+        flex-direction: column;
+        border-radius: 3px;
+
+        label{
+            width: fit-content;
+            display: none;
+            sup{
+                color: $error_color;
+            }
+        }
+
+        label.active{
+            display: block;
+        }
+
+        small{
+            color: $error_color;
+            display: none;
+        }
+
+        small.active{
+            display: block;
+        }
+
+        #show_password{
+            &:hover{
+                color: $theme_color;
+            }
+        }
+    }
+
+    .form-group.error {
+        border: 1px solid $error_color;
+    }
+
+
+    #signup_btn{
+        background-color: $theme_color;
+    }
+
+}
