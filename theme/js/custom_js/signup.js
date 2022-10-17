@@ -2,13 +2,14 @@
 $(() => {
     const first_name = document.getElementById("first_name");
     const last_name = document.getElementById("last_name");
-    const email = document.getElementById("email");
-    const telephone = document.getElementById("telephone");
+    const user_email = document.getElementById("user_email");
+    const user_telephone = document.getElementById("user_telephone");
     const user_password = document.getElementById("user_password");
     const confirm_password = document.getElementById("confirm_password");
     const show_password = document.getElementById("show_password");
+    const user_category = document.getElementById("user-category");
 
-    const input_array = [first_name, last_name, email, telephone, user_password, confirm_password];
+    const input_array = [first_name, last_name, user_email, user_telephone, user_password, confirm_password, user_category];
 
     
     // showing error message 

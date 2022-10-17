@@ -370,26 +370,27 @@
       <!--**********************************
             Sidebar start
         ***********************************-->
-      <div class="nk-sidebar">
-        <div class="nk-nav-scroll">
-          <ul class="metismenu" id="menu">
+      <div class="nk-sidebar bg-success">
+        <div class="nk-nav-scroll bg-success">
+          <ul class="metismenu bg-success" id="menu">
             <li class="nav-label">Dashboard</li>
             <li>
               <a
-                class="has-arrow"
+                class="has-arrow bg-success"
                 href="javascript:void()"
-                aria-expanded="false"
+                aria-expanded="fals"
               >
                 <i class="icon-speedometer menu-icon"></i
                 ><span class="nav-text">Dashboard</span>
               </a>
-              <ul aria-expanded="false">
+              <ul aria-expanded="false" class="bg-success">
                 <li><a href="./home.php">Home</a></li>
                 <li><a href="./Admin_users.php">Users</a></li>
                 <li><a href="./products.php">Products</a></li>
+                <li><a href="./orders.php">Orders</a></li>
               </ul>
             </li>
-            <li class="mega-menu mega-menu-sm">
+            <!-- <li class="mega-menu mega-menu-sm">
               <a
                 class="has-arrow"
                 href="javascript:void()"
@@ -487,13 +488,13 @@
                 <li><a href="./ui-progressbar.html">Progressbar</a></li>
                 <li><a href="./ui-tab.html">Tab</a></li>
                 <li><a href="./ui-typography.html">Typography</a></li>
-                <!-- </ul>
+                <!-</ul>
                     </li>
                     <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="icon-layers menu-icon"></i><span class="nav-text">Components</span>
                         </a>
-                        <ul aria-expanded="false"> -->
+                        <ul aria-expanded="false"> 
                 <li><a href="./uc-nestedable.html">Nestedable</a></li>
                 <li><a href="./uc-noui-slider.html">Noui Slider</a></li>
                 <li><a href="./uc-sweetalert.html">Sweet Alert</a></li>
@@ -577,7 +578,7 @@
                   </ul>
                 </li>
               </ul>
-            </li>
+            </li> -->
           </ul>
         </div>
       </div>
@@ -596,7 +597,7 @@
                 <a href="javascript:void(0)">Dashboard</a>
               </li>
               <li class="breadcrumb-item active">
-                <a href="javascript:void(0)">Home</a>
+                <a href="javascript:void(0)">users</a>
               </li>
             </ol>
           </div>
@@ -610,13 +611,17 @@
                 <div class="card-body">
                   <h4 class="card-title">Users</h4>
                   <div class="table-responsive">
-                    <a href="./add_admin_user.php"
-                      ><i
-                        class="fa fa-plus fa-2x btn btn-success"
-                        id="add_user"
-                        title="Add user"
-                      ></i
-                    ></a>
+                    <div id="add_user">
+                      <a href="./add_admin_user.php" class="badge badge-pill gradient-1"
+                        ><i
+                          class="fa fa-plus fa-2x p-2"
+                          id=""
+                          data-toggle="tooltip"
+                          data-placement="top"
+                          title="Add user"
+                        ></i
+                      ></a>
+                    </div>
                     <table
                       class="table table-striped table-bordered zero-configuration"
                     >
@@ -636,6 +641,7 @@
                       </thead>
 
                       <tbody>
+                        <?php for($i=0; $i<=50; $i++): ?>
                         <tr>
                           <td>Emp-00001</td>
                           <td>Kuwebwa Anatoli</td>
@@ -643,464 +649,31 @@
                           <td>+256779320075</td>
                           <td>akuwebwa@gmail.com</td>
                           <td>Nakasero, Kampala</td>
-                          <th id="action_buttons">
+                          <td id="action_buttons">
                             <i
                               class="fa fa-info btn btn-info"
                               id="show-user-details"
+                              data-toggle="tooltip"
+                              data-placement="top"
                               title="Details"
                             ></i>
-                            <a href="/add_admin_user"
+                            <a href="./add_admin_user.php"
                               ><i
                                 class="fa fa-pencil btn btn-primary"
+                                data-toggle="tooltip"
+                                data-placement="top"
                                 title="Edit"
                               ></i
                             ></a>
                             <i
                               class="fa fa-trash btn btn-danger"
+                              data-toggle="tooltip"
+                              data-placement="top"
                               title="Delete"
                             ></i>
-                          </th>
+                          </td>
                         </tr>
-                        <tr>
-                          <td>Emp-00001</td>
-                          <td>Kuwebwa Anatoli</td>
-                          <td>M</td>
-                          <td>+256779320075</td>
-                          <td>akuwebwa@gmail.com</td>
-                          <td>Nakasero, Kampala</td>
-                          <th id="action_buttons">
-                            <i
-                              class="fa fa-info btn btn-info"
-                              title="Details"
-                            ></i>
-                            <i
-                              class="fa fa-pencil btn btn-primary"
-                              title="Edit"
-                            ></i>
-                            <i
-                              class="fa fa-trash btn btn-danger"
-                              title="Delete"
-                            ></i>
-                          </th>
-                        </tr>
-                        <tr>
-                          <td>Emp-00001</td>
-                          <td>Kuwebwa Anatoli</td>
-                          <td>M</td>
-                          <td>+256779320075</td>
-                          <td>akuwebwa@gmail.com</td>
-                          <td>Nakasero, Kampala</td>
-                          <th id="action_buttons">
-                            <i
-                              class="fa fa-info btn btn-info"
-                              title="Details"
-                            ></i>
-                            <i
-                              class="fa fa-pencil btn btn-primary"
-                              title="Edit"
-                            ></i>
-                            <i
-                              class="fa fa-trash btn btn-danger"
-                              title="Delete"
-                            ></i>
-                          </th>
-                        </tr>
-                        <tr>
-                          <td>Emp-00001</td>
-                          <td>Kuwebwa Anatoli</td>
-                          <td>M</td>
-                          <td>+256779320075</td>
-                          <td>akuwebwa@gmail.com</td>
-                          <td>Nakasero, Kampala</td>
-                          <th id="action_buttons">
-                            <i
-                              class="fa fa-info btn btn-info"
-                              title="Details"
-                            ></i>
-                            <i
-                              class="fa fa-pencil btn btn-primary"
-                              title="Edit"
-                            ></i>
-                            <i
-                              class="fa fa-trash btn btn-danger"
-                              title="Delete"
-                            ></i>
-                          </th>
-                        </tr>
-                        <tr>
-                          <td>Emp-00001</td>
-                          <td>Kuwebwa Anatoli</td>
-                          <td>M</td>
-                          <td>+256779320075</td>
-                          <td>akuwebwa@gmail.com</td>
-                          <td>Nakasero, Kampala</td>
-                          <th id="action_buttons">
-                            <i
-                              class="fa fa-info btn btn-info"
-                              title="Details"
-                            ></i>
-                            <i
-                              class="fa fa-pencil btn btn-primary"
-                              title="Edit"
-                            ></i>
-                            <i
-                              class="fa fa-trash btn btn-danger"
-                              title="Delete"
-                            ></i>
-                          </th>
-                        </tr>
-                        <tr>
-                          <td>Emp-00001</td>
-                          <td>Kuwebwa Anatoli</td>
-                          <td>M</td>
-                          <td>+256779320075</td>
-                          <td>akuwebwa@gmail.com</td>
-                          <td>Nakasero, Kampala</td>
-                          <th id="action_buttons">
-                            <i
-                              class="fa fa-info btn btn-info"
-                              title="Details"
-                            ></i>
-                            <i
-                              class="fa fa-pencil btn btn-primary"
-                              title="Edit"
-                            ></i>
-                            <i
-                              class="fa fa-trash btn btn-danger"
-                              title="Delete"
-                            ></i>
-                          </th>
-                        </tr>
-                        <tr>
-                          <td>Emp-00001</td>
-                          <td>Kuwebwa Anatoli</td>
-                          <td>M</td>
-                          <td>+256779320075</td>
-                          <td>akuwebwa@gmail.com</td>
-                          <td>Nakasero, Kampala</td>
-                          <th id="action_buttons">
-                            <i
-                              class="fa fa-info btn btn-info"
-                              title="Details"
-                            ></i>
-                            <i
-                              class="fa fa-pencil btn btn-primary"
-                              title="Edit"
-                            ></i>
-                            <i
-                              class="fa fa-trash btn btn-danger"
-                              title="Delete"
-                            ></i>
-                          </th>
-                        </tr>
-                        <tr>
-                          <td>Emp-00001</td>
-                          <td>Kuwebwa Anatoli</td>
-                          <td>M</td>
-                          <td>+256779320075</td>
-                          <td>akuwebwa@gmail.com</td>
-                          <td>Nakasero, Kampala</td>
-                          <th id="action_buttons">
-                            <i
-                              class="fa fa-info btn btn-info"
-                              title="Details"
-                            ></i>
-                            <i
-                              class="fa fa-pencil btn btn-primary"
-                              title="Edit"
-                            ></i>
-                            <i
-                              class="fa fa-trash btn btn-danger"
-                              title="Delete"
-                            ></i>
-                          </th>
-                        </tr>
-                        <tr>
-                          <td>Emp-00001</td>
-                          <td>Kuwebwa Anatoli</td>
-                          <td>M</td>
-                          <td>+256779320075</td>
-                          <td>akuwebwa@gmail.com</td>
-                          <td>Nakasero, Kampala</td>
-                          <th id="action_buttons">
-                            <i
-                              class="fa fa-info btn btn-info"
-                              title="Details"
-                            ></i>
-                            <i
-                              class="fa fa-pencil btn btn-primary"
-                              title="Edit"
-                            ></i>
-                            <i
-                              class="fa fa-trash btn btn-danger"
-                              title="Delete"
-                            ></i>
-                          </th>
-                        </tr>
-                        <tr>
-                          <td>Emp-00001</td>
-                          <td>Kuwebwa Anatoli</td>
-                          <td>M</td>
-                          <td>+256779320075</td>
-                          <td>akuwebwa@gmail.com</td>
-                          <td>Nakasero, Kampala</td>
-                          <th id="action_buttons">
-                            <i
-                              class="fa fa-info btn btn-info"
-                              title="Details"
-                            ></i>
-                            <i
-                              class="fa fa-pencil btn btn-primary"
-                              title="Edit"
-                            ></i>
-                            <i
-                              class="fa fa-trash btn btn-danger"
-                              title="Delete"
-                            ></i>
-                          </th>
-                        </tr>
-                        <tr>
-                          <td>Emp-00001</td>
-                          <td>Kuwebwa Anatoli</td>
-                          <td>M</td>
-                          <td>+256779320075</td>
-                          <td>akuwebwa@gmail.com</td>
-                          <td>Nakasero, Kampala</td>
-                          <th id="action_buttons">
-                            <i
-                              class="fa fa-info btn btn-info"
-                              title="Details"
-                            ></i>
-                            <i
-                              class="fa fa-pencil btn btn-primary"
-                              title="Edit"
-                            ></i>
-                            <i
-                              class="fa fa-trash btn btn-danger"
-                              title="Delete"
-                            ></i>
-                          </th>
-                        </tr>
-                        <tr>
-                          <td>Emp-00001</td>
-                          <td>Kuwebwa Anatoli</td>
-                          <td>M</td>
-                          <td>+256779320075</td>
-                          <td>akuwebwa@gmail.com</td>
-                          <td>Nakasero, Kampala</td>
-                          <th id="action_buttons">
-                            <i
-                              class="fa fa-info btn btn-info"
-                              title="Details"
-                            ></i>
-                            <i
-                              class="fa fa-pencil btn btn-primary"
-                              title="Edit"
-                            ></i>
-                            <i
-                              class="fa fa-trash btn btn-danger"
-                              title="Delete"
-                            ></i>
-                          </th>
-                        </tr>
-                        <tr>
-                          <td>Emp-00001</td>
-                          <td>Kuwebwa Anatoli</td>
-                          <td>M</td>
-                          <td>+256779320075</td>
-                          <td>akuwebwa@gmail.com</td>
-                          <td>Nakasero, Kampala</td>
-                          <th id="action_buttons">
-                            <i
-                              class="fa fa-info btn btn-info"
-                              title="Details"
-                            ></i>
-                            <i
-                              class="fa fa-pencil btn btn-primary"
-                              title="Edit"
-                            ></i>
-                            <i
-                              class="fa fa-trash btn btn-danger"
-                              title="Delete"
-                            ></i>
-                          </th>
-                        </tr>
-                        <tr>
-                          <td>Emp-00001</td>
-                          <td>Kuwebwa Anatoli</td>
-                          <td>M</td>
-                          <td>+256779320075</td>
-                          <td>akuwebwa@gmail.com</td>
-                          <td>Nakasero, Kampala</td>
-                          <th id="action_buttons">
-                            <i
-                              class="fa fa-info btn btn-info"
-                              title="Details"
-                            ></i>
-                            <i
-                              class="fa fa-pencil btn btn-primary"
-                              title="Edit"
-                            ></i>
-                            <i
-                              class="fa fa-trash btn btn-danger"
-                              title="Delete"
-                            ></i>
-                          </th>
-                        </tr>
-                        <tr>
-                          <td>Emp-00001</td>
-                          <td>Kuwebwa Anatoli</td>
-                          <td>M</td>
-                          <td>+256779320075</td>
-                          <td>akuwebwa@gmail.com</td>
-                          <td>Nakasero, Kampala</td>
-                          <th id="action_buttons">
-                            <i
-                              class="fa fa-info btn btn-info"
-                              title="Details"
-                            ></i>
-                            <i
-                              class="fa fa-pencil btn btn-primary"
-                              title="Edit"
-                            ></i>
-                            <i
-                              class="fa fa-trash btn btn-danger"
-                              title="Delete"
-                            ></i>
-                          </th>
-                        </tr>
-                        <tr>
-                          <td>Emp-00001</td>
-                          <td>Kuwebwa Anatoli</td>
-                          <td>M</td>
-                          <td>+256779320075</td>
-                          <td>akuwebwa@gmail.com</td>
-                          <td>Nakasero, Kampala</td>
-                          <th id="action_buttons">
-                            <i
-                              class="fa fa-info btn btn-info"
-                              title="Details"
-                            ></i>
-                            <i
-                              class="fa fa-pencil btn btn-primary"
-                              title="Edit"
-                            ></i>
-                            <i
-                              class="fa fa-trash btn btn-danger"
-                              title="Delete"
-                            ></i>
-                          </th>
-                        </tr>
-                        <tr>
-                          <td>Emp-00001</td>
-                          <td>Kuwebwa Anatoli</td>
-                          <td>M</td>
-                          <td>+256779320075</td>
-                          <td>akuwebwa@gmail.com</td>
-                          <td>Nakasero, Kampala</td>
-                          <th id="action_buttons">
-                            <i
-                              class="fa fa-info btn btn-info"
-                              title="Details"
-                            ></i>
-                            <i
-                              class="fa fa-pencil btn btn-primary"
-                              title="Edit"
-                            ></i>
-                            <i
-                              class="fa fa-trash btn btn-danger"
-                              title="Delete"
-                            ></i>
-                          </th>
-                        </tr>
-                        <tr>
-                          <td>Emp-00001</td>
-                          <td>Kuwebwa Anatoli</td>
-                          <td>M</td>
-                          <td>+256779320075</td>
-                          <td>akuwebwa@gmail.com</td>
-                          <td>Nakasero, Kampala</td>
-                          <th id="action_buttons">
-                            <i
-                              class="fa fa-info btn btn-info"
-                              title="Details"
-                            ></i>
-                            <i
-                              class="fa fa-pencil btn btn-primary"
-                              title="Edit"
-                            ></i>
-                            <i
-                              class="fa fa-trash btn btn-danger"
-                              title="Delete"
-                            ></i>
-                          </th>
-                        </tr>
-                        <tr>
-                          <td>Emp-00001</td>
-                          <td>Kuwebwa Anatoli</td>
-                          <td>M</td>
-                          <td>+256779320075</td>
-                          <td>akuwebwa@gmail.com</td>
-                          <td>Nakasero, Kampala</td>
-                          <th id="action_buttons">
-                            <i
-                              class="fa fa-info btn btn-info"
-                              title="Details"
-                            ></i>
-                            <i
-                              class="fa fa-pencil btn btn-primary"
-                              title="Edit"
-                            ></i>
-                            <i
-                              class="fa fa-trash btn btn-danger"
-                              title="Delete"
-                            ></i>
-                          </th>
-                        </tr>
-                        <tr>
-                          <td>Emp-00001</td>
-                          <td>Kuwebwa Anatoli</td>
-                          <td>M</td>
-                          <td>+256779320075</td>
-                          <td>akuwebwa@gmail.com</td>
-                          <td>Nakasero, Kampala</td>
-                          <th id="action_buttons">
-                            <i
-                              class="fa fa-info btn btn-info"
-                              title="Details"
-                            ></i>
-                            <i
-                              class="fa fa-pencil btn btn-primary"
-                              title="Edit"
-                            ></i>
-                            <i
-                              class="fa fa-trash btn btn-danger"
-                              title="Delete"
-                            ></i>
-                          </th>
-                        </tr>
-                        <tr>
-                          <td>Emp-00001</td>
-                          <td>Kuwebwa Anatoli</td>
-                          <td>M</td>
-                          <td>+256779320075</td>
-                          <td>akuwebwa@gmail.com</td>
-                          <td>Nakasero, Kampala</td>
-                          <th id="action_buttons">
-                            <i
-                              class="fa fa-info btn btn-info"
-                              title="Details"
-                            ></i>
-                            <i
-                              class="fa fa-pencil btn btn-primary"
-                              title="Edit"
-                            ></i>
-                            <i
-                              class="fa fa-trash btn btn-danger"
-                              title="Delete"
-                            ></i>
-                          </th>
-                        </tr>
+                        <?php endfor; ?>
                       </tbody>
                       <tfoot>
                         <tr>

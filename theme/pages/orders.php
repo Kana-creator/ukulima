@@ -1,44 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Ukulia | Orders</title>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Ukulima | Products</title>
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="../assets/logo.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/logo.PNG" />
     <!-- Custom Stylesheet -->
-    <link href="../css/style.css" rel="stylesheet">
+    <link
+      href="../plugins/tables/css/datatable/dataTables.bootstrap4.min.css"
+      rel="stylesheet"
+    />
+    <link href="../css/style.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/custom_css/products.css" />
+  </head>
 
-</head>
-
-<body>
-
+  <body>
     <!--*******************
         Preloader start
     ********************-->
     <div id="preloader">
-        <div class="loader">
-            <svg class="circular" viewBox="25 25 50 50">
-                <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="3" stroke-miterlimit="10" />
-            </svg>
-        </div>
+      <div class="loader">
+        <img src="../assets/logo.PNG" alt="" class="logo" />
+        <!-- <svg class="circular" viewBox="25 25 50 50">
+          <circle
+            class="path"
+            cx="50"
+            cy="50"
+            r="20"
+            fill="none"
+            stroke-width="3"
+            stroke-miterlimit="10"
+          />
+        </svg> -->
+      </div>
     </div>
     <!--*******************
         Preloader end
     ********************-->
 
-    
     <!--**********************************
         Main wrapper start
     ***********************************-->
     <div id="main-wrapper">
-
-        <!--**********************************
+      <!--**********************************
             Nav header start
         ***********************************-->
-        <div
+      <div
         class="nav-header"
         style="border-bottom: 2px solid green; padding: 0; height: fit-content"
       >
@@ -54,7 +63,7 @@
             align-items: center;
           "
         >
-          <a href="/home.php">
+          <a href="../home.php">
             <b class="logo-abbr"
               ><img
                 src="../assets/logo.png"
@@ -78,14 +87,14 @@
           </a>
         </div>
       </div>
-        <!--**********************************
+      <!--**********************************
             Nav header end
         ***********************************-->
 
-        <!--**********************************
+      <!--**********************************
             Header start
         ***********************************-->
-        <div class="header" style="border-bottom: 5px solid green">
+      <div class="header" style="border-bottom: 5px solid green">
         <div class="header-content clearfix">
           <div class="nav-control">
             <div class="hamburger">
@@ -107,7 +116,7 @@
                 placeholder="Search Dashboard"
                 aria-label="Search Dashboard"
               />
-              <div class="drop-down animated flipInX d-md-none">
+              <div class="drop-down d-md-none">
                 <form action="#">
                   <input
                     type="text"
@@ -120,19 +129,18 @@
           </div>
           <div class="header-right">
             <ul class="clearfix">
-              <li class="icons dropdown">
+              <!-- <li class="icons dropdown">
                 <a href="javascript:void(0)" data-toggle="dropdown">
                   <i class="mdi mdi-email-outline"></i>
-                  <span class="badge badge-pill gradient-1">3</span>
+                  <span class="badge gradient-1 badge-pill badge-primary"
+                    >3</span
+                  >
                 </a>
                 <div class="drop-down animated fadeIn dropdown-menu">
                   <div
                     class="dropdown-content-heading d-flex justify-content-between"
                   >
                     <span class="">3 New Messages</span>
-                    <a href="javascript:void()" class="d-inline-block">
-                      <span class="badge badge-pill gradient-1">3</span>
-                    </a>
                   </div>
                   <div class="dropdown-content-body">
                     <ul>
@@ -211,11 +219,13 @@
                     </ul>
                   </div>
                 </div>
-              </li>
+              </li> -->
               <li class="icons dropdown">
                 <a href="javascript:void(0)" data-toggle="dropdown">
                   <i class="mdi mdi-bell-outline"></i>
-                  <span class="badge badge-pill gradient-2">3</span>
+                  <span class="badge badge-pill gradient-2 badge-primary"
+                    >3</span
+                  >
                 </a>
                 <div
                   class="drop-down animated fadeIn dropdown-menu dropdown-notfication"
@@ -224,9 +234,6 @@
                     class="dropdown-content-heading d-flex justify-content-between"
                   >
                     <span class="">2 New Notifications</span>
-                    <a href="javascript:void()" class="d-inline-block">
-                      <span class="badge badge-pill gradient-2">5</span>
-                    </a>
                   </div>
                   <div class="dropdown-content-body">
                     <ul>
@@ -297,7 +304,7 @@
                 </a>
                 <div
                   class="drop-down dropdown-language animated fadeIn dropdown-menu"
-                 >
+                >
                   <div class="dropdown-content-body">
                     <ul>
                       <li><a href="javascript:void()">English</a></li>
@@ -314,9 +321,7 @@
                   <span class="activity active"></span>
                   <img src="../images/user/1.png" height="40" width="40" alt="" />
                 </div>
-                <div
-                  class="drop-down dropdown-profile animated fadeIn dropdown-menu"
-                >
+                <div class="drop-down dropdown-profile dropdown-menu">
                   <div class="dropdown-content-body">
                     <ul>
                       <li>
@@ -325,12 +330,14 @@
                         >
                       </li>
                       <li>
-                        <a href="javascript:void()">
-                          <i class="icon-envelope-open"></i> <span>Inbox</span>
-                          <div class="badge gradient-3 badge-pill gradient-1">
+                        <a href="email-inbox.html"
+                          ><i class="icon-envelope-open"></i> <span>Inbox</span>
+                          <div
+                            class="badge gradient-3 badge-pill badge-primary"
+                          >
                             3
-                          </div>
-                        </a>
+                          </div></a
+                        >
                       </li>
 
                       <hr class="my-2" />
@@ -352,868 +359,434 @@
           </div>
         </div>
       </div>
-      
-        <!--**********************************
+      <!--**********************************
             Header end ti-comment-alt
         ***********************************-->
 
-        <!--**********************************
+      <!--**********************************
             Sidebar start
         ***********************************-->
-        <div class="nk-sidebar">           
-            <div class="nk-nav-scroll">
-                <ul class="metismenu" id="menu">
-                    <li class="nav-label">Dashboard</li>
-                    <li>
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="icon-speedometer menu-icon"></i><span class="nav-text">Dashboard</span>
-                        </a>
-                        <ul aria-expanded="false">
-                            <li><a href="./index.html">Home 1</a></li>
-                            <!-- <li><a href="./index-2.html">Home 2</a></li> -->
-                        </ul>
-                    </li>
-                    <li class="mega-menu mega-menu-sm">
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="icon-globe-alt menu-icon"></i><span class="nav-text">Layouts</span>
-                        </a>
-                        <ul aria-expanded="false">
-                            <li><a href="./layout-blank.html">Blank</a></li>
-                            <li><a href="./layout-one-column.html">One Column</a></li>
-                            <li><a href="./layout-two-column.html">Two column</a></li>
-                            <li><a href="./layout-compact-nav.html">Compact Nav</a></li>
-                            <li><a href="./layout-vertical.html">Vertical</a></li>
-                            <li><a href="./layout-horizontal.html">Horizontal</a></li>
-                            <li><a href="./layout-boxed.html">Boxed</a></li>
-                            <li><a href="./layout-wide.html">Wide</a></li>
-                            
-                            
-                            <li><a href="./layout-fixed-header.html">Fixed Header</a></li>
-                            <li><a href="layout-fixed-sidebar.html">Fixed Sidebar</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-label">Apps</li>
-                    <li>
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="icon-envelope menu-icon"></i> <span class="nav-text">Email</span>
-                        </a>
-                        <ul aria-expanded="false">
-                            <li><a href="./email-inbox.html">Inbox</a></li>
-                            <li><a href="./email-read.html">Read</a></li>
-                            <li><a href="./email-compose.html">Compose</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="icon-screen-tablet menu-icon"></i><span class="nav-text">Apps</span>
-                        </a>
-                        <ul aria-expanded="false">
-                            <li><a href="./app-profile.html">Profile</a></li>
-                            <li><a href="./app-calender.html">Calender</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="icon-graph menu-icon"></i> <span class="nav-text">Charts</span>
-                        </a>
-                        <ul aria-expanded="false">
-                            <li><a href="./chart-flot.html">Flot</a></li>
-                            <li><a href="./chart-morris.html">Morris</a></li>
-                            <li><a href="./chart-chartjs.html">Chartjs</a></li>
-                            <li><a href="./chart-chartist.html">Chartist</a></li>
-                            <li><a href="./chart-sparkline.html">Sparkline</a></li>
-                            <li><a href="./chart-peity.html">Peity</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-label">UI Components</li>
-                    <li>
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="icon-grid menu-icon"></i><span class="nav-text">UI Components</span>
-                        </a>
-                        <ul aria-expanded="false">
-                            <li><a href="./ui-accordion.html">Accordion</a></li>
-                            <li><a href="./ui-alert.html">Alert</a></li>
-                            <li><a href="./ui-badge.html">Badge</a></li>
-                            <li><a href="./ui-button.html">Button</a></li>
-                            <li><a href="./ui-button-group.html">Button Group</a></li>
-                            <li><a href="./ui-cards.html">Cards</a></li>
-                            <li><a href="./ui-carousel.html">Carousel</a></li>
-                            <li><a href="./ui-dropdown.html">Dropdown</a></li>
-                            <li><a href="./ui-list-group.html">List Group</a></li>
-                            <li><a href="./ui-media-object.html">Media Object</a></li>
-                            <li><a href="./ui-modal.html">Modal</a></li>
-                            <li><a href="./ui-pagination.html">Pagination</a></li>
-                            <li><a href="./ui-popover.html">Popover</a></li>
-                            <li><a href="./ui-progressbar.html">Progressbar</a></li>
-                            <li><a href="./ui-tab.html">Tab</a></li>
-                            <li><a href="./ui-typography.html">Typography</a></li>
-                        <!-- </ul>
+      <div class="nk-sidebar bg-success">
+        <div class="nk-nav-scroll bg-success">
+          <ul class="metismenu bg-success" id="menu">
+            <li class="nav-label">Dashboard</li>
+            <li>
+              <a
+                class="has-arrow bg-success"
+                href="javascript:void()"
+                aria-expanded="fals"
+              >
+                <i class="icon-speedometer menu-icon"></i
+                ><span class="nav-text">Dashboard</span>
+              </a>
+              <ul aria-expanded="false" class="bg-success">
+                <li><a href="./home.php">Home</a></li>
+                <li><a href="./Admin_users.php">Users</a></li>
+                <li><a href="./products.php">Products</a></li>
+                <li><a href="./orders.php">Orders</a></li>
+              </ul>
+            </li>
+            <!-- <li class="mega-menu mega-menu-sm">
+              <a
+                class="has-arrow"
+                href="javascript:void()"
+                aria-expanded="false"
+              >
+                <i class="icon-globe-alt menu-icon"></i
+                ><span class="nav-text">Layouts</span>
+              </a>
+              <ul aria-expanded="false">
+                <li><a href="./layout-blank.html">Blank</a></li>
+                <li><a href="./layout-one-column.html">One Column</a></li>
+                <li><a href="./layout-two-column.html">Two column</a></li>
+                <li><a href="./layout-compact-nav.html">Compact Nav</a></li>
+                <li><a href="./layout-vertical.html">Vertical</a></li>
+                <li><a href="./layout-horizontal.html">Horizontal</a></li>
+                <li><a href="./layout-boxed.html">Boxed</a></li>
+                <li><a href="./layout-wide.html">Wide</a></li>
+
+                <li><a href="./layout-fixed-header.html">Fixed Header</a></li>
+                <li><a href="layout-fixed-sidebar.html">Fixed Sidebar</a></li>
+              </ul>
+            </li>
+            <li class="nav-label">Apps</li>
+            <li>
+              <a
+                class="has-arrow"
+                href="javascript:void()"
+                aria-expanded="false"
+              >
+                <i class="icon-envelope menu-icon"></i>
+                <span class="nav-text">Email</span>
+              </a>
+              <ul aria-expanded="false">
+                <li><a href="./email-inbox.html">Inbox</a></li>
+                <li><a href="./email-read.html">Read</a></li>
+                <li><a href="./email-compose.html">Compose</a></li>
+              </ul>
+            </li>
+            <li>
+              <a
+                class="has-arrow"
+                href="javascript:void()"
+                aria-expanded="false"
+              >
+                <i class="icon-screen-tablet menu-icon"></i
+                ><span class="nav-text">Apps</span>
+              </a>
+              <ul aria-expanded="false">
+                <li><a href="./app-profile.html">Profile</a></li>
+                <li><a href="./app-calender.html">Calender</a></li>
+              </ul>
+            </li>
+            <li>
+              <a
+                class="has-arrow"
+                href="javascript:void()"
+                aria-expanded="false"
+              >
+                <i class="icon-graph menu-icon"></i>
+                <span class="nav-text">Charts</span>
+              </a>
+              <ul aria-expanded="false">
+                <li><a href="./chart-flot.html">Flot</a></li>
+                <li><a href="./chart-morris.html">Morris</a></li>
+                <li><a href="./chart-chartjs.html">Chartjs</a></li>
+                <li><a href="./chart-chartist.html">Chartist</a></li>
+                <li><a href="./chart-sparkline.html">Sparkline</a></li>
+                <li><a href="./chart-peity.html">Peity</a></li>
+              </ul>
+            </li>
+            <li class="nav-label">UI Components</li>
+            <li>
+              <a
+                class="has-arrow"
+                href="javascript:void()"
+                aria-expanded="false"
+              >
+                <i class="icon-grid menu-icon"></i
+                ><span class="nav-text">UI Components</span>
+              </a>
+              <ul aria-expanded="false">
+                <li><a href="./ui-accordion.html">Accordion</a></li>
+                <li><a href="./ui-alert.html">Alert</a></li>
+                <li><a href="./ui-badge.html">Badge</a></li>
+                <li><a href="./ui-button.html">Button</a></li>
+                <li><a href="./ui-button-group.html">Button Group</a></li>
+                <li><a href="./ui-cards.html">Cards</a></li>
+                <li><a href="./ui-carousel.html">Carousel</a></li>
+                <li><a href="./ui-dropdown.html">Dropdown</a></li>
+                <li><a href="./ui-list-group.html">List Group</a></li>
+                <li><a href="./ui-media-object.html">Media Object</a></li>
+                <li><a href="./ui-modal.html">Modal</a></li>
+                <li><a href="./ui-pagination.html">Pagination</a></li>
+                <li><a href="./ui-popover.html">Popover</a></li>
+                <li><a href="./ui-progressbar.html">Progressbar</a></li>
+                <li><a href="./ui-tab.html">Tab</a></li>
+                <li><a href="./ui-typography.html">Typography</a></li>
+                <!-</ul>
                     </li>
                     <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="icon-layers menu-icon"></i><span class="nav-text">Components</span>
                         </a>
-                        <ul aria-expanded="false"> -->
-                            <li><a href="./uc-nestedable.html">Nestedable</a></li>
-                            <li><a href="./uc-noui-slider.html">Noui Slider</a></li>
-                            <li><a href="./uc-sweetalert.html">Sweet Alert</a></li>
-                            <li><a href="./uc-toastr.html">Toastr</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="widgets.html" aria-expanded="false">
-                            <i class="icon-badge menu-icon"></i><span class="nav-text">Widget</span>
-                        </a>
-                    </li>
-                    <li class="nav-label">Forms</li>
-                    <li>
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="icon-note menu-icon"></i><span class="nav-text">Forms</span>
-                        </a>
-                        <ul aria-expanded="false">
-                            <li><a href="./form-basic.html">Basic Form</a></li>
-                            <li><a href="./form-validation.html">Form Validation</a></li>
-                            <li><a href="./form-step.html">Step Form</a></li>
-                            <li><a href="./form-editor.html">Editor</a></li>
-                            <li><a href="./form-picker.html">Picker</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-label">Table</li>
-                    <li>
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="icon-menu menu-icon"></i><span class="nav-text">Table</span>
-                        </a>
-                        <ul aria-expanded="false">
-                            <li><a href="./table-basic.html" aria-expanded="false">Basic Table</a></li>
-                            <li><a href="./table-datatable.html" aria-expanded="false">Data Table</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-label">Pages</li>
-                    <li>
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="icon-notebook menu-icon"></i><span class="nav-text">Pages</span>
-                        </a>
-                        <ul aria-expanded="false">
-                            <li><a href="./page-login.html">Login</a></li>
-                            <li><a href="./page-register.html">Register</a></li>
-                            <li><a href="./page-lock.html">Lock Screen</a></li>
-                            <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">Error</a>
-                                <ul aria-expanded="false">
-                                    <li><a href="./page-error-404.html">Error 404</a></li>
-                                    <li><a href="./page-error-403.html">Error 403</a></li>
-                                    <li><a href="./page-error-400.html">Error 400</a></li>
-                                    <li><a href="./page-error-500.html">Error 500</a></li>
-                                    <li><a href="./page-error-503.html">Error 503</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
+                        <ul aria-expanded="false"> 
+                <li><a href="./uc-nestedable.html">Nestedable</a></li>
+                <li><a href="./uc-noui-slider.html">Noui Slider</a></li>
+                <li><a href="./uc-sweetalert.html">Sweet Alert</a></li>
+                <li><a href="./uc-toastr.html">Toastr</a></li>
+              </ul>
+            </li>
+            <li>
+              <a href="widgets.html" aria-expanded="false">
+                <i class="icon-badge menu-icon"></i
+                ><span class="nav-text">Widget</span>
+              </a>
+            </li>
+            <li class="nav-label">Forms</li>
+            <li>
+              <a
+                class="has-arrow"
+                href="javascript:void()"
+                aria-expanded="false"
+              >
+                <i class="icon-note menu-icon"></i
+                ><span class="nav-text">Forms</span>
+              </a>
+              <ul aria-expanded="false">
+                <li><a href="./form-basic.html">Basic Form</a></li>
+                <li><a href="./form-validation.html">Form Validation</a></li>
+                <li><a href="./form-step.html">Step Form</a></li>
+                <li><a href="./form-editor.html">Editor</a></li>
+                <li><a href="./form-picker.html">Picker</a></li>
+              </ul>
+            </li>
+            <li class="nav-label">Table</li>
+            <li>
+              <a
+                class="has-arrow"
+                href="javascript:void()"
+                aria-expanded="false"
+              >
+                <i class="icon-menu menu-icon"></i
+                ><span class="nav-text">Table</span>
+              </a>
+              <ul aria-expanded="false">
+                <li>
+                  <a href="./table-basic.html" aria-expanded="false"
+                    >Basic Table</a
+                  >
+                </li>
+                <li>
+                  <a href="./table-datatable.html" aria-expanded="false"
+                    >Data Table</a
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="nav-label">Pages</li>
+            <li>
+              <a
+                class="has-arrow"
+                href="javascript:void()"
+                aria-expanded="false"
+              >
+                <i class="icon-notebook menu-icon"></i
+                ><span class="nav-text">Pages</span>
+              </a>
+              <ul aria-expanded="false">
+                <li><a href="./page-login.html">Login</a></li>
+                <li><a href="./page-register.html">Register</a></li>
+                <li><a href="./page-lock.html">Lock Screen</a></li>
+                <li>
+                  <a
+                    class="has-arrow"
+                    href="javascript:void()"
+                    aria-expanded="false"
+                    >Error</a
+                  >
+                  <ul aria-expanded="false">
+                    <li><a href="./page-error-404.html">Error 404</a></li>
+                    <li><a href="./page-error-403.html">Error 403</a></li>
+                    <li><a href="./page-error-400.html">Error 400</a></li>
+                    <li><a href="./page-error-500.html">Error 500</a></li>
+                    <li><a href="./page-error-503.html">Error 503</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </li> -->
+          </ul>
         </div>
-        <!--**********************************
+      </div>
+      <!--**********************************
             Sidebar end
         ***********************************-->
 
-        <!--**********************************
+      <!--**********************************
             Content body start
         ***********************************-->
-        <div class="content-body">
-
-            <div class="row page-titles mx-0">
-                <div class="col p-md-0">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
-                        <li class="breadcrumb-item active"><a href="javascript:void(0)">Orders</a></li>
-                    </ol>
-                </div>
-            </div>
-            <!-- row -->
-
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="card-title">
-                                    <h4>Table Basic</h4>
-                                </div>
-                                <div class="table-responsive">
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>Name</th>
-                                                <th>Status</th>
-                                                <th>Date</th>
-                                                <th>Price</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <th>1</th>
-                                                <td>Kolor Tea Shirt For Man</td>
-                                                <td><span class="badge badge-primary px-2">Sale</span>
-                                                </td>
-                                                <td>January 22</td>
-                                                <td class="color-primary">$21.56</td>
-                                            </tr>
-                                            <tr>
-                                                <th>2</th>
-                                                <td>Kolor Tea Shirt For Women</td>
-                                                <td><span class="badge badge-danger px-2">Tax</span>
-                                                </td>
-                                                <td>January 30</td>
-                                                <td class="color-success">$55.32</td>
-                                            </tr>
-                                            <tr>
-                                                <th>3</th>
-                                                <td>Blue Backpack For Baby</td>
-                                                <td><span class="badge badge-success px-2">Extended</span>
-                                                </td>
-                                                <td>January 25</td>
-                                                <td class="color-danger">$14.85</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /# column -->
-                    <div class="col-lg-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="card-title">
-                                    <h4>Table Striped</h4>
-                                </div>
-                                <div class="table-responsive">
-                                    <table class="table table-striped">
-                                        <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>Name</th>
-                                                <th>Status</th>
-                                                <th>Date</th>
-                                                <th>Price</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <th>1</th>
-                                                <td>Kolor Tea Shirt For Man</td>
-                                                <td><span class="badge badge-primary px-2">Sale</span>
-                                                </td>
-                                                <td>January 22</td>
-                                                <td class="color-primary">$21.56</td>
-                                            </tr>
-                                            <tr>
-                                                <th>2</th>
-                                                <td>Kolor Tea Shirt For Women</td>
-                                                <td><span class="badge badge-danger px-2">Tax</span>
-                                                </td>
-                                                <td>January 30</td>
-                                                <td class="color-success">$55.32</td>
-                                            </tr>
-                                            <tr>
-                                                <th>3</th>
-                                                <td>Blue Backpack For Baby</td>
-                                                <td><span class="badge badge-success px-2">Extended</span>
-                                                </td>
-                                                <td>January 25</td>
-                                                <td class="color-danger">$14.85</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /# column -->
-                    <div class="col-lg-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="card-title">
-                                    <h4>Table Bordered</h4>
-                                </div>
-                                <div class="table-responsive">
-                                    <table class="table table-bordered">
-                                        <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>Name</th>
-                                                <th>Status</th>
-                                                <th>Date</th>
-                                                <th>Price</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <th>1</th>
-                                                <td>Kolor Tea Shirt For Man</td>
-                                                <td><span class="badge badge-primary px-2">Sale</span>
-                                                </td>
-                                                <td>January 22</td>
-                                                <td class="color-primary">$21.56</td>
-                                            </tr>
-                                            <tr>
-                                                <th>2</th>
-                                                <td>Kolor Tea Shirt For Women</td>
-                                                <td><span class="badge badge-danger px-2">Tax</span>
-                                                </td>
-                                                <td>January 30</td>
-                                                <td class="color-success">$55.32</td>
-                                            </tr>
-                                            <tr>
-                                                <th>3</th>
-                                                <td>Blue Backpack For Baby</td>
-                                                <td><span class="badge badge-success px-2">Extended</span>
-                                                </td>
-                                                <td>January 25</td>
-                                                <td class="color-danger">$14.85</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /# column -->
-                    <div class="col-lg-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="card-title">
-                                    <h4>Table Hover</h4>
-                                </div>
-                                <div class="table-responsive">
-                                    <table class="table table-hover">
-                                        <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>Name</th>
-                                                <th>Status</th>
-                                                <th>Date</th>
-                                                <th>Price</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <th>1</th>
-                                                <td>Kolor Tea Shirt For Man</td>
-                                                <td><span class="badge badge-primary px-2">Sale</span>
-                                                </td>
-                                                <td>January 22</td>
-                                                <td class="color-primary">$21.56</td>
-                                            </tr>
-                                            <tr>
-                                                <th>2</th>
-                                                <td>Kolor Tea Shirt For Women</td>
-                                                <td><span class="badge badge-danger px-2">Tax</span>
-                                                </td>
-                                                <td>January 30</td>
-                                                <td class="color-success">$55.32</td>
-                                            </tr>
-                                            <tr>
-                                                <th>3</th>
-                                                <td>Blue Backpack For Baby</td>
-                                                <td><span class="badge badge-success px-2">Extended</span>
-                                                </td>
-                                                <td>January 25</td>
-                                                <td class="color-danger">$14.85</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /# card -->
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">Basic Table</h4>
-                                <div class="table-responsive">
-                                    <table class="table header-border">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">#</th>
-                                                <th scope="col">First Name</th>
-                                                <th scope="col">Last Name</th>
-                                                <th scope="col">User Name</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <th>1</th>
-                                                <td>Jacklyn</td>
-                                                <td>G.Bearden</td>
-                                                <td>@jacklyn</td>
-                                            </tr>
-                                            <tr>
-                                                <th>2</th>
-                                                <td>Nancy</td>
-                                                <td>J. Daniels</td>
-                                                <td>@daniels</td>
-                                            </tr>
-                                            <tr>
-                                                <th>3</th>
-                                                <td>Betty</td>
-                                                <td>R. Christensen</td>
-                                                <td>@betty</td>
-                                            </tr>
-                                            <tr>
-                                                <th>4</th>
-                                                <td>Lucinda</td>
-                                                <td>D. Sears</td>
-                                                <td>@lucinda</td>
-                                            </tr>
-                                            <tr>
-                                                <th>5</th>
-                                                <td>William</td>
-                                                <td>T. Marks</td>
-                                                <td>@william.marks</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">Hover Table</h4>
-                                <div class="table-responsive">
-                                    <table class="table header-border table-hover verticle-middle">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">#</th>
-                                                <th scope="col">Product</th>
-                                                <th scope="col">Popularity</th>
-                                                <th scope="col">Sales</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <th>1</th>
-                                                <td>Air Conditioner</td>
-                                                <td>
-                                                    <div class="progress" style="height: 10px">
-                                                        <div class="progress-bar gradient-1" style="width: 70%;" role="progressbar"><span class="sr-only">70% Complete</span>
-                                                        </div>
-                                                    </div> 
-                                                </td>
-                                                <td><span class="label gradient-1 btn-rounded">70%</span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th>2</th>
-                                                <td>Textiles</td>
-                                                <td>
-                                                    <div class="progress" style="height: 10px">
-                                                        <div class="progress-bar gradient-2" style="width: 70%;" role="progressbar"><span class="sr-only">70% Complete</span>
-                                                        </div>
-                                                    </div> 
-                                                </td>
-                                                <td><span class="label btn-rounded gradient-2">70%</span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th>3</th>
-                                                <td>Milk Powder</td>
-                                                <td>
-                                                    <div class="progress" style="height: 10px">
-                                                        <div class="progress-bar gradient-3" style="width: 70%;" role="progressbar"><span class="sr-only">70% Complete</span>
-                                                        </div>
-                                                    </div> 
-                                                </td>
-                                                <td><span class="label btn-rounded gradient-3">70%</span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th>4</th>
-                                                <td>Vehicles</td>
-                                                <td>
-                                                    <div class="progress" style="height: 10px">
-                                                        <div class="progress-bar gradient-8" style="width: 70%;" role="progressbar"><span class="sr-only">70% Complete</span>
-                                                        </div>
-                                                    </div> 
-                                                </td>
-                                                <td><span class="label gradient-8 btn-rounded">70%</span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th>5</th>
-                                                <td>Boats</td>
-                                                <td>
-                                                    <div class="progress" style="height: 10px">
-                                                        <div class="progress-bar gradient-1" style="width: 70%;" role="progressbar"><span class="sr-only">70% Complete</span>
-                                                        </div>
-                                                    </div> 
-                                                </td>
-                                                <td><span class="label gradient-1 btn-rounded">70%</span>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">Bordered Table</h4>
-                                <div class="table-responsive">
-                                    <table class="table table-bordered verticle-middle">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">Task</th>
-                                                <th scope="col">Progress</th>
-                                                <th scope="col">Deadline</th>
-                                                <th scope="col">Label</th>
-                                                <th scope="col">Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>Air Conditioner</td>
-                                                <td>
-                                                    <div class="progress" style="height: 10px">
-                                                        <div class="progress-bar gradient-1" style="width: 70%;" role="progressbar"><span class="sr-only">70% Complete</span>
-                                                        </div>
-                                                    </div> 
-                                                </td>
-                                                <td>Apr 20,2018</td>
-                                                <td><span class="label gradient-1 btn-rounded">70%</span>
-                                                </td>
-                                                <td><span><a href="#" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil color-muted m-r-5"></i> </a><a href="#" data-toggle="tooltip" data-placement="top" title="Close"><i class="fa fa-close color-danger"></i></a></span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Textiles</td>
-                                                <td>
-                                                    <div class="progress" style="height: 10px">
-                                                        <div class="progress-bar gradient-2" style="width: 70%;" role="progressbar"><span class="sr-only">70% Complete</span>
-                                                        </div>
-                                                    </div> 
-                                                </td>
-                                                <td>May 27,2018</td>
-                                                <td><span class="label gradient-2 btn-rounded">70%</span>
-                                                </td>
-                                                <td><span><a href="#" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil color-muted m-r-5"></i> </a><a href="#" data-toggle="tooltip" data-placement="top" title="Close"><i class="fa fa-close color-danger"></i></a></span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Milk Powder</td>
-                                                <td>
-                                                    <div class="progress" style="height: 10px">
-                                                        <div class="progress-bar gradient-3" style="width: 70%;" role="progressbar"><span class="sr-only">70% Complete</span>
-                                                        </div>
-                                                    </div> 
-                                                </td>
-                                                <td>May 18,2018</td>
-                                                <td><span class="label gradient-3 btn-rounded">70%</span>
-                                                </td>
-                                                <td><span><a href="#" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil color-muted m-r-5"></i> </a><a href="#" data-toggle="tooltip" data-placement="top" title="Close"><i class="fa fa-close color-danger"></i></a></span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Vehicles</td>
-                                                <td>
-                                                    <div class="progress" style="height: 10px">
-                                                        <div class="progress-bar gradient-4" style="width: 70%;" role="progressbar"><span class="sr-only">70% Complete</span>
-                                                        </div>
-                                                    </div> 
-                                                </td>
-                                                <td>Mar 27,2018</td>
-                                                <td><span class="label gradient-4 btn-rounded">70%</span>
-                                                </td>
-                                                <td><span><a href="#" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil color-muted m-r-5"></i> </a><a href="#" data-toggle="tooltip" data-placement="top" title="Close"><i class="fa fa-close color-danger"></i></a></span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Boats</td>
-                                                <td>
-                                                    <div class="progress" style="height: 10px">
-                                                        <div class="progress-bar gradient-9" style="width: 70%;" role="progressbar"><span class="sr-only">70% Complete</span>
-                                                        </div>
-                                                    </div> 
-                                                </td>
-                                                <td>Jun 28,2018</td>
-                                                <td><span class="label gradient-9 btn-rounded">70%</span>
-                                                </td>
-                                                <td><span><a href="#" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil color-muted m-r-5"></i> </a><a href="#" data-toggle="tooltip" data-placement="top" title="Close"><i class="fa fa-close color-danger"></i></a></span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Boats</td>
-                                                <td>
-                                                    <div class="progress" style="height: 10px">
-                                                        <div class="progress-bar gradient-2" style="width: 70%;" role="progressbar"><span class="sr-only">70% Complete</span>
-                                                        </div>
-                                                    </div> 
-                                                </td>
-                                                <td>Aug 20,2018</td>
-                                                <td><span class="label gradient-2 btn-rounded">70%</span>
-                                                </td>
-                                                <td><span><a href="#" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil color-muted m-r-5"></i> </a><a href="#" data-toggle="tooltip" data-placement="top" title="Close"><i class="fa fa-close color-danger"></i></a></span>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">Table Stripped</h4>
-                                <div class="table-responsive"> 
-                                    <table class="table table-bordered table-striped verticle-middle">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">Task</th>
-                                                <th scope="col">Progress</th>
-                                                <th scope="col">Deadline</th>
-                                                <th scope="col">Label</th>
-                                                <th scope="col">Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>Air Conditioner</td>
-                                                <td>
-                                                    <div class="progress" style="height: 10px">
-                                                        <div class="progress-bar gradient-1" style="width: 70%;" role="progressbar"><span class="sr-only">70% Complete</span>
-                                                        </div>
-                                                    </div> 
-                                                </td>
-                                                <td>Apr 20,2018</td>
-                                                <td><span class="label gradient-1 btn-rounded">70%</span>
-                                                </td>
-                                                <td><span><a href="#" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil color-muted m-r-5"></i> </a><a href="#" data-toggle="tooltip" data-placement="top" title="Close"><i class="fa fa-close color-danger"></i></a></span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Textiles</td>
-                                                <td>
-                                                    <div class="progress" style="height: 10px">
-                                                        <div class="progress-bar gradient-2" style="width: 70%;" role="progressbar"><span class="sr-only">70% Complete</span>
-                                                        </div>
-                                                    </div> 
-                                                </td>
-                                                <td>May 27,2018</td>
-                                                <td><span class="label gradient-2 btn-rounded">70%</span>
-                                                </td>
-                                                <td><span><a href="#" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil color-muted m-r-5"></i> </a><a href="#" data-toggle="tooltip" data-placement="top" title="Close"><i class="fa fa-close color-danger"></i></a></span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Milk Powder</td>
-                                                <td>
-                                                    <div class="progress" style="height: 10px">
-                                                        <div class="progress-bar gradient-3" style="width: 70%;" role="progressbar"><span class="sr-only">70% Complete</span>
-                                                        </div>
-                                                    </div> 
-                                                </td>
-                                                <td>May 18,2018</td>
-                                                <td><span class="label gradient-3 btn-rounded">70%</span>
-                                                </td>
-                                                <td><span><a href="#" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil color-muted m-r-5"></i> </a><a href="#" data-toggle="tooltip" data-placement="top" title="Close"><i class="fa fa-close color-danger"></i></a></span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Vehicles</td>
-                                                <td>
-                                                    <div class="progress" style="height: 10px">
-                                                        <div class="progress-bar gradient-4" style="width: 70%;" role="progressbar"><span class="sr-only">70% Complete</span>
-                                                        </div>
-                                                    </div> 
-                                                </td>
-                                                <td>Mar 27,2018</td>
-                                                <td><span class="label gradient-4 btn-rounded">70%</span>
-                                                </td>
-                                                <td><span><a href="#" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil color-muted m-r-5"></i> </a><a href="#" data-toggle="tooltip" data-placement="top" title="Close"><i class="fa fa-close color-danger"></i></a></span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Boats</td>
-                                                <td>
-                                                    <div class="progress" style="height: 10px">
-                                                        <div class="progress-bar gradient-9" style="width: 70%;" role="progressbar"><span class="sr-only">70% Complete</span>
-                                                        </div>
-                                                    </div> 
-                                                </td>
-                                                <td>Jun 28,2018</td>
-                                                <td><span class="label gradient-9 btn-rounded">70%</span>
-                                                </td>
-                                                <td><span><a href="#" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil color-muted m-r-5"></i> </a><a href="#" data-toggle="tooltip" data-placement="top" title="Close"><i class="fa fa-close color-danger"></i></a></span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Boats</td>
-                                                <td>
-                                                    <div class="progress" style="height: 10px">
-                                                        <div class="progress-bar gradient-2" style="width: 70%;" role="progressbar"><span class="sr-only">70% Complete</span>
-                                                        </div>
-                                                    </div> 
-                                                </td>
-                                                <td>Aug 20,2018</td>
-                                                <td><span class="label gradient-2 btn-rounded">70%</span>
-                                                </td>
-                                                <td><span><a href="#" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil color-muted m-r-5"></i> </a><a href="#" data-toggle="tooltip" data-placement="top" title="Close"><i class="fa fa-close color-danger"></i></a></span>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">Responsive Table</h4>
-                                <div class="table-responsive">
-                                    <table class="table header-border">
-                                        <thead>
-                                            <tr>
-                                                <th>Invoice</th>
-                                                <th>User</th>
-                                                <th>Date</th>
-                                                <th>Amount</th>
-                                                <th>Status</th>
-                                                <th>Country</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td><a href="javascript:void(0)">Order #26589</a>
-                                                </td>
-                                                <td>Herman Beck</td>
-                                                <td><span class="text-muted">Oct 16, 2017</span>
-                                                </td>
-                                                <td>$45.00</td>
-                                                <td><span class="label gradient-1 rounded">Paid</span>
-                                                </td>
-                                                <td>EN</td>
-                                            </tr>
-                                            <tr>
-                                                <td><a href="javascript:void(0)">Order #58746</a>
-                                                </td>
-                                                <td>Mary Adams</td>
-                                                <td><span class="text-muted">Oct 12, 2017</span>
-                                                </td>
-                                                <td>$245.30</td>
-                                                <td><span class="label gradient-2 rounded">Shipped</span>
-                                                </td>
-                                                <td>CN</td>
-                                            </tr>
-                                            <tr>
-                                                <td><a href="javascript:void(0)">Order #98458</a>
-                                                </td>
-                                                <td>Caleb Richards</td>
-                                                <td><span class="text-muted">May 18, 2017</span>
-                                                </td>
-                                                <td>$38.00</td>
-                                                <td><span class="label gradient-4 rounded">Shipped</span>
-                                                </td>
-                                                <td>AU</td>
-                                            </tr>
-                                            <tr>
-                                                <td><a href="javascript:void(0)">Order #32658</a>
-                                                </td>
-                                                <td>June Lane</td>
-                                                <td><span class="text-muted">Apr 28, 2017</span>
-                                                </td>
-                                                <td>$77.99</td>
-                                                <td><span class="label gradient-2 rounded">Paid</span>
-                                                </td>
-                                                <td>FR</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">Contextual Table</h4>
-                                <div class="table-responsive">
-                                    <table class="table header-border">
-                                        <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>Column heading</th>
-                                                <th>Column heading</th>
-                                                <th>Column heading</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr class="table-active">
-                                                <td>1</td>
-                                                <td>Column content</td>
-                                                <td>Column content</td>
-                                                <td>Column content</td>
-                                            </tr>
-                                            <tr class="table-primary">
-                                                <td>1</td>
-                                                <td>Column content</td>
-                                                <td>Column content</td>
-                                                <td>Column content</td>
-                                            </tr>
-                                            <tr class="table-success">
-                                                <td>2</td>
-                                                <td>Column content</td>
-                                                <td>Column content</td>
-                                                <td>Column content</td>
-                                            </tr>
-                                            <tr class="table-info">
-                                                <td>3</td>
-                                                <td>Column content</td>
-                                                <td>Column content</td>
-                                                <td>Column content</td>
-                                            </tr>
-                                            <tr class="table-warning">
-                                                <td>4</td>
-                                                <td>Column content</td>
-                                                <td>Column content</td>
-                                                <td>Column content</td>
-                                            </tr>
-                                            <tr class="table-danger">
-                                                <td>5</td>
-                                                <td>Column content</td>
-                                                <td>Column content</td>
-                                                <td>Column content</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- #/ container -->
+      <div class="content-body">
+        <div class="row page-titles mx-0">
+          <div class="col p-md-0">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item">
+                <a href="javascript:void(0)">Dashboard</a>
+              </li>
+              <li class="breadcrumb-item active">
+                <a href="javascript:void(0)">Orders</a>
+              </li>
+            </ol>
+          </div>
         </div>
-        <!--**********************************
+        <!-- row -->
+
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-12">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Orders</h4>
+                  <div class="table-responsive">
+                     <div id="add_product">
+                      <a href="#" class="badge badge-pill gradient-3" onclick = "tableToCSV()"
+                        ><i
+                          class="fa fa-download fa-2x p-2"
+                          id=""
+                          data-toggle="tooltip"
+                          data-placement="top"
+                          title="Download orders list"
+                          
+                        ></i
+                      ></a>
+                      <!-- <a href="./Add_product.php"
+                        ><i
+                          class="fa fa-upload fa-2x btn btn-success"
+                          id=""
+                          title="Upload list"
+                        ></i
+                      ></a>
+                      <a href="./Add_product.php"
+                        ><i
+                          class="fa fa-download fa-2x btn btn-success"
+                          id=""
+                          title="Download list"
+                        ></i
+                      ></a> -->
+                    </div>
+                    <table
+                      class="table table-striped table-bordered zero-configuration"
+                    >
+                      <thead>
+                        <tr>
+                          <th>Order ID</th>
+                          <th>Customer Name</th>
+                          <th>Telephone number</th>
+                          <th>Email address</th>
+                          <th>Order date</th>
+                          <th>Status</th>
+                          <th>Action</th>
+                        </tr>
+                      </thead>
+
+                      <tbody>
+                        <?php 
+                        for($i = 1; $i<=100; $i++): 
+                          $product_status = "";
+                          $status_title = "";
+                          if($i%3 == 0){
+                            $product_status = "gradient-1";
+                            $status_title = "cleared";
+                          } else if($i%7 == 0){
+                            $product_status = "gradient-1";
+                            $status_title = "cleared";
+                          } else{
+                            $product_status = "gradient-3";
+                            $status_title = "pending";
+
+                          }
+                          ?>
+                        <tr>
+                          <td>Order-00001</td>
+                          <td>Kuwebwa Anatoli</td>
+                          <td><a href="tel: +256779320075">256779320075</a></td>
+                          <td><a href="mailto: akuwebwa@gmail.com">akuwebwa@gmail.com</a></td>
+                          <td>25/06/2022</td>
+                          <td class=""                     
+                              data-toggle="tooltip"
+                              data-placement="top"
+                              title="<?php echo $status_title; ?>">
+                            <div class="progress" style="height: 10px">
+                                <div class="progress-bar <?php echo $product_status; ?>" style="width: 70%;"    role="progressbar"><span class="sr-only">70% Complete</span>
+                                </div>
+                            </div> 
+                          </td>
+                          <td id="action_buttons">
+                            <i
+                              class="fa fa-info btn btn-info"
+                              id="show-user-details"
+                              data-toggle="tooltip"
+                              data-placement="top"
+                              title="Details"
+                            ></i>
+                            
+                          </td>
+                        </tr>
+
+                        <?php endfor; ?>
+                        
+                      </tbody>
+                      <tfoot>
+                        <tr>
+                          <th>Order ID</th>
+                          <th>Customer name</th>
+                          <th>Telephone number</th>
+                          <th>Email addres</th>
+                          <th>Date of manufacture</th>
+                          <th>Expiry date</th>
+                          <th>Action</th>
+                        </tr>
+                      </tfoot>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="user-details">
+          <div class="details-inner bg-light alert container py-5 pt-5h">
+            <i class="fa fa-times fa-2x" id="close-user"></i>
+            <div class="row justify-content-center align-content-center py-5">
+              <div class="left col-md-4">
+                <h1 class="text-success text-center">Product details</h1>
+                <img
+                  src="../images/products/weed master powder.jpg"
+                  class="col-12"
+                />
+                <div class="col-12 row justify-content-center my-3 py-4">
+                  <a href="" class="btn btn-danger mx-1">Delete</a>
+                  <a href="../Add_product" class="btn btn-info mx-1">Edit</a>
+                </div>
+              </div>
+              <div class="right col-md-6 row justify-content-left">
+                <div class="left text-right alert col-6">
+                  <p><b>Product ID: </b></p>
+                  <p><b>Brand Name: </b></p>
+                  <p><b>Manufacturer: </b></p>
+                  <p><b>Registered supplier: </b></p>
+                  <p><b>Point of origin: </b></p>
+                  <p><b>Date of manufacture: </b></p>
+                  <p><b>Expiry date: </b></p>
+                  <p><b>Unit of measure: </b></p>
+                  <p><b>Batch number: </b></p>
+                  <p><b>Serial number: </b></p>
+                  <p><b>Unit cost: </b></p>
+                  <p><b>E-Extension: </b></p>
+                </div>
+                <div class="right alert col-6">
+                  <p>Prod-0001</p>
+                  <p>Weed master</p>
+                  <p>Kakoola Ug ltd</p>
+                  <p>K&M Traders</p>
+                  <p>Mukono industrial Area</p>
+                  <p>25th/06/2022</p>
+                  <p>23th/06/2023</p>
+                  <p>1.5ltr</p>
+                  <p>44545Y64</p>
+                  <p>RUE4466564RTT56</p>
+                  <p>UGX. 17500</p>
+
+                  <p>
+                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                    Voluptatem sapiente, consectetur dicta nostrum quas porro ex
+                    explicabo, earum maiores dolore repudiandae sit nulla sequi
+                    fugit, qui iure velit ratione! Exercitationem veritatis
+                    accusantium, ab eius eum aliquam ea alias sed quod obcaecati
+                    maxime dicta quae quas ratione nobis debitis corporis ullam.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- #/ container -->
+      </div>
+      <!--**********************************
             Content body end
         ***********************************-->
-        
-        
-        <!--**********************************
+
+      <!--**********************************
             Footer start
         ***********************************-->
-        <div class="footer">
-            <div class="copyright">
-                <p>Copyright &copy; Designed & Developed by <a href="https://themeforest.net/user/quixlab">Quixlab</a> 2018</p>
-            </div>
+      <div class="footer">
+        <div class="copyright">
+          <p>
+            Copyright &copy; Designed & Developed by
+            <a href="https://themeforest.net/user/quixlab">Anatoli</a> 2022
+          </p>
         </div>
-        <!--**********************************
+      </div>
+      <!--**********************************
             Footer end
         ***********************************-->
     </div>
@@ -1229,7 +802,49 @@
     <script src="../js/settings.js"></script>
     <script src="../js/gleek.js"></script>
     <script src="../js/styleSwitcher.js"></script>
+    <script src="../js/custom_js/Admin_users.js"></script>
 
-</body>
+    <script src="../plugins/tables/js/jquery.dataTables.min.js"></script>
+    <script src="../plugins/tables/js/datatable/dataTables.bootstrap4.min.js"></script>
+    <script src="../plugins/tables/js/datatable-init/datatable-basic.min.js"></script>
 
+
+  
+    <script>
+      function tableToCSV(){
+        var csv_data = [];
+        var rows = document.getElementsByTagName('tr');
+
+        for(var i=0; i<rows.length; i++){
+          var cols = rows[i].querySelectorAll('td, th');
+          var csvrow = [];
+          for(var j=0; j < cols.length; j++){
+            csvrow.push(cols[j].innerText);
+
+          }
+          csv_data.push(csvrow.join(","));
+        }
+        csv_data = csv_data.join('\n');
+
+        downloadCSVFile(csv_data);
+      }
+
+
+      function downloadCSVFile(csv_data){
+        CSVFile = new Blob([csv_data], {
+          type: "text/csv"
+        });
+        var temp_link = document.createElement('a');
+        temp_link.download = "Orders.csv";
+        var url = window.URL.createObjectURL(CSVFile);
+        temp_link.href = url;
+        temp_link.style.display == "none";
+        temp_link.click();
+        document.body.removeChild(temp_link);
+
+      }
+    </script>
+
+
+  </body>
 </html>

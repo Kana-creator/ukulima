@@ -56,9 +56,9 @@
                     <div class="form-group">
                       <i class="fa fa-user fa-2x p-2"></i>
                       <input
-                        type="email"
+                        type="text"
                         class="form-control"
-                        placeholder="Email"
+                        placeholder="Email or Phone number"
                         id="user_name"
                       />
                     </div>

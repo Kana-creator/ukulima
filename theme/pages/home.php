@@ -378,27 +378,27 @@
       <!--**********************************
             Sidebar start
         ***********************************-->
-      <div class="nk-sidebar">
-        <div class="nk-nav-scroll">
-          <ul class="metismenu" id="menu">
+      <div class="nk-sidebar bg-success text-light">
+        <div class="nk-nav-scroll bg-success text-light">
+          <ul class="metismenu bg-success txt-light" id="menu">
             <li class="nav-label">Dashboard</li>
             <li>
               <a
-                class="has-arrow"
+                class="has-arrow bg-success"
                 href="javascript:void()"
-                aria-expanded="false"
+                aria-expanded="fals"
               >
                 <i class="icon-speedometer menu-icon"></i
                 ><span class="nav-text">Dashboard</span>
               </a>
-              <ul aria-expanded="false">
-                <li><a href="./home.php">Home</a></li>
-                <li><a href="./Admin_users.php">Users</a></li>
-                <li><a href="./products.php">Products</a></li>
-                <li><a href="./orders.php">Orders</a></li>
+              <ul aria-expanded="false" class="bg-success">
+                <li><a href="./home.php"><span><i class="fa fa-home"></i></span> Home</a></li>
+                <li><a href="./Admin_users.php"><span><i class="fa fa-users"></i></span> Users</a></li>
+                <li><a href="./products.php"><span><i class="fa fa-product"></i></span> Products</a></li>
+                <li><a href="./orders.php"><span><i class="fab fa-basket"></i></span> Orders</a></li>
               </ul>
             </li>
-            <li class="mega-menu mega-menu-sm">
+            <!-- <li class="mega-menu mega-menu-sm">
               <a
                 class="has-arrow"
                 href="javascript:void()"
@@ -496,13 +496,13 @@
                 <li><a href="./ui-progressbar.html">Progressbar</a></li>
                 <li><a href="./ui-tab.html">Tab</a></li>
                 <li><a href="./ui-typography.html">Typography</a></li>
-                <!-- </ul>
+                <!-</ul>
                     </li>
                     <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="icon-layers menu-icon"></i><span class="nav-text">Components</span>
                         </a>
-                        <ul aria-expanded="false"> -->
+                        <ul aria-expanded="false"> 
                 <li><a href="./uc-nestedable.html">Nestedable</a></li>
                 <li><a href="./uc-noui-slider.html">Noui Slider</a></li>
                 <li><a href="./uc-sweetalert.html">Sweet Alert</a></li>
@@ -586,7 +586,7 @@
                   </ul>
                 </li>
               </ul>
-            </li>
+            </li> -->
           </ul>
         </div>
       </div>

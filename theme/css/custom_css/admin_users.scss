@@ -2,10 +2,9 @@ $theme_color: #7d7;
 
 .table-responsive {
   #add_user {
-    position: fixed;
-    right: 35px;
-    top: 180px;
-    z-index: 100000;
+    position: absolute;
+    right: 60px;
+    top: 30px;
   }
 
   table {

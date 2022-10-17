@@ -366,26 +366,27 @@
       <!--**********************************
             Sidebar start
         ***********************************-->
-      <div class="nk-sidebar">
-        <div class="nk-nav-scroll">
-          <ul class="metismenu" id="menu">
+      <div class="nk-sidebar bg-success">
+        <div class="nk-nav-scroll bg-success">
+          <ul class="metismenu bg-success" id="menu">
             <li class="nav-label">Dashboard</li>
             <li>
               <a
-                class="has-arrow"
+                class="has-arrow bg-success"
                 href="javascript:void()"
-                aria-expanded="false"
+                aria-expanded="fals"
               >
                 <i class="icon-speedometer menu-icon"></i
                 ><span class="nav-text">Dashboard</span>
               </a>
-              <ul aria-expanded="false">
+              <ul aria-expanded="false" class="bg-success">
                 <li><a href="./home.php">Home</a></li>
                 <li><a href="./Admin_users.php">Users</a></li>
                 <li><a href="./products.php">Products</a></li>
+                <li><a href="./orders.php">Orders</a></li>
               </ul>
             </li>
-            <li class="mega-menu mega-menu-sm">
+            <!-- <li class="mega-menu mega-menu-sm">
               <a
                 class="has-arrow"
                 href="javascript:void()"
@@ -483,13 +484,13 @@
                 <li><a href="./ui-progressbar.html">Progressbar</a></li>
                 <li><a href="./ui-tab.html">Tab</a></li>
                 <li><a href="./ui-typography.html">Typography</a></li>
-                <!-- </ul>
+                <!-</ul>
                     </li>
                     <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="icon-layers menu-icon"></i><span class="nav-text">Components</span>
                         </a>
-                        <ul aria-expanded="false"> -->
+                        <ul aria-expanded="false"> 
                 <li><a href="./uc-nestedable.html">Nestedable</a></li>
                 <li><a href="./uc-noui-slider.html">Noui Slider</a></li>
                 <li><a href="./uc-sweetalert.html">Sweet Alert</a></li>
@@ -573,7 +574,7 @@
                   </ul>
                 </li>
               </ul>
-            </li>
+            </li> -->
           </ul>
         </div>
       </div>
@@ -607,24 +608,30 @@
                   <h4 class="card-title">Products</h4>
                   <div class="table-responsive">
                     <div id="add_product">
-                      <a href="./Add_product.php"
+                      <a href="./Add_product.php" class="badge badge-pill gradient-1"
                         ><i
-                          class="fa fa-plus fa-2x btn btn-success"
+                          class="fa fa-plus fa-2x  p-2"
                           id=""
+                          data-toggle="tooltip"
+                          data-placement="top"
                           title="Add product"
                         ></i
                       ></a>
-                      <a href="./Add_product.php"
+                      <a href="./Add_product.php" class="badge badge-pill gradient-3"
                         ><i
-                          class="fa fa-upload fa-2x btn btn-success"
+                          class="fa fa-upload fa-2x p-2"
                           id=""
+                          data-toggle="tooltip"
+                          data-placement="top"
                           title="Upload list"
                         ></i
                       ></a>
-                      <a href="./Add_product.php"
+                      <a href="./Add_product.php" class="badge badge-pill gradient-4"
                         ><i
-                          class="fa fa-download fa-2x btn btn-success"
+                          class="fa fa-download fa-2x p-2"
                           id=""
+                          data-toggle="tooltip"
+                          data-placement="top"
                           title="Download list"
                         ></i
                       ></a>
@@ -645,31 +652,57 @@
                       </thead>
 
                       <tbody>
-                        <?php for($i = 1; $i<=500; $i++): ?>
+                        <?php 
+                        for($i = 1; $i<=100; $i++): 
+                          $product_status = "";
+                          $status_title = "";
+                          if($i%3 == 0){
+                            $product_status = "text-warning";
+                            $status_title = "Soon expiring";
+                          } else if($i%7 == 0){
+                            $product_status = "text-danger";
+                            $status_title = "Expired";
+                          } else{
+                            $product_status = "text-success";
+                            $status_title = "Current";
+
+                          }
+                          ?>
                         <tr>
                           <td>Prod-00001</td>
                           <td>Weed master</td>
-                          <td class="badge badge-pill">44545Y64</td>
+                          <td>44545Y64</td>
                           <td>RUE4466564RTT56</td>
                           <td>25/06/2022</td>
-                          <td>23/06/2023</td>
-                          <th id="action_buttons">
+                          <td class="badge-pill text-center <?php echo $product_status; ?>"                     
+                              data-toggle="tooltip"
+                              data-placement="top"
+                              title="<?php echo $status_title; ?>">
+                              23/06/2023
+                            </td>
+                          <td id="action_buttons">
                             <i
                               class="fa fa-info btn btn-info"
                               id="show-user-details"
+                              data-toggle="tooltip"
+                              data-placement="top"
                               title="Details"
                             ></i>
                             <a href="./Add_product.php"
                               ><i
                                 class="fa fa-pencil btn btn-primary"
+                                data-toggle="tooltip"
+                                data-placement="top"
                                 title="Edit"
                               ></i
                             ></a>
                             <i
                               class="fa fa-trash btn btn-danger"
+                              data-toggle="tooltip"
+                              data-placement="top"
                               title="Delete"
                             ></i>
-                          </th>
+                          </td>
                         </tr>
 
                         <?php endfor; ?>
@@ -705,7 +738,7 @@
                 />
                 <div class="col-12 row justify-content-center my-3 py-4">
                   <a href="" class="btn btn-danger mx-1">Delete</a>
-                  <a href="../Add_product" class="btn btn-info mx-1">Edit</a>
+                  <a href="./Add_product.php" class="btn btn-info mx-1">Edit</a>
                 </div>
               </div>
               <div class="right col-md-6 row justify-content-left">

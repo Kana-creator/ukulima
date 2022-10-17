@@ -380,6 +380,7 @@
                 <li><a href="./Admin_users.php">Users</a></li>
                 <li><a href="./products.php">Products</a></li>
                 <li><a href="./orders.php">Orders</a></li>
+                <li><a href="./sales.php">Sales</a></li>
               </ul>
             </li>
             <li class="mega-menu mega-menu-sm">

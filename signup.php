@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Ukulima</title>
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="theme/assets/images/logo.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="theme/assets/logo.png">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <link href="theme/css/style.css" rel="stylesheet">
     <link rel="stylesheet" href="theme/css/custom_css/signup.css">
@@ -42,36 +42,47 @@
                                 
                                     <a class="text-center logo-link" href="/ukulima"><img src="theme/assets/logo.PNG" alt="" class="logo"></a>
         
-                                <form action="signup" class="mt-5 mb-5 login-input">
+                                <form action="theme/APIs/sign_up_api.php" method="POST" class="mt-5 mb-5 login-input">
                                     <div class="form-group">
                                         <label for="first_name">First Name<sup>*</sup></label>
-                                        <input type="text" class="form-control" id="first_name"  placeholder="First Name">
+                                        <input type="text" class="form-control" id="first_name" name="first_name"
+                                        placeholder="First Name">
                                         <small>Error</small>
                                     </div>
                                     <div class="form-group">
                                         <label for="last_name">Last Name<sup>*</sup></label>
-                                        <input type="text" class="form-control" id="last_name"  placeholder="Last Name">
+                                        <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Last Name">
                                         <small>Error</small>
                                     </div>
                                     <div class="form-group">
                                         <label for="email">Email<sup>*</sup></label>
-                                        <input type="email" class="form-control" id="email"  placeholder="Email">
+                                        <input type="email" class="form-control" id="user_email" name="user_email"  placeholder="Email">
                                         <small>Error</small>
                                     </div>
                                     <div class="form-group">
                                         <label for="telephone">Telephone<sup>*</sup></label>
-                                        <input type="text" class="form-control" id="telephone"  placeholder="Telephone">
+                                        <input type="text" class="form-control" id="user_telephone" name="user_telephone"  placeholder="Telephone">
+                                        <small>Error</small>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="user-category">User category<sup>*</sup></label>
+                                        <select class="form-control" id="user-category" name="user_category">
+                                            <option value="">Select your user category</option>
+                                            <option value="producer">Producer</option>
+                                            <option value="SupPlier">Supplier</option>
+                                            <option value="consumer">Consumer</option>
+                                        </select>
                                         <small>Error</small>
                                     </div>
                                     <div class="form-group">
                                         <label for="user_password">Password<sup>*</sup></label>
-                                        <input type="password" class="form-control" id="user_password" placeholder="Password">
+                                        <input type="password" class="form-control" id="user_password" name="user_password" placeholder="Password">
                                         <small>Error</small>
                                         <i class="fa fa-eye fa-2x" id="show_password"></i>
                                     </div>
                                     <div class="form-group">
                                         <label for="confirm_password">Confirm Password<sup>*</sup></label>
-                                        <input type="text" class="form-control" id="confirm_password" placeholder="Confirm Password">
+                                        <input type="text" class="form-control" id="confirm_password" name="confirm_password" placeholder="Confirm Password">
                                         <small>Error</small>
                                     </div>
                                     <button class="btn login-form__btn submit w-100" id="signup_btn">Signup</button>
