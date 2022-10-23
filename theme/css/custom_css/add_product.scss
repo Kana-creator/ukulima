@@ -1,0 +1,13 @@
+
+
+.form-group{
+    .inner-group{
+        small{
+            visibility: hidden;
+        }
+
+        small.active{
+            visibility: visible;
+        }
+    }
+}

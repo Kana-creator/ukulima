@@ -1,0 +1,8 @@
+.form-group .inner-group small {
+  visibility: hidden;
+}
+
+.form-group .inner-group small.active {
+  visibility: visible;
+}
+/*# sourceMappingURL=add_product.css.map */

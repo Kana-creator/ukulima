@@ -10,6 +10,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="../assets/logo.PNG" />
     <!-- Custom Stylesheet -->
     <link href="../css/style.css" rel="stylesheet" />
+    <link href="../css/custom_css/add_product.css" rel="stylesheet" />
   </head>
 
   <body>
@@ -604,14 +605,14 @@
               <div class="card">
                 <div class="card-body">
                   <div class="form-validation">
-                    <form class="form-valide" action="#" method="post">
+                    <form class="form-valide" action="../APIs/products_api.php" method="post">
                       <div class="form-group row">
                         <label
                           class="col-lg-4 col-form-label text-right"
                           for="val-brand-name"
                           >Brand name <span class="text-danger">*</span>
                         </label>
-                        <div class="col-lg-6">
+                        <div class="col-lg-6 inner-group">
                           <input
                             type="text"
                             class="form-control"
@@ -627,7 +628,7 @@
                           for="val-manufacturer"
                           >Manufacturer <span class="text-danger">*</span>
                         </label>
-                        <div class="col-lg-6">
+                        <div class="col-lg-6 inner-group">
                           <input
                             type="text"
                             class="form-control"
@@ -646,7 +647,7 @@
                             >*</span
                           >
                         </label>
-                        <div class="col-lg-6">
+                        <div class="col-lg-6 inner-group">
                           <input
                             type="text"
                             class="form-control"
@@ -662,7 +663,7 @@
                           for="val-point-of-origin"
                           >Point of Origin <span class="text-danger">*</span>
                         </label>
-                        <div class="col-lg-6">
+                        <div class="col-lg-6 inner-group">
                           <input
                             type="text"
                             class="form-control"
@@ -679,7 +680,7 @@
                           >Date of manufacture
                           <span class="text-danger">*</span>
                         </label>
-                        <div class="col-lg-6">
+                        <div class="col-lg-6 inner-group">
                           <input
                             type="date"
                             class="form-control"
@@ -695,7 +696,7 @@
                           for="val-date-of-expiry"
                           >Expiry date <span class="text-danger">*</span>
                         </label>
-                        <div class="col-lg-6">
+                        <div class="col-lg-6 inner-group">
                           <input
                             type="date"
                             class="form-control"
@@ -710,7 +711,7 @@
                           for="val-product-image"
                           >Product Image <span class="text-danger">*</span>
                         </label>
-                        <div class="col-lg-6">
+                        <div class="col-lg-6 inner-group">
                           <input
                             type="file"
                             accept="image/*"
@@ -727,7 +728,7 @@
                           for="val-confirm-password"
                           >Unit of measure <span class="text-danger">*</span>
                         </label>
-                        <div class="col-lg-6">
+                        <div class="col-lg-6 inner-group">
                           <input
                             type="text"
                             class="form-control"
@@ -743,13 +744,13 @@
                           for="val-batch-number"
                           >Batch number <span class="text-danger">*</span>
                         </label>
-                        <div class="col-lg-6">
+                        <div class="col-lg-6 inner-group">
                           <input
                             type="text"
                             class="form-control"
                             id="val-batch-number"
-                            name="val-batch-numnber"
-                            placeholder="Enter your full address here."
+                            name="val-batch-number"
+                            placeholder="Enter batch number."
                           />
                         </div>
                       </div>
@@ -759,7 +760,7 @@
                           for="val-serial-number"
                           >Serial number <span class="text-danger">*</span>
                         </label>
-                        <div class="col-lg-6">
+                        <div class="col-lg-6 inner-group">
                           <input
                             type="text"
                             class="form-control"
@@ -775,11 +776,11 @@
                           for="val-unit-cost"
                           >Unit cost <span class="text-danger">*</span>
                         </label>
-                        <div class="col-lg-6">
+                        <div class="col-lg-6 inner-group">
                           <input
                             type="number"
                             class="form-control"
-                            id="val-marital"
+                            id="val-unit-cost"
                             name="val-unit-cost"
                             placeholder="Enter product Unit cost"
                           />
@@ -792,7 +793,7 @@
                           >How to use the product
                           <span class="text-danger">*</span>
                         </label>
-                        <div class="col-lg-6">
+                        <div class="col-lg-6 inner-group">
                           <textarea
                             class="form-control"
                             id="val-e-extension"
@@ -805,7 +806,7 @@
 
                       <div class="form-group row">
                         <div class="col-lg-8 ml-auto">
-                          <button type="submit" class="btn btn-success">
+                          <button type="submit" class="btn btn-success" id="add_product">
                             Submit
                           </button>
                         </div>
@@ -850,6 +851,7 @@
     <script src="../js/settings.js"></script>
     <script src="../js/gleek.js"></script>
     <script src="../js/styleSwitcher.js"></script>
+    <!-- <script src="../js/custom_js/products.js"></script> -->
 
     <script src="../plugins/validation/jquery.validate.min.js"></script>
     <script src="../plugins/validation/form-validation-product.js"></script>

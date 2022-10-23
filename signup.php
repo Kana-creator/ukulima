@@ -38,11 +38,13 @@
                 <div class="col-xl-6">
                     <div class="form-input-content">
                         <div class="card login-form mb-0">
+                                    <a class="text-center logo-link" href="/ukulima"><img src="theme/assets/logo.PNG" alt="" class="logo"></a>
                             <div class="card-body pt-5"> 
                                 
-                                    <a class="text-center logo-link" href="/ukulima"><img src="theme/assets/logo.PNG" alt="" class="logo"></a>
+
+                                    <h1 class="col-12 text-center" style="margin-top: 100px">Create Account</h1>
         
-                                <form action="theme/APIs/sign_up_api.php" method="POST" class="mt-5 mb-5 login-input">
+                                <form class="mt-5 mb-5 login-input">
                                     <div class="form-group">
                                         <label for="first_name">First Name<sup>*</sup></label>
                                         <input type="text" class="form-control" id="first_name" name="first_name"
@@ -75,6 +77,15 @@
                                         <small>Error</small>
                                     </div>
                                     <div class="form-group">
+                                        <label for="user_gender">Gender<sup>*</sup></label>
+                                        <select class="form-control" id="user_gender" name="user_gender">
+                                            <option value="">Select your gender</option>
+                                            <option value="Male">Male</option>
+                                            <option value="Female">Female</option>
+                                        </select>
+                                        <small>Error</small>
+                                    </div>
+                                    <div class="form-group">
                                         <label for="user_password">Password<sup>*</sup></label>
                                         <input type="password" class="form-control" id="user_password" name="user_password" placeholder="Password">
                                         <small>Error</small>
@@ -97,6 +108,14 @@
             </div>
         </div>
     </div>
+
+    <div id="message_div">
+        <div class="alert msg row justify-center">
+            <i class="fa fa-check fa-4x col-12 text-center" id="alert_icon"></i>
+            <p class="text-center col-12" id="alert_msg">Sign up successfull</p>
+            <input type="submit" id="ok" class="btn btn-primary m-auto" value="Ok"/>
+        </div>
+    </dive>
     
 
     

@@ -1,3 +1,10 @@
+
+<?php
+
+include "../objects/user_object.php";
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -627,12 +634,12 @@
                     >
                       <thead>
                         <tr>
-                          <th>Employee Number</th>
+                          <th>User ID</th>
                           <th>Name</th>
                           <th>Gender</th>
                           <th>Telephone</th>
                           <th>Email</th>
-                          <th>Office</th>
+                          <th>Status</th>
                           <th>Action</th>
                           <!-- <th>Age</th>
                           <th>Start date</th>
@@ -641,14 +648,14 @@
                       </thead>
 
                       <tbody>
-                        <?php for($i=0; $i<=50; $i++): ?>
+                        <?php while($user_row = $user_result->fetch_array()): ?>
                         <tr>
-                          <td>Emp-00001</td>
-                          <td>Kuwebwa Anatoli</td>
-                          <td>M</td>
-                          <td>+256779320075</td>
-                          <td>akuwebwa@gmail.com</td>
-                          <td>Nakasero, Kampala</td>
+                          <td>Emp-<?php echo $user_row['user_id'];?></td>
+                          <td><?php echo decrypt_data($user_row['first_name'])." ".decrypt_data($user_row['last_name']);?></td>
+                          <td><?php echo $user_row['user_gender'];?></td>
+                          <td><?php echo decrypt_data($user_row['user_telephone']);?></td>
+                          <td><?php echo decrypt_data($user_row['user_email']);?></td>
+                          <td>Online</td>
                           <td id="action_buttons">
                             <i
                               class="fa fa-info btn btn-info"
@@ -673,16 +680,16 @@
                             ></i>
                           </td>
                         </tr>
-                        <?php endfor; ?>
+                        <?php endwhile; ?>
                       </tbody>
                       <tfoot>
                         <tr>
-                          <th>Employee Number</th>
+                          <th>User ID</th>
                           <th>Name</th>
                           <th>Gender</th>
                           <th>Telephone</th>
                           <th>Email</th>
-                          <th>Office</th>
+                          <th>Status</th>
                           <th>Action</th>
                         </tr>
                       </tfoot>

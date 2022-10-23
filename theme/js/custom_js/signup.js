@@ -8,8 +8,11 @@ $(() => {
     const confirm_password = document.getElementById("confirm_password");
     const show_password = document.getElementById("show_password");
     const user_category = document.getElementById("user-category");
+    const user_gender = document.getElementById("user_gender");
 
-    const input_array = [first_name, last_name, user_email, user_telephone, user_password, confirm_password, user_category];
+    const input_array = [first_name, last_name, user_email, user_telephone, user_password, confirm_password];
+
+    const select_array = [user_category, user_gender];
 
     
     // showing error message 
@@ -25,7 +28,7 @@ $(() => {
 
     // removing error message
     const show_success = input => {
-        const form_group = input.parentElement;        
+        const form_group = input.parentElement;
         const small = form_group.querySelector("small").classList.remove("active");
         const label = form_group.querySelector("label").classList.add("active");
         form_group.classList.remove("error");
@@ -36,18 +39,28 @@ $(() => {
         inputArray.forEach(element => {
             if (element.value.length === 0) {
                 show_error(element);
-                e.preventDefault();
             } else {
                 show_success(element);
             }
 
         })
+
     }
 
-// showing required fields on text input
+    // showing required fields on text input
     input_array.forEach(input => {
         input.addEventListener('keyup', () => {
-            check_required(input_array);
+            check_required(input_array.concat(select_array));
+        });
+    });
+
+    
+
+
+    // SHOWING REQIRED SELECT FIELDS
+    select_array.forEach(input => {
+        input.addEventListener('change', () => {
+            check_required(select_array.concat(input_array));
         });
     });
 
@@ -69,6 +82,51 @@ $(() => {
 
     // sign up buttton click
     $("#signup_btn").on('click', (e) => {
-        check_required(input_array, e);
+        if (first_name.value.trim() == "" || last_name.value.trim() == "" || user_email.value.trim() == "" || user_telephone.value.trim() == "" || user_password.value.trim() == "" || confirm_password.value.trim() == "" || user_category.value.trim() == "" || user_gender.value.trim() == "") {
+            check_required(input_array.concat(select_array), e);
+        } else {
+            $.ajax({
+                url: "theme/APIs/sign_up_api.php",
+                type: "POST",
+                dataType: "JSON",
+                data: {
+                    action: "sign_up",
+                    first_name: first_name.value,
+                    last_name: last_name.value,
+                    user_email: user_email.value, 
+                    user_telephone: user_telephone.value,
+                    user_password: user_password.value,
+                    confirm_password: confirm_password.value,
+                    user_category: user_category.value,
+                    user_gender: user_gender.value
+
+                },
+                async: true,
+                Cache: false,
+                success: (res) => {
+                    document.getElementById("message_div").classList.add('active');
+                    document.getElementById("alert_msg").innerText = res['msg'];                        
+                    var alert_icon = document.getElementById("alert_icon");
+                    if (res['status'] === "error") {
+                        alert_icon.classList.remove("fa-chack");
+                        alert_icon.classList.add("fa-warning");
+                        
+                    } else {
+                        alert_icon.classList.add("fa-chack");
+                        alert_icon.classList.remove("fa-warning"); 
+                    }
+                    $("#ok").on('click', () => {
+                        if (res['status'] === 'error') {
+                            document.getElementById("message_div").classList.remove('active');
+                            
+                        } else {
+                            window.location.href = "/ukulima-1";
+                        }
+                    })
+                }
+            });
+
+        }
+            e.preventDefault();
     });
-})
+});
