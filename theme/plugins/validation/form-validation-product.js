@@ -15,7 +15,7 @@ jQuery(".form-valide").validate({
 
         "val-date-of-manufacture": { required: !0 },
         "val-date-of-expiry": { required: !0},
-        "val-product-image": {required: !0},
+        // "val-product-image": {required: !0},
         "val-unit-of-measure": {required: !0},
         "val-batch-number": {required: !0},
         "val-serial-number": {required: !0},
@@ -37,7 +37,7 @@ jQuery(".form-valide").validate({
         
         "val-date-of-manufacture": "Please enter date of manufacture",
         "val-date-of-expiry": "Please enter date of expiry",
-        "val-product-image": "Please upload product image",
+        // "val-product-image": "Please upload product image",
         "val-unit-of-measure": "Please enter product unit of measure",
         "val-batch-number": "Please enter product's batch number",
         "val-serial-number": "Please enter product serial number",

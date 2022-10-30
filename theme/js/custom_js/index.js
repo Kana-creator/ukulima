@@ -21,11 +21,10 @@ $(() => {
         
 
     // FUNCNTION FOR CHECKING EMPTY FIELDS
-    const check_required = (inputArr, e) => {
+    const check_required = (inputArr) => {
         inputArr.forEach(element => {
             if (element.value.length === 0) {
                 show_error(element);
-                e.preventDefault();
             } else {
                 show_success(element)
             }
@@ -58,7 +57,28 @@ $(() => {
     
 // LOGINGING IN BUTTON CLICK
     $("#sign_in_btn").on('click', (e) => {
-        check_required(input_array, e);
-        alert("Congratulations Anatoli for this awesome programming.");
+        if (user_name.value.trim() === "" && password.value.trim() === "") {
+            check_required(input_array);
+        } else {
+            $.ajax({
+                url: "./theme/APIs/login_api.php",
+                type: "POST",
+                dataType: "JSON",
+                data: {
+                    action: "login",
+                    user_name: user_name.value,
+                    password: password.value,
+                }, 
+                Cache: false,
+                success: (res) => {
+                    alert(res['message']);
+                    if (res['status'] === 'success') {
+                        window.location.href = "theme/pages/home.php";
+                    }
+                },
+            })
+        }
+
+        e.preventDefault();
     })
 })

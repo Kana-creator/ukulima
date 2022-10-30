@@ -1,3 +1,8 @@
+div {
+  font-weight: 300;
+  color: black;
+}
+
 .table-responsive #add_product {
   position: absolute;
   right: 40px;
@@ -24,12 +29,25 @@
   background-color: rgba(119, 221, 119, 0.075);
 }
 
+.table-responsive table tbody tr td:hover {
+  color: #000000;
+}
+
 .table-responsive table tbody tr.active #action_buttons {
   opacity: 1;
 }
 
-#user-details {
-  position: absolute;
+.table-responsive table thead th, .table-responsive table tfoot th {
+  font-weight: 600;
+  color: #462;
+}
+
+.table-responsive table thead th:hover, .table-responsive table tfoot th:hover {
+  color: #000000;
+}
+
+#product-details {
+  position: fixed;
   right: 0;
   left: 0;
   top: 0;
@@ -40,24 +58,54 @@
           transform: scale(0);
   -webkit-transition: all 1s;
   transition: all 1s;
+  overflow-y: auto;
 }
 
-#user-details .details-inner {
+#product-details .details-inner {
   min-height: 100vh;
 }
 
-#user-details .details-inner #close-user {
+#product-details .details-inner #close-user {
   color: #a45;
   position: absolute;
   right: 20px;
   cursor: pointer;
 }
 
-#user-details .details-inner #close-user:hover {
+#product-details .details-inner #close-user:hover {
   color: #7d7;
 }
 
-#user-details.show {
+#product-details.show {
+  -webkit-transform: scale(1);
+          transform: scale(1);
+}
+
+#message_div {
+  background: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  -webkit-transform: scale(0);
+          transform: scale(0);
+  -webkit-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+  z-index: 10000;
+}
+
+#message_div .msg {
+  background-color: #ffffff;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  color: #d35;
+}
+
+#message_div.active {
   -webkit-transform: scale(1);
           transform: scale(1);
 }

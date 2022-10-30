@@ -16,9 +16,9 @@ $(() => {
     })
 
 
-     $("#show-user-details").on('click', function () {
-        $("#user-details").addClass("show");
-     })
+    //  $("#show-user-details").on('click', function () {
+    //     $("#product-details").addClass("show");
+    //  })
     
     $("#close-user").on('click', () => {
         $("#user-details").removeClass("show");
