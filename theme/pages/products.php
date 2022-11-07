@@ -1,6 +1,12 @@
 <?php
 
 include "../objects/product_object.php";
+session_start();
+if (isset($_SESSION['user_id'])) {
+  $user_name = $_SESSION['user_name'];
+} else {
+  header("Location: ../../index.php");
+}
 
 
 ?>
@@ -193,7 +199,7 @@ include "../objects/product_object.php";
                   </div>
                 </div>
               </li> -->
-            <li class="icons dropdown">
+            <li class="icons dropdown" title="Notifications" data-toggle="tooltip" data-placement="top">
               <a href="javascript:void(0)" data-toggle="dropdown">
                 <i class="mdi mdi-bell-outline"></i>
                 <span class="badge badge-pill gradient-2 badge-primary">3</span>
@@ -268,7 +274,7 @@ include "../objects/product_object.php";
                   </div>
                 </div>
               </li> -->
-            <li class="icons dropdown">
+            <li class="icons dropdown" title="Profile" data-toggle="tooltip" data-placement="top">
               <div class="user-img c-pointer position-relative" data-toggle="dropdown">
                 <span class="activity active"></span>
                 <img src="../images/user/1.png" height="40" width="40" alt="" />
@@ -277,7 +283,7 @@ include "../objects/product_object.php";
                 <div class="dropdown-content-body">
                   <ul>
                     <li>
-                      <a href="app-profile.html"><i class="icon-user"></i> <span>Profile</span></a>
+                      <a href="#"><i class="icon-user"></i> <span><?php echo decrypt_data($user_name); ?></span></a>
                     </li>
                     <li>
                       <a href="email-inbox.html"><i class="icon-envelope-open"></i> <span>Inbox</span>
@@ -292,7 +298,7 @@ include "../objects/product_object.php";
                       <a href="page-lock.html"><i class="icon-lock"></i> <span>Lock Screen</span></a>
                     </li>
                     <li>
-                      <a href="page-login.html"><i class="icon-key"></i> <span>Logout</span></a>
+                      <a href="../APIs/logout_api.php"><i class="icon-key"></i> <span>Logout</span></a>
                     </li>
                   </ul>
                 </div>

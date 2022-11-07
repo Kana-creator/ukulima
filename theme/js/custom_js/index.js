@@ -73,7 +73,17 @@ $(() => {
                 success: (res) => {
                     alert(res['message']);
                     if (res['status'] === 'success') {
-                        window.location.href = "theme/pages/home.php";
+                        if (res['user_type'] === "consumer") {                            
+                            window.location.href = "theme/pages/consumer_page.php";
+                        } else if (res['user_type'] === "producer") {                            
+                            window.location.href = "theme/pages/products.php";
+                        } else if (re['user_type'] === "supplier") {                            
+                            window.location.href = "theme/pages/products.php";
+                        } else if (res['user_type'] === "admin") {                            
+                            window.location.href = "theme/pages/home.php";
+                        } else if (res['user_type'] === "supper_admin") {                            
+                            window.location.href = "theme/pages/system_settings.php";
+                        }
                     }
                 },
             })

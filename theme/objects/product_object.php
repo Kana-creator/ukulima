@@ -52,4 +52,4 @@ class Product
 }
 
 
-$product_result = $mysqli->query("SELECT * FROM Product");
+$product_result = $mysqli->query("SELECT * FROM Product GROUP BY product_image");

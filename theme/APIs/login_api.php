@@ -18,7 +18,8 @@ function user_login($mysqli, $user_name, $password)
                     session_start();
                     $_SESSION['user_id'] = $row['user_id'];
                     $_SESSION['user_name'] = $row['first_name'];
-                    echo json_encode(array("status" => "success", "message" => "Login successful"));
+                    $_SESSION['user_category'] = $row['user_category'];
+                    echo json_encode(array("status" => "success", "message" => "Login successful", "user_type" => $_SESSION['user_category']));
                 } else {
                     echo json_encode(array("status" => "error", "message" => "Wrong password!"));
                 }

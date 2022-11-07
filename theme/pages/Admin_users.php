@@ -1,7 +1,11 @@
 <?php
-
 include "../objects/user_object.php";
-
+session_start();
+if (isset($_SESSION['user_id'])) {
+  $user_name = $_SESSION['user_name'];
+} else {
+  header("Location: ../../index.php");
+}
 ?>
 
 <!DOCTYPE html>
@@ -277,7 +281,7 @@ include "../objects/user_object.php";
                 <div class="dropdown-content-body">
                   <ul>
                     <li>
-                      <a href="app-profile.html"><i class="icon-user"></i> <span>Profile</span></a>
+                      <a href="#"><i class="icon-user"></i> <span><?php echo decrypt_data($user_name); ?></span></a>
                     </li>
                     <li>
                       <a href="email-inbox.html"><i class="icon-envelope-open"></i> <span>Inbox</span>
@@ -292,7 +296,7 @@ include "../objects/user_object.php";
                       <a href="page-lock.html"><i class="icon-lock"></i> <span>Lock Screen</span></a>
                     </li>
                     <li>
-                      <a href="page-login.html"><i class="icon-key"></i> <span>Logout</span></a>
+                      <a href="../APIs/logout_api.php"><i class="icon-key"></i> <span>Logout</span></a>
                     </li>
                   </ul>
                 </div>
@@ -584,6 +588,12 @@ include "../objects/user_object.php";
                           $(() => {
                             $("#show-user-details<?php echo $user_row['user_id']; ?>").on('click', () => {
                               $("#user-details").addClass("show");
+                              $("#user_id").text("<?php echo 'User_' . $user_row['user_id']; ?>");
+                              $("#user_name").text("<?php echo decrypt_data($user_row['first_name']); ?> <?php echo decrypt_data($user_row['last_name']); ?>");
+                              $("#user_email").text("<?php echo decrypt_data($user_row['user_email']); ?>");
+                              $("#telephone").text("<?php echo decrypt_data($user_row['user_telephone']); ?>");
+                              $("#gender").text("<?php echo $user_row['user_gender']; ?>");
+                              $("#user_type").text("<?php echo $user_row['user_category']; ?>");
                             })
                           })
                         </script>
@@ -622,7 +632,7 @@ include "../objects/user_object.php";
             </div>
             <div class="right col-md-6 row justify-content-left">
               <div class="left text-right alert col-6">
-                <p><b>Employee Number: </b></p>
+                <p><b>User_id: </b></p>
                 <p><b>Name: </b></p>
                 <p><b>Email: </b></p>
                 <p><b>Telephone: </b></p>
