@@ -1,7 +1,9 @@
 <?php
-
-include "../objects/product_object.php";
+include "../APIs/connection_api.php";
+include "../APIs/encryption_api.php";
+$product_result = $mysqli->query("SELECT * FROM Product");
 session_start();
+
 if (isset($_SESSION['user_id'])) {
     $user_name = $_SESSION['user_name'];
 } else {
@@ -10,6 +12,7 @@ if (isset($_SESSION['user_id'])) {
 
 
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -108,97 +111,7 @@ if (isset($_SESSION['user_id'])) {
                 </div>
                 <div class="header-right">
                     <ul class="clearfix">
-                        <!-- <li class="icons dropdown">
-                <a href="javascript:void(0)" data-toggle="dropdown">
-                  <i class="mdi mdi-email-outline"></i>
-                  <span class="badge gradient-1 badge-pill badge-primary"
-                    >3</span
-                  >
-                </a>
-                <div class="drop-down animated fadeIn dropdown-menu">
-                  <div
-                    class="dropdown-content-heading d-flex justify-content-between"
-                  >
-                    <span class="">3 New Messages</span>
-                  </div>
-                  <div class="dropdown-content-body">
-                    <ul>
-                      <li class="notification-unread">
-                        <a href="javascript:void()">
-                          <img
-                            class="float-left mr-3 avatar-img"
-                            src="images/avatar/1.jpg"
-                            alt=""
-                          />
-                          <div class="notification-content">
-                            <div class="notification-heading">Saiful Islam</div>
-                            <div class="notification-timestamp">
-                              08 Hours ago
-                            </div>
-                            <div class="notification-text">
-                              Hi Teddy, Just wanted to let you ...
-                            </div>
-                          </div>
-                        </a>
-                      </li>
-                      <li class="notification-unread">
-                        <a href="javascript:void()">
-                          <img
-                            class="float-left mr-3 avatar-img"
-                            src="images/avatar/2.jpg"
-                            alt=""
-                          />
-                          <div class="notification-content">
-                            <div class="notification-heading">Adam Smith</div>
-                            <div class="notification-timestamp">
-                              08 Hours ago
-                            </div>
-                            <div class="notification-text">
-                              Can you do me a favour?
-                            </div>
-                          </div>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="javascript:void()">
-                          <img
-                            class="float-left mr-3 avatar-img"
-                            src="images/avatar/3.jpg"
-                            alt=""
-                          />
-                          <div class="notification-content">
-                            <div class="notification-heading">Barak Obama</div>
-                            <div class="notification-timestamp">
-                              08 Hours ago
-                            </div>
-                            <div class="notification-text">
-                              Hi Teddy, Just wanted to let you ...
-                            </div>
-                          </div>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="javascript:void()">
-                          <img
-                            class="float-left mr-3 avatar-img"
-                            src="images/avatar/4.jpg"
-                            alt=""
-                          />
-                          <div class="notification-content">
-                            <div class="notification-heading">
-                              Hilari Clinton
-                            </div>
-                            <div class="notification-timestamp">
-                              08 Hours ago
-                            </div>
-                            <div class="notification-text">Hello</div>
-                          </div>
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </li> -->
+
                         <li class="icons dropdown" title="Notifications" data-toggle="tooltip" data-placement="top">
                             <a href="javascript:void(0)" data-toggle="dropdown">
                                 <i class="mdi mdi-bell-outline"></i>
@@ -338,55 +251,120 @@ if (isset($_SESSION['user_id'])) {
             <!-- row -->
 
             <div class="container-fluid">
-                <div class="col-12">
-                    <form class="container-fluid p-2 bg-light">
-                        <h4>Verify Product</h4>
+                <div class="col-md-8 my-4 row">
+                    <form class="container-fluid p-2 col-12">
+                        <h4 class="col-12">Verify Product</h4>
                         <div class="form-group col-md-12">
-                            <input type="text" class="form-control" placeholder="Enter serial number to verify product..." />
-                            <input type="submit" value="Verify" class="btn btn-success rounded" />
+                            <input type="text" class="form-control" placeholder="Enter serial number to verify product..." id="input_serial_number" />
+                            <input type="submit" value="Verify" class="btn btn-success rounded" id="verify_product" />
                         </div>
+                        <b id="verification_message" class="col-12 text-danger"></b>
                     </form>
                 </div>
 
-                <div class="col-12">
-                    <?php while ($prodcut_row = $product_result->fetch_array()) : ?>
-                        <img src="../assets/product_images/<?php echo decrypt_data($prodcut_row['product_image']); ?>
-                    " class="col-md-4" />
+                <div class="col-12 row">
+                    <?php while ($product_row = $product_result->fetch_array()) : ?>
+                        <div class="card col-xl-4 col-lg-4 col-md-6 col-sm-12 p-2">
+                            <div class="card-inner card">
+                                <img src="../assets/product_images/<?php echo decrypt_data($product_row['product_image']); ?>" class="card-head" height="250" width="220" />
+                                <div class="card-body" style="line-height: 2px;">
+                                    <h4><?php echo decrypt_data($product_row['brand_name']); ?></h4>
+                                    <p><?php echo decrypt_data($product_row['unit_of_measure']); ?></p>
+                                    <p class="text-success">Ugx. <?php echo number_format(decrypt_data($product_row['unit_cost']), 1); ?>/=</p>
+                                    <div>
+                                        <button id="product_details<?php echo $product_row['product_id']; ?>" class="btn btn-sm btn-warning">Details</button>
+                                        <button id="add_to_cat<?php echo $product_row['product_id']; ?>" class="btn btn-sm btn-info">Add to cat</button>
+                                    </div>
+
+                                </div>
+                                <div id="cat_div<?php echo $product_row['product_id']; ?>" class="cat_div">
+                                    <div class="cat-details p-3">
+                                        <h4 class="col-12 text-center">Add to cat</h4>
+                                        <input type="number" autofocus class="form-control" placeholder="Enter number of items" id="number_of_items<?php echo $product_row['product_id']; ?>" />
+                                        <b id="cat_msg<?php echo $product_row['product_id']; ?>" class="text-danger"></b>
+                                        <div id="cat_action_btn" class="justify-center">
+                                            <button id="cancel_add_to_cat<?php echo $product_row['product_id']; ?>" class="btn btn-sm btn-secondary">Cancel</button>
+                                            <button id="add_btn<?php echo $product_row['product_id']; ?>" class="btn btn-sm btn-success">Add</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <script>
+                            $(() => {
+
+                                $("#product_details<?php echo $product_row['product_id']; ?>").on('click', () => {
+                                    $("#product-details").addClass("show");
+                                    $("#product_image").attr("src", "../assets/product_images/<?php echo decrypt_data($product_row['product_image']); ?>");
+                                    $("#p_brand_name").text("<?php echo decrypt_data($product_row['brand_name']); ?>");
+                                    $("#p_manufacturer").text("<?php echo decrypt_data($product_row['product_manufacturer']) ?>");
+                                    $("#p_supplier").text("<?php echo decrypt_data($product_row['product_supplier']); ?>");
+                                    $("#p_point_of_origin").text("<?php echo decrypt_data($product_row['point_of_origin']); ?>");
+                                    $("#p_date_of_manufacture").text("<?php echo $product_row['date_of_manufacture']; ?>");
+                                    $("#p_expiry_date").text("<?php echo $product_row['product_expiry_date']; ?>");
+                                    $("#p_unit_of_measure").text("<?php echo decrypt_data($product_row['unit_of_measure']); ?>");
+                                    $("#p_batch_number").text("<?php echo decrypt_data($product_row['batch_number']); ?>");
+                                    $("#p_serial_number").text("<?php echo decrypt_data($product_row['serial_number']); ?>");
+                                    $("#p_unit_cost").text("Ugx. <?php echo number_format(decrypt_data($product_row['unit_cost'])); ?>/=");
+                                    $("#p_user_guid").text("<?php echo decrypt_data($product_row['user_guid']); ?>");
+                                });
+
+
+                                $("#add_to_cat<?php echo $product_row['product_id']; ?>").on('click', () => {
+                                    $("#cat_div<?php echo $product_row['product_id']; ?>").addClass('show');
+
+                                });
+
+
+                                $("#cancel_add_to_cat<?php echo $product_row['product_id']; ?>").on('click', () => {
+                                    $("#cat_div<?php echo $product_row['product_id']; ?>").removeClass("show");
+                                });
+
+
+                                $("#add_btn<?php echo $product_row['product_id']; ?>").on('click', () => {
+                                    var number_of_items = $("#number_of_items<?php echo $product_row['product_id']; ?>").val();
+                                    if (number_of_items <= 0) {
+                                        $("#cat_msg<?php echo $product_row['product_id']; ?>").text("Please enter a valid number of items");
+                                    } else {
+                                        $.ajax({
+                                            url: "../APIs/consumer_page_api.php",
+                                            type: "POST",
+                                            dataType: "JSON",
+                                            data: {
+                                                action: "add_to_cat",
+                                                product_id: "<?php echo $product_row['product_id']; ?>",
+                                                number_of_items: number_of_items,
+                                            },
+                                            Cache: false,
+                                            success: (res) => {
+                                                alert(res['message']);
+                                            },
+                                        });
+                                    }
+                                });
+                            })
+                        </script>
+
                     <?php endwhile; ?>
                 </div>
             </div>
 
-
-            <script>
-                $(() => {
-                    $("#show-user-details").on('click', function() {
-                        $("#product-details").addClass("show");
-                    })
-
-                    $("#close-user").on('click', () => {
-                        $("#product-details").removeClass("show");
-                    })
-
-
-                })
-            </script>
-
-
             <div id="product-details">
-                <div class="details-inner bg-light alert container py-5 pt-5h">
+                <div class="details-inner bg-light alert container py-5 pt-5">
                     <i class="fa fa-times fa-2x" id="close-user"></i>
                     <div class="row justify-content-center align-content-center py-5">
                         <div class="left col-md-4">
                             <h1 class="text-success text-center">Product details</h1>
-                            <img src="../assets/product_images/weed master powder.jpg" class="col-12" id="product_image" />
-                            <div class="col-12 row justify-content-center my-3 py-4">
+                            <img class="col-12" id="product_image" />
+                            <!-- <div class="col-12 row justify-content-center my-3 py-4">
                                 <a href="" class="btn btn-danger mx-1">Delete</a>
                                 <a href="./Add_product.php" class="btn btn-info mx-1">Edit</a>
-                            </div>
+                            </div> -->
                         </div>
                         <div class="right col-md-6 row justify-content-left">
                             <div class="left text-right alert col-6">
-                                <p><b>Product ID: </b></p>
+                                <!-- <p><b>Product ID: </b></p> -->
                                 <p><b>Brand Name: </b></p>
                                 <p><b>Manufacturer: </b></p>
                                 <p><b>Registered supplier: </b></p>
@@ -400,7 +378,7 @@ if (isset($_SESSION['user_id'])) {
                                 <p><b>E-Extension: </b></p>
                             </div>
                             <div class="right alert col-6">
-                                <p id="p_product_id">Prod-0001</p>
+                                <!-- <p id="p_product_id">Prod-0001</p> -->
                                 <p id="p_brand_name">Weed master</p>
                                 <p id="p_manufacturer">Kakoola Ug ltd</p>
                                 <p id="p_supplier">K&M Traders</p>
@@ -438,7 +416,7 @@ if (isset($_SESSION['user_id'])) {
             <div class="copyright">
                 <p>
                     Copyright &copy; Designed & Developed by
-                    <a href="https://themeforest.net/user/quixlab">Anatoli</a> 2022
+                    <a href="#">Anatoli</a> 2022
                 </p>
             </div>
         </div>
@@ -450,70 +428,19 @@ if (isset($_SESSION['user_id'])) {
         Main wrapper end
     ***********************************-->
 
-
-    <div id="message_div">
-        <div class="alert msg row justify-center">
-            <i class="fa fa-check fa-4x col-12 text-center" id="alert_icon"></i>
-            <p class="text-center col-12" id="alert_msg">Sign up successfull</p>
-            <input type="submit" id="ok" class="btn btn-primary m-auto" value="Ok" />
-        </div>
-        </dive>
-
-
-        <?php
-
-        if (isset($_GET['action'])) {
-            $status = $_GET['status'];
-        ?>
-            <script>
-                $(() => {
-                    $('#message_div').addClass('active');
-                    $("#alert_msg").text("<?php echo $_GET['message']; ?>");
-
-                    $("#ok").on('click', () => {
-                        $('#message_div').removeClass('active');
-                    })
-                });
-            </script>
-
-        <?php
-            if ($_GET['status'] == "error") {
-                $icon = "fa-warning";
-            } else {
-                $icon = "fa-check";
-            }
-        }
-
-        ?>
-
-
-
-        <div id="message_div">
-            <div class="alert msg row justify-center">
-                <i class="fa <?php echo $icon; ?> fa-4x col-12 text-center" id="alert_icon"></i>
-                <p class="text-center col-12" id="alert_msg">Sign up successfull</p>
-                <input type="submit" id="ok" class="btn btn-primary m-auto" value="Ok" />
-            </div>
-            </dive>
-
-
-
-
-
-
-            <!--**********************************
+    <!--**********************************
         Scripts
     ***********************************-->
-            <script src="../plugins/common/common.min.js"></script>
-            <script src="../js/custom.min.js"></script>
-            <script src="../js/settings.js"></script>
-            <script src="../js/gleek.js"></script>
-            <script src="../js/styleSwitcher.js"></script>
-            <script src="../js/custom_js/products.js"></script>
+    <script src="../plugins/common/common.min.js"></script>
+    <script src="../js/custom.min.js"></script>
+    <script src="../js/settings.js"></script>
+    <script src="../js/gleek.js"></script>
+    <script src="../js/styleSwitcher.js"></script>
+    <script src="../js/custom_js/consumer_page.js"></script>
 
-            <script src="../plugins/tables/js/jquery.dataTables.min.js"></script>
-            <script src="../plugins/tables/js/datatable/dataTables.bootstrap4.min.js"></script>
-            <script src="../plugins/tables/js/datatable-init/datatable-basic.min.js"></script>
+    <script src="../plugins/tables/js/jquery.dataTables.min.js"></script>
+    <script src="../plugins/tables/js/datatable/dataTables.bootstrap4.min.js"></script>
+    <script src="../plugins/tables/js/datatable-init/datatable-basic.min.js"></script>
 </body>
 
 </html>

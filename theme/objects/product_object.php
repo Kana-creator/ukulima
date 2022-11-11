@@ -51,5 +51,6 @@ class Product
     }
 }
 
-
-$product_result = $mysqli->query("SELECT * FROM Product GROUP BY product_image");
+session_start();
+$user_id = $_SESSION['user_id'];
+$product_result = $mysqli->query("SELECT * FROM Product WHERE user_id=$user_id");

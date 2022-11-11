@@ -1,7 +1,6 @@
 <?php
 
 include "../objects/product_object.php";
-session_start();
 if (isset($_SESSION['user_id'])) {
   $user_name = $_SESSION['user_name'];
 } else {
@@ -617,8 +616,8 @@ if (isset($_SESSION['user_id'])) {
                               $("#p_unit_of_measure").text("<?php echo decrypt_data($product_row['unit_of_measure']); ?>");
                               $("#p_batch_number").text("<?php echo decrypt_data($product_row['batch_number']); ?>");
                               $("#p_serial_number").text("<?php echo decrypt_data($product_row['serial_number']); ?>");
-                              $("#p_unit_cost").text("<?php echo  decrypt_data($product_row['unit_cost']); ?>");
                               $("#p_user_guid").text("<?php echo decrypt_data($product_row['user_guid']); ?>");
+                              $("#p_unit_cost").text("Ugx. <?php echo  number_format(decrypt_data($product_row['unit_cost']), 1); ?>/=");
 
                               $("#product_image").attr("src", "../assets/product_images/<?php echo decrypt_data($product_row['product_image']); ?>");
 
