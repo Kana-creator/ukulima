@@ -679,7 +679,7 @@ if (isset($_SESSION['user_id'])) {
             </div>
             <div class="right col-md-6 row justify-content-left">
               <div class="left text-right alert col-6">
-                <p><b>Product ID: </b></p>
+                <p><b>Products ID: </b></p>
                 <p><b>Brand Name: </b></p>
                 <p><b>Manufacturer: </b></p>
                 <p><b>Registered supplier: </b></p>
