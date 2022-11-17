@@ -24,19 +24,37 @@ function verify_product($mysqli, $serial_number)
 }
 
 
-// FUNCTION FOR ADDING A PRODUCT TO CAT
-function add_to_cat($mysqli, $product_id, $user_id, $number_of_items)
+// FUNCTION FOR ADDING A PRODUCT TO CART
+function add_to_cat($mysqli, $product_id, $user_id, $number_of_items, $order_date)
 {
     $result = $mysqli->query("SELECT * FROM Product WHERE product_id=$product_id");
     if (!$result) {
         echo json_encode(array("status" => "error", "message" => $mysqli->error));
     } else {
         if (mysqli_num_rows($result) > 0) {
-            $query = $mysqli->query("INSERT INTO Order(product_id, user_id, number_of_items) VALUES($product_id, $user_id, $number_of_items')");
-            if (!$query) {
-                echo json_encode(array("status" => "error", "message" => $mysqli->error));
+            $result = $mysqli->query("SELECT * FROM user_order WHERE product_id=$product_id AND user_id=$user_id");
+            if (mysqli_num_rows($result) > 0) {
+                $row = $result->fetch_array();
+                $number_of_items = $row['number_of_items'] + $number_of_items;
+                $query = $mysqli->query("UPDATE user_order SET number_of_items=$number_of_items WHERE product_id=$product_id AND user_id=$user_id");
+                if (!$query) {
+                    echo json_encode(array("status" => "error", "message" => $mysqli->error));
+                } else {
+                    echo json_encode(array("status" => "success", "message" => "Product has successfully been added to cart."));
+                }
             } else {
-                echo json_encode(array("status" => "success", "message" => "Product successfully added to cat."));
+                $query = $mysqli->query("INSERT INTO user_order(product_id, user_id, number_of_items, order_date) VALUES($product_id, $user_id, $number_of_items, '$order_date')");
+                if (!$query) {
+                    echo json_encode(array("status" => "error", "message" => $mysqli->error));
+                } else {
+                    $cat_result = $mysqli->query("SELECT SUM(number_of_items) AS number_of_items FROM USER_ORDER WHERE user_id=$user_id");
+                    $cat_row = $cat_result->fetch_array();
+                    $number_of_items = $cat_row['number_of_items'];
+                    if ($number_of_items > 9) {
+                        $number_of_items = "9+";
+                    }
+                    echo json_encode(array("status" => "success", "message" => "Product successfully added to cart.", "number_of_items" => $number_of_items));
+                }
             }
         } else {
             echo json_encode(array("status" => "success", "message" => "Product not found"));
@@ -58,7 +76,8 @@ if (isset($_POST['action'])) {
         $product_id = $_POST['product_id'];
         $user_id = $_SESSION['user_id'];
         $number_of_items = $_POST['number_of_items'];
+        $order_date = date("Y-m-d");
 
-        add_to_cat($mysqli, $product_id, $user_id, $number_of_items);
+        add_to_cat($mysqli, $product_id, $user_id, $number_of_items, $order_date);
     }
 }

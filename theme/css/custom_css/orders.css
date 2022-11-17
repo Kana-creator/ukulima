@@ -1,0 +1,114 @@
+div {
+  font-weight: 300;
+  color: black;
+}
+
+.table-responsive #add_product {
+  position: absolute;
+  right: 40px;
+  top: 30px;
+}
+
+.table-responsive table tbody tr #action_buttons {
+  opacity: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.table-responsive table tbody tr #action_buttons i.btn {
+  padding: 5px 10px;
+  margin-left: 2px;
+}
+
+.table-responsive table tbody tr:hover {
+  background-color: rgba(119, 221, 119, 0.075);
+}
+
+.table-responsive table tbody tr td:hover {
+  color: #000000;
+}
+
+.table-responsive table tbody tr.active #action_buttons {
+  opacity: 1;
+}
+
+.table-responsive table thead th,
+.table-responsive table tfoot th {
+  font-weight: 600;
+  color: #462;
+}
+
+.table-responsive table thead th:hover,
+.table-responsive table tfoot th:hover {
+  color: #000000;
+}
+
+#order-details {
+  position: fixed;
+  right: 0;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9999999999;
+  -webkit-transform: scale(0);
+          transform: scale(0);
+  -webkit-transition: all 1s;
+  transition: all 1s;
+  overflow-y: auto;
+}
+
+#order-details .details-inner {
+  min-height: 100vh;
+}
+
+#order-details .details-inner #close-order {
+  color: #a45;
+  position: absolute;
+  right: 20px;
+  cursor: pointer;
+}
+
+#order-details .details-inner #close-order:hover {
+  color: #7d7;
+}
+
+#order-details.show {
+  -webkit-transform: scale(1);
+          transform: scale(1);
+}
+
+#message_div {
+  background: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  -webkit-transform: scale(0);
+          transform: scale(0);
+  -webkit-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+  z-index: 10000;
+}
+
+#message_div .msg {
+  background-color: #ffffff;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  color: #d35;
+}
+
+#message_div.active {
+  -webkit-transform: scale(1);
+          transform: scale(1);
+}
+/*# sourceMappingURL=orders.css.map */

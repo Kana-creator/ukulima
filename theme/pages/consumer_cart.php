@@ -7,7 +7,7 @@ session_start();
 if (isset($_SESSION['user_id'])) {
   $user_name = $_SESSION['user_name'];
   $user_id = $_SESSION['user_id'];
-  $cart_result = $mysqli->query("SELECT user_order.order_id AS order_id, user_order.user_id AS order_user_id, user_order.number_of_items AS number_of_items, user_order.order_date AS order_date, user_order.clearence_status AS clearence_status, user_order.product_id AS product_id, product.unit_of_measure AS unit_of_measure, product.brand_name AS brand_name, product.product_image AS product_image, product.unit_cost AS unit_cost FROM user_order INNER JOIN product ON product.product_id = user_order.product_id  WHERE product.user_id=$user_id AND user_order.check_out_status=1 GROUP BY user_order.product_id");
+  $cart_result = $mysqli->query("SELECT user_order.order_id AS order_id, user_order.user_id AS order_user_id, user_order.number_of_items AS number_of_items, user_order.order_date AS order_date, user_order.number_of_items AS number_of_items, user_order.check_out_status AS check_out_status, product.unit_cost AS unit_cost, product.unit_of_measure AS unit_of_measure, product.brand_name AS brand_name FROM user_order INNER JOIN product ON product.product_id = user_order.product_id  WHERE user_order.user_id=$user_id");
 } else {
   header("Location: ../../index.php");
 }
@@ -327,10 +327,10 @@ if (isset($_SESSION['user_id'])) {
               <i class="icon-speedometer menu-icon"></i><span class="nav-text">Dashboard</span>
             </a>
             <ul aria-expanded="false" class="bg-success">
-              <li><a href="./home.php">Home</a></li>
+              <li><a href="./consumer_page.php">Home</a></li>
               <li><a href="./Admin_users.php">Users</a></li>
               <li><a href="./products.php">Products</a></li>
-              <li><a href="./orders.php">Orders</a></li>
+              <li><a href="./consumer_cart.php">Orders</a></li>
             </ul>
           </li>
           <!-- <li class="mega-menu mega-menu-sm">
@@ -575,9 +575,11 @@ if (isset($_SESSION['user_id'])) {
                     <thead>
                       <tr>
                         <!-- <th>Order ID</th> -->
-                        <th>Customer Name</th>
-                        <th>Telephone number</th>
-                        <th>Email address</th>
+                        <th>Brand Name</th>
+                        <th>Unit of measure</th>
+                        <th>Number of items</th>
+                        <th>Unit cost</th>
+                        <th>Total cost</th>
                         <th>Order date</th>
                         <th>Status</th>
                         <th>Action</th>
@@ -591,29 +593,28 @@ if (isset($_SESSION['user_id'])) {
                         $i += 1;
                         $product_status = "";
                         $status_title = "";
-                        if ($cart_row['clearence_status'] == 1) {
+                        if ($cart_row['check_out_status'] == 1) {
                           $product_status = "gradient-1";
                           $status_title = "cleared";
+                          $cancel_order = "hidden";
                         } else {
                           $product_status = "gradient-3";
                           $status_title = "pending";
+                          $cancel_order = "show";
                         }
 
-                        $cart_users_id = $cart_row['order_user_id'];
-                        $user_result = $mysqli->query("SELECT * FROM User WHERE user_id=$cart_users_id");
-                        $cart_user_row = $user_result->fetch_array();
-
-
-                        $product_id = $cart_row['product_id'];
-                        $order_results = $mysqli->query("SELECT SUM(number_of_items) AS number_of_items FROM user_order WHERE product_id=$product_id AND check_out_status=1");
-                        $order_row = $order_results->fetch_array();
+                        // $cart_users_id = $cart_row['order_user_id'];
+                        // $user_result = $mysqli->query("SELECT * FROM User WHERE user_id=$cart_users_id");
+                        // $cart_user_row = $cart_result->fetch_array();
 
                       ?>
                         <tr>
                           <!-- <td>Order-<?php echo $i; ?></td> -->
-                          <td><?php echo decrypt_data($cart_user_row['first_name']); ?></td>
-                          <td><a href="tel: <?php echo decrypt_data($cart_user_row['user_telephone']); ?>"><?php echo decrypt_data($cart_user_row['user_telephone']); ?></a></td>
-                          <td><?php echo decrypt_data($cart_user_row['user_email']); ?></td>
+                          <td><?php echo decrypt_data($cart_row['brand_name']); ?></td>
+                          <td><?php echo decrypt_data($cart_row['unit_of_measure']); ?></td>
+                          <td><?php echo $cart_row['number_of_items']; ?></td>
+                          <td><?php echo number_format(decrypt_data($cart_row['unit_cost'])); ?></td>
+                          <td><?php echo number_format($cart_row['number_of_items'] * decrypt_data($cart_row['unit_cost'])); ?></td>
                           <td><?php echo $cart_row['order_date']; ?></td>
                           <td class="" data-toggle="tooltip" data-placement="top" title="<?php echo $status_title; ?>">
                             <!-- <?php echo $cart_row['number_of_items']; ?> -->
@@ -623,7 +624,8 @@ if (isset($_SESSION['user_id'])) {
                             </div>
                           </td>
                           <td id="action_buttons">
-                            <i class="fa fa-info btn btn-info" id="show-order-details<?php echo $cart_row['order_id']; ?>" data-toggle="tooltip" data-placement="top" title="Details"></i>
+                            <i class="fa fa-check btn btn-info" id="show-order-details<?php echo $cart_row['order_id']; ?>" data-toggle="tooltip" data-placement="top" title="check out"></i>
+                            <i class="fa fa-times btn btn-danger" id="cancel_order<?php echo $cart_row['order_id']; ?>" data-toggle="tooltip" data-placement="top" title="Cancel order" <?php echo $cancel_order; ?>></i>
 
                           </td>
                         </tr>
@@ -632,13 +634,6 @@ if (isset($_SESSION['user_id'])) {
                           $(() => {
                             $("#show-order-details<?php echo $cart_row['order_id']; ?>").on('click', () => {
                               $("#order-details").addClass("show");
-                              $("#input_order_id").val("<?php echo $cart_row['order_id']; ?>");
-                              $("#product_image").attr("src", "../assets/product_images/<?php echo decrypt_data($cart_row['product_image']); ?>");
-                              $("#p_brand_name").text("<?php echo decrypt_data($cart_row['brand_name']); ?>");
-                              $("#p_number_of_items").text("<?php echo $order_row['number_of_items']; ?>");
-                              $("#p_unit_of_measure").text("<?php echo decrypt_data($cart_row['unit_of_measure']); ?>");
-                              $("#p_unit_cost").text("<?php echo number_format(decrypt_data($cart_row['unit_cost'])); ?>");
-                              $("#p_total_cost").text("<?php echo number_format(decrypt_data($cart_row['unit_cost']) * $order_row['number_of_items']); ?>");
                             })
 
                             $("#close-order").on("click", () => {
@@ -654,9 +649,11 @@ if (isset($_SESSION['user_id'])) {
                     <tfoot>
                       <tr>
                         <!-- <th>Order ID</th> -->
-                        <th>Customer name</th>
-                        <th>Telephone number</th>
-                        <th>Email addres</th>
+                        <th>Brand name</th>
+                        <th>Unit of measure</th>
+                        <th>Number of items</th>
+                        <th>Unit Cost</th>
+                        <th>Total Cost</th>
                         <th>Order date</th>
                         <th>Status</th>
                         <th>Action</th>
@@ -674,42 +671,48 @@ if (isset($_SESSION['user_id'])) {
           <i class="fa fa-times fa-2x" id="close-order"></i>
           <div class="row justify-content-center align-content-center py-5">
             <div class="left col-md-4">
-              <h1 class="text-success text-center">Order details</h1>
-              <img src="../images/products/weed master powder.jpg" class="col-12" id="product_image" height="300" width="250" />
+              <h1 class="text-success text-center">Product details</h1>
+              <img src="../images/products/weed master powder.jpg" class="col-12" />
               <div class="col-12 row justify-content-center my-3 py-4">
-                <input type="number" id="input_order_id" hidden />
-                <a href="#" id="clear_order" class="btn btn-small btn-danger mx-1">Clear Order</a>
+                <a href="" class="btn btn-small btn-danger mx-1">Clear Order</a>
               </div>
             </div>
             <div class="right col-md-6 row justify-content-left">
               <div class="left text-right alert col-6">
-                <!-- <p><b>Product ID: </b></p> -->
-                <p><b>Brand name: </b></p>
+                <p><b>Product ID: </b></p>
+                <p><b>Brand Name: </b></p>
+                <p><b>Manufacturer: </b></p>
+                <p><b>Registered supplier: </b></p>
+                <p><b>Point of origin: </b></p>
+                <p><b>Date of manufacture: </b></p>
+                <p><b>Expiry date: </b></p>
                 <p><b>Unit of measure: </b></p>
-                <p><b>Number of Items: </b></p>
-                <p><b>Unig cost: </b></p>
-                <p><b>Total cost: </b></p>
-                <p><b>Order date: </b></p>
-                <p><b>Order status: </b></p>
-                <p><b>Name of customer: </b></p>
-                <p><b>Telephone number: </b></p>
-                <p><b>Email: </b></p>
-                <p><b>Address: </b></p>
+                <p><b>Batch number: </b></p>
+                <p><b>Serial number: </b></p>
+                <p><b>Unit cost: </b></p>
+                <p><b>E-Extension: </b></p>
               </div>
               <div class="right alert col-6">
-                <!-- <p>Prod-0001</p> -->
-                <p id="p_brand_name">Weed master</p>
-                <p id="p_unit_of_measure">1.5ltr</p>
-                <p id="p_number_of_items">15</p>
-                <p id="p_unit_cost">13000</p>
-                <p id="p_total_cost">758000</p>
-                <p>25th/03/2022</p>
-                <p>Pending</p>
-                <p>Anatoli Kuwebwa</p>
-                <p>0779320075</p>
-                <p>akuwenwa@gmail.com</p>
-                <p>-</p>
+                <p>Prod-0001</p>
+                <p>Weed master</p>
+                <p>Bukoola Ug ltd</p>
+                <p>K&M Traders</p>
+                <p>Mukono industrial Area</p>
+                <p>25th/06/2022</p>
+                <p>23th/06/2023</p>
+                <p>1.5ltr</p>
+                <p>44545Y64</p>
+                <p>RUE4466564RTT56</p>
+                <p>UGX. 17500</p>
 
+                <p>
+                  Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                  Voluptatem sapiente, consectetur dicta nostrum quas porro ex
+                  explicabo, earum maiores dolore repudiandae sit nulla sequi
+                  fugit, qui iure velit ratione! Exercitationem veritatis
+                  accusantium, ab eius eum aliquam ea alias sed quod obcaecati
+                  maxime dicta quae quas ratione nobis debitis corporis ullam.
+                </p>
               </div>
             </div>
           </div>
@@ -748,7 +751,7 @@ if (isset($_SESSION['user_id'])) {
   <script src="../js/settings.js"></script>
   <script src="../js/gleek.js"></script>
   <script src="../js/styleSwitcher.js"></script>
-  <script src="../js/custom_js/orders.js"></script>
+  <script src="../js/custom_js/Admin_users.js"></script>
 
   <script src="../plugins/tables/js/jquery.dataTables.min.js"></script>
   <script src="../plugins/tables/js/datatable/dataTables.bootstrap4.min.js"></script>

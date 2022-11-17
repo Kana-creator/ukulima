@@ -6,6 +6,14 @@ session_start();
 
 if (isset($_SESSION['user_id'])) {
     $user_name = $_SESSION['user_name'];
+    $user_id = $_SESSION['user_id'];
+    $cat_result = $mysqli->query("SELECT SUM(number_of_items) AS number_of_items FROM user_order WHERE user_id=$user_id AND check_out_status=0");
+
+    $cat_row = $cat_result->fetch_array();
+    $number_of_items = $cat_row['number_of_items'];
+    if ($number_of_items > 9) {
+        $number_of_items = "9+";
+    }
 } else {
     header("Location: ../../index.php");
 }
@@ -111,6 +119,32 @@ if (isset($_SESSION['user_id'])) {
                 </div>
                 <div class="header-right">
                     <ul class="clearfix">
+                        <li class="icons dropdown" title="Cart" data-toggle="tooltip" data-placement="top">
+                            <a href="javascript:void(0)" data-toggle="dropdown">
+                                <i class="fa fa-shopping-cart"></i>
+                                <span class="badge badge-pill gradient-3 badge-primary" id="number_of_cat"><?php echo $number_of_items; ?></span>
+                            </a>
+                            <div class="drop-down animated fadeIn dropdown-menu dropdown-notfication">
+                                <div class="dropdown-content-heading d-flex justify-content-between">
+                                    <span class=""><b><?php echo $number_of_items; ?></b> Items Pending in cart</span>
+                                </div>
+                                <div class="dropdown-content-body">
+                                    <ul>
+                                        <li>
+                                            <a href="./consumer_cart.php">
+                                                Check out
+                                                <!-- <span class="mr-3 avatar-icon bg-success-lighten-2"><i class="icon-present"></i></span>
+                                                <div class="notification-content">
+                                                    <h6 class="notification-heading">
+                                                        Events near you
+                                                    </h6>
+                                                    <span class="notification-text">Within next 5 days</span>
+                                                </div> -->
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                        </li>
 
                         <li class="icons dropdown" title="Notifications" data-toggle="tooltip" data-placement="top">
                             <a href="javascript:void(0)" data-toggle="dropdown">
@@ -218,10 +252,10 @@ if (isset($_SESSION['user_id'])) {
                             <i class="icon-speedometer menu-icon"></i><span class="nav-text">Dashboard</span>
                         </a>
                         <ul aria-expanded="false" class="bg-success">
-                            <li><a href="./home.php">Home</a></li>
+                            <li><a href="./consumer_page.php">Home</a></li>
                             <li><a href="./Admin_users.php">Users</a></li>
                             <li><a href="./products.php">Products</a></li>
-                            <li><a href="./orders.php">Orders</a></li>
+                            <li><a href="./consumer_cart.php">Orders</a></li>
                         </ul>
                     </li>
 
@@ -265,7 +299,7 @@ if (isset($_SESSION['user_id'])) {
                 <div class="col-12 row">
                     <?php while ($product_row = $product_result->fetch_array()) : ?>
                         <div class="card col-xl-4 col-lg-4 col-md-6 col-sm-12 p-2">
-                            <div class="card-inner card">
+                            <div class="card-inner card" id="card_inner<?php echo $product_row['product_id']; ?>">
                                 <img src="../assets/product_images/<?php echo decrypt_data($product_row['product_image']); ?>" class="card-head" height="250" width="220" />
                                 <div class="card-body" style="line-height: 2px;">
                                     <h4><?php echo decrypt_data($product_row['brand_name']); ?></h4>
@@ -311,8 +345,14 @@ if (isset($_SESSION['user_id'])) {
                                 });
 
 
-                                $("#add_to_cat<?php echo $product_row['product_id']; ?>").on('click', () => {
-                                    $("#cat_div<?php echo $product_row['product_id']; ?>").addClass('show');
+                                $("#add_to_cat<?php echo $product_row['product_id']; ?>").on('click', function() {
+
+                                    $(".card-inner").removeClass("show");
+
+                                    $("#card_inner<?php echo $product_row['product_id']; ?>").addClass("show");
+
+                                    // $("#cat_div<?php echo $product_row['product_id']; ?>").addClass('show');
+                                    // $("#cat_div<?php echo $product_row['product_id']; ?>").siblings().removeClass('show');
 
                                 });
 
@@ -339,8 +379,13 @@ if (isset($_SESSION['user_id'])) {
                                             Cache: false,
                                             success: (res) => {
                                                 alert(res['message']);
+                                                $("#number_of_cat").text(res['number_of_items']);
+                                                $(".card-inner").removeClass("show");
+                                                $("#number_of_items<?php echo $product_row['product_id']; ?>").val("");
+
                                             },
                                         });
+
                                     }
                                 });
                             })

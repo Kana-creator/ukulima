@@ -137,7 +137,7 @@ div {
   padding: 20px;
 }
 
-.card .card-inner .cat_div.show {
+.card .card-inner.show .cat_div {
   margin-top: 0;
   visibility: visible;
 }
