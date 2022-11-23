@@ -1,5 +1,15 @@
-$theme_color: #7d7;
+$theme_color: #00FF7F;
 $error_color: #d35;
+
+* {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: 300;
+}
+
+
+body{
+    background-color: $theme_color;
+}
 
 .logo-link{
 

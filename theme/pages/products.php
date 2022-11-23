@@ -1,8 +1,13 @@
 <?php
 
-include "../objects/product_object.php";
+// include "../objects/product_object.php";
+include "../APIs/connection_api.php";
+include "../APIs/encryption_api.php";
+session_start();
 if (isset($_SESSION['user_id'])) {
+  $user_id = $_SESSION['user_id'];
   $user_name = $_SESSION['user_name'];
+  $product_result = $mysqli->query("SELECT * FROM Product WHERE user_id=$user_id");
 } else {
   header("Location: ../../index.php");
 }
@@ -570,15 +575,15 @@ if (isset($_SESSION['user_id'])) {
 
                     <tbody>
                       <?php
-                      $i = 1;
                       while ($product_row = $product_result->fetch_array()) :
-                        $i += 1;
+                        $expiry = new DateTime($product_row['product_expiry_date']);
+                        $now = new DateTime("now");
                         $product_status = "";
                         $status_title = "";
-                        if ($i % 3 == 0) {
+                        if ($now->diff($expiry)->format('%a') <= 5) {
                           $product_status = "text-warning";
                           $status_title = "Soon expiring";
-                        } else if ($i % 7 == 0) {
+                        } else if ($expiry <= $now) {
                           $product_status = "text-danger";
                           $status_title = "Expired";
                         } else {

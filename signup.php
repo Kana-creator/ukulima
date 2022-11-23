@@ -36,7 +36,7 @@
         <div class="container h-100">
             <div class="row justify-content-center h-100">
                 <div class="col-xl-6">
-                    <div class="form-input-content">
+                    <div class="form-input-content m-4">
                         <div class="card login-form mb-0">
                             <a class="text-center logo-link" href="/ukulima"><img src="theme/assets/logo.PNG" alt="" class="logo"></a>
                             <div class="card-body pt-5">
@@ -95,9 +95,9 @@
                                         <input type="text" class="form-control" id="confirm_password" name="confirm_password" placeholder="Confirm Password">
                                         <small>Error</small>
                                     </div>
-                                    <button class="btn login-form__btn submit w-100" id="signup_btn">Signup</button>
+                                    <button class="btn btn-sm login-form__btn submit w-100" id="signup_btn">Signup</button>
                                 </form>
-                                <p class="mt-5 login-form__footer">Have account <a href="./index.php" class="text-primary">Sign in </a> now</p>
+                                <p class="mt-5 login-form__footer">Have account <a href="./index.php" class="text-primary">Login </a> now</p>
                                 </p>
                             </div>
                         </div>

@@ -32,11 +32,11 @@ function add_to_cat($mysqli, $product_id, $user_id, $number_of_items, $order_dat
         echo json_encode(array("status" => "error", "message" => $mysqli->error));
     } else {
         if (mysqli_num_rows($result) > 0) {
-            $result = $mysqli->query("SELECT * FROM user_order WHERE product_id=$product_id AND user_id=$user_id");
+            $result = $mysqli->query("SELECT * FROM user_order WHERE product_id=$product_id AND user_id=$user_id AND check_out_status=0");
             if (mysqli_num_rows($result) > 0) {
                 $row = $result->fetch_array();
                 $number_of_items = $row['number_of_items'] + $number_of_items;
-                $query = $mysqli->query("UPDATE user_order SET number_of_items=$number_of_items WHERE product_id=$product_id AND user_id=$user_id");
+                $query = $mysqli->query("UPDATE user_order SET number_of_items=$number_of_items WHERE product_id=$product_id AND user_id=$user_id AND check_out_status=0");
                 if (!$query) {
                     echo json_encode(array("status" => "error", "message" => $mysqli->error));
                 } else {
@@ -62,8 +62,21 @@ function add_to_cat($mysqli, $product_id, $user_id, $number_of_items, $order_dat
     }
 }
 
-// add_to_cat($mysqli, 4, 3, 2);
-
+// FUNCTION FOR CANCELLING AN ORDER
+function cancel_order($mysqli, $order_id)
+{
+    $result = $mysqli->query("SELECT * FROM user_order WHERE order_id=$order_id");
+    if (!$result) {
+        echo json_encode(array("status" => "error", "message" => $mysqli->error));
+    } else {
+        $query = $mysqli->query("DELETE FROM user_order WHERE order_id=$order_id");
+        if (!$query) {
+            echo json_encode(array("status" => "error", "message" => $mysqli->error));
+        } else {
+            echo json_encode(array("status" => "error", "message" => "Order has been cancelled successfully."));
+        }
+    }
+}
 
 
 
@@ -79,5 +92,8 @@ if (isset($_POST['action'])) {
         $order_date = date("Y-m-d");
 
         add_to_cat($mysqli, $product_id, $user_id, $number_of_items, $order_date);
+    } else if ($_POST['action'] == "cancel_order") {
+        $order_id = $_POST['order_id'];
+        cancel_order($mysqli, $order_id);
     }
 }

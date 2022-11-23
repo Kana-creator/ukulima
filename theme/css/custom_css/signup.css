@@ -1,3 +1,12 @@
+* {
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-weight: 300;
+}
+
+body {
+  background-color: #00FF7F;
+}
+
 .logo-link {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -20,7 +29,7 @@
 
 .login-input .form-group {
   margin-bottom: 30px;
-  border-bottom: 1px solid #7d7;
+  border-bottom: 1px solid #00FF7F;
   position: relative;
   padding: 0 10px;
   display: -webkit-box;
@@ -58,7 +67,7 @@
 }
 
 .login-input .form-group #show_password:hover {
-  color: #7d7;
+  color: #00FF7F;
 }
 
 .login-input .form-group.error {
@@ -66,7 +75,7 @@
 }
 
 .login-input #signup_btn {
-  background-color: #7d7;
+  background-color: #00FF7F;
 }
 
 #message_div {

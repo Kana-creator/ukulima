@@ -41,7 +41,7 @@ function add_product(
             if ($expiry <= $now) {
                 $message = "Your product could not be added because it is expired!";
                 $status = "error";
-            } else if ($now->diff($expiry)->format('%a') <= 10) {
+            } else if ($now->diff($expiry)->format('%a') <= 5) {
                 $message = "your Product could not be added because it is soon expiring";
                 $status = "error";
             } else if ($expiry < $manufacture) {

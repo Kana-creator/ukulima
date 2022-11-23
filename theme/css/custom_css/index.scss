@@ -1,6 +1,15 @@
-
-$theme_color: #7d7;
+$theme_color: #00FF7F;
 $error_color: #d35;
+
+*{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: 300;
+}
+
+body {
+    // background-color: #242;
+    background-color: rgba($color: $theme_color, $alpha: 1);
+}
 
 .logo-link {
 
@@ -12,32 +21,58 @@ $error_color: #d35;
     .logo {
         width: 100px;
         height: 100px;
-        position: absolute;
-        top: -10px;
+        margin: 0 0 -20px 0;
     }
 }
 
-.login-input {    
+.login-form{
+
+    background-color: #eeeeee;
+    color: black;
+    font-style: $error_color;
+    padding: 0;
+    width: 300px;
+    
+        .login-input {
+            padding: 0;
 
     .form-group {
-        margin-bottom: 30px;
-        border-bottom: 1px solid $theme_color;
         position: relative;
-        padding: 0 10px;
+        border-radius: 10px;
+        height: 40px;
+
+        .form-control{
+            background-color: #FFFFFF;
+            padding: 0 10px;
+            border-radius: 10px;
+            line-height: -3px;
+            height: 100%;
+        }
 
         #show_password {
-                &:hover {
-                    color: $theme_color;
-                }
+            position: absolute;
+            top: 60%;
+            left: 90%;
+            transform: translate(-0%, -90%);
+
+            &:hover {
+                color: $theme_color;
             }
+        }
+
+                #sign_in_btn {
+                    background-color: $theme_color;
+                    &:hover{
+                        background-color: rgba($color: $theme_color, $alpha: .5);
+                    }
+                }
     }
 
     .form-group.active {
         border: 1px solid $error_color;
     }
 
-    #sign_in_btn{
-        background-color: $theme_color;
-    }
+   
 
+}
 }

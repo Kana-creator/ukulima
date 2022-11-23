@@ -624,7 +624,7 @@ if (isset($_SESSION['user_id'])) {
                             </div>
                           </td>
                           <td id="action_buttons">
-                            <i class="fa fa-check btn btn-info" id="show-order-details<?php echo $cart_row['order_id']; ?>" data-toggle="tooltip" data-placement="top" title="check out"></i>
+                            <i class="fa fa-info btn btn-info" id="show-order-details<?php echo $cart_row['order_id']; ?>" data-toggle="tooltip" data-placement="top" title="Order details"></i>
                             <i class="fa fa-times btn btn-danger" id="cancel_order<?php echo $cart_row['order_id']; ?>" data-toggle="tooltip" data-placement="top" title="Cancel order" <?php echo $cancel_order; ?>></i>
 
                           </td>
@@ -634,12 +634,40 @@ if (isset($_SESSION['user_id'])) {
                           $(() => {
                             $("#show-order-details<?php echo $cart_row['order_id']; ?>").on('click', () => {
                               $("#order-details").addClass("show");
-                            })
+                            });
 
                             $("#close-order").on("click", () => {
                               $("#order-details").removeClass("show");
 
+                            });
+
+
+
+                            $("#cancel_order<?php echo $cart_row['order_id']; ?>").on('click', () => {
+                              var confirm_cancel = confirm("Are you sure you want to cancel this order?");
+                              if (confirm_cancel === true) {
+                                $.ajax({
+                                  url: "../APIs/consumer_page_api.php",
+                                  type: "POST",
+                                  dataType: "JSON",
+                                  data: {
+                                    action: "cancel_order",
+                                    order_id: "<?php echo $cart_row['order_id']; ?>",
+                                  },
+                                  cache: false,
+                                  success: res => {
+                                    alert(res['message']);
+                                    window.location.href = "./consumer_cart.php";
+                                  },
+
+                                })
+                              }
+
                             })
+
+
+
+
                           })
                         </script>
 

@@ -1,5 +1,11 @@
 <?php
 include "../objects/product_object.php";
+if (isset($_SESSION['user_id'])) {
+  $user_id = $_SESSION['user_id'];
+  $user_name = $_SESSION['user_name'];
+} else {
+  header("Location: ../APIs/logout_api.php");
+}
 if (isset($_GET['product_id'])) {
   $product_result = $mysqli->query("SELECT * FROM Product WHERE product_id=" . $_GET['product_id'] . "");
   $product_row = $product_result->fetch_array();
@@ -284,7 +290,7 @@ if (isset($_GET['product_id'])) {
                 <div class="dropdown-content-body">
                   <ul>
                     <li>
-                      <a href="app-profile.html"><i class="icon-user"></i> <span>Profile</span></a>
+                      <a href="app-profile.html"><i class="icon-user"></i> <span><?php echo decrypt_data($user_name); ?></span></a>
                     </li>
                     <li>
                       <a href="email-inbox.html"><i class="icon-envelope-open"></i> <span>Inbox</span>
@@ -299,7 +305,7 @@ if (isset($_GET['product_id'])) {
                       <a href="page-lock.html"><i class="icon-lock"></i> <span>Lock Screen</span></a>
                     </li>
                     <li>
-                      <a href="page-login.html"><i class="icon-key"></i> <span>Logout</span></a>
+                      <a href="../APIs/logout_api.php"><i class="icon-key"></i> <span>Logout</span></a>
                     </li>
                   </ul>
                 </div>
@@ -561,6 +567,22 @@ if (isset($_GET['product_id'])) {
                       </label>
                       <div class="col-lg-6 inner-group">
                         <input type="file" accept="image/*" class="form-control" id="val-product-image" name="val-product-image" value="<?php echo $product_image; ?>" />
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label class="col-lg-4 col-form-label text-right" for="val-confirm-password">Unit of measure <span class="text-danger">*</span>
+                      </label>
+                      <div class="col-lg-6 inner-group">
+                        <select class="form-control">
+                          <option value="">Select unit of measure</option>
+                          <option value="ltr">Litres</option>
+                          <option value="ml">Miligrams</option>
+                          <option value="g">Gramms</option>
+                          <option value="Kg">Killogram</option>
+                          <option value="">Select unit of measure</option>
+                          <option value="">Select unit of measure</option>
+                          <option value="">Select unit of measure</option>
+                        </select>
                       </div>
                     </div>
                     <div class="form-group row">

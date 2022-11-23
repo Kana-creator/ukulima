@@ -1,19 +1,17 @@
 <?php
 include "../APIs/connection_api.php";
 include "../APIs/encryption_api.php";
-$product_result = $mysqli->query("SELECT * FROM Product");
+$now = new DateTime('now');
+$product_result = $mysqli->query("SELECT * FROM Product GROUP BY product_image");
 session_start();
 
 if (isset($_SESSION['user_id'])) {
     $user_name = $_SESSION['user_name'];
     $user_id = $_SESSION['user_id'];
-    $cat_result = $mysqli->query("SELECT SUM(number_of_items) AS number_of_items FROM user_order WHERE user_id=$user_id AND check_out_status=0");
+    $cart_result = $mysqli->query("SELECT SUM(number_of_items) AS number_of_items FROM user_order WHERE user_id=$user_id AND check_out_status=0");
 
-    $cat_row = $cat_result->fetch_array();
-    $number_of_items = $cat_row['number_of_items'];
-    if ($number_of_items > 9) {
-        $number_of_items = "9+";
-    }
+    $cart_row = $cart_result->fetch_array();
+    $number_of_items = $cart_row['number_of_items'];
 } else {
     header("Location: ../../index.php");
 }

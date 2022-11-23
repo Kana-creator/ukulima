@@ -1,3 +1,12 @@
+* {
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-weight: 300;
+}
+
+body {
+  background-color: springgreen;
+}
+
 .logo-link {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -14,26 +23,56 @@
 .logo-link .logo {
   width: 100px;
   height: 100px;
-  position: absolute;
-  top: -10px;
+  margin: 0 0 -20px 0;
 }
 
-.login-input .form-group {
-  margin-bottom: 30px;
-  border-bottom: 1px solid #7d7;
+.login-form {
+  background-color: #eeeeee;
+  color: black;
+  font-style: #d35;
+  padding: 0;
+  width: 300px;
+}
+
+.login-form .login-input {
+  padding: 0;
+}
+
+.login-form .login-input .form-group {
   position: relative;
+  border-radius: 10px;
+  height: 40px;
+}
+
+.login-form .login-input .form-group .form-control {
+  background-color: #FFFFFF;
   padding: 0 10px;
+  border-radius: 10px;
+  line-height: -3px;
+  height: 100%;
 }
 
-.login-input .form-group #show_password:hover {
-  color: #7d7;
+.login-form .login-input .form-group #show_password {
+  position: absolute;
+  top: 60%;
+  left: 90%;
+  -webkit-transform: translate(0%, -90%);
+          transform: translate(0%, -90%);
 }
 
-.login-input .form-group.active {
+.login-form .login-input .form-group #show_password:hover {
+  color: #00FF7F;
+}
+
+.login-form .login-input .form-group #sign_in_btn {
+  background-color: #00FF7F;
+}
+
+.login-form .login-input .form-group #sign_in_btn:hover {
+  background-color: rgba(0, 255, 127, 0.5);
+}
+
+.login-form .login-input .form-group.active {
   border: 1px solid #d35;
-}
-
-.login-input #sign_in_btn {
-  background-color: #7d7;
 }
 /*# sourceMappingURL=index.css.map */
