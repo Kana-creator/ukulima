@@ -89,7 +89,61 @@
           transform: scale(1);
 }
 
+.btn,
 .btn-sm {
-  color: #FFFFFF;
+  color: #ffffff;
 }
-/*# sourceMappingURL=admin_users.css.map */
+
+.btn:hover,
+.btn-sm:hover {
+  opacity: 0.8;
+}
+
+#consumer_group_form {
+  background-color: #efefef;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  height: 0;
+  overflow: hidden;
+  -webkit-transition: 20.7s;
+  transition: 20.7s;
+}
+
+#consumer_group_form form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+#consumer_group_form form .form-group .form-control {
+  height: 5px;
+  padding: 0 10px;
+}
+
+#consumer_group_form form .form-group small {
+  color: #d35;
+}
+
+#consumer_group_form.show {
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+/*# sourceMappingURL=consumer_group.css.map */

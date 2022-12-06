@@ -159,7 +159,7 @@ if (isset($_POST['add_product'])) {
         $_POST['val-e-extension']
     );
     $product_properties = $product->get_properties();
-    session_start();
+    // session_start();
     $user_id = $_SESSION['user_id'];
     $brand_name = encrypt_data($product_properties['brand_name']);
     $product_manufacturer = encrypt_data($product_properties['product_manufacturer']);

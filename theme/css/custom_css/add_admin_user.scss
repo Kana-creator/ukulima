@@ -1,0 +1,38 @@
+$theme_color: #00FF7F;
+$error_color: #d35;
+
+* {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: 400;
+    font-size: 99%;
+    color: #000000;
+}
+
+.nk-sidebar {
+    background-color: $theme_color;
+
+    .nk-nav-scroll {
+        background-color: $theme_color;
+
+        .metismenu {
+            background-color: $theme_color;
+
+            .nav-label {
+                background-color: $theme_color;
+
+                ul {
+
+                    background-color: $theme_color;
+                }
+            }
+        }
+    }
+}
+
+form{
+    .form-group{
+        label{
+            font-weight: 900;
+        }
+    }
+}

@@ -1,6 +1,28 @@
-div {
-  font-weight: 300;
-  color: black;
+* {
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-weight: 400;
+  font-size: 99%;
+  color: #000000;
+}
+
+.nk-sidebar {
+  background-color: #00FF7F;
+}
+
+.nk-sidebar .nk-nav-scroll {
+  background-color: #00FF7F;
+}
+
+.nk-sidebar .nk-nav-scroll .metismenu {
+  background-color: #00FF7F;
+}
+
+.nk-sidebar .nk-nav-scroll .metismenu .nav-label {
+  background-color: #00FF7F;
+}
+
+.nk-sidebar .nk-nav-scroll .metismenu .nav-label ul {
+  background-color: #00FF7F;
 }
 
 .table-responsive #add_product {
@@ -26,7 +48,7 @@ div {
 }
 
 .table-responsive table tbody tr:hover {
-  background-color: rgba(119, 221, 119, 0.075);
+  background-color: rgba(0, 255, 127, 0.1);
 }
 
 .table-responsive table tbody tr td:hover {
@@ -73,7 +95,7 @@ div {
 }
 
 #product-details .details-inner #close-user:hover {
-  color: #7d7;
+  color: #00FF7F;
 }
 
 #product-details.show {
@@ -108,5 +130,9 @@ div {
 #message_div.active {
   -webkit-transform: scale(1);
           transform: scale(1);
+}
+
+.btn-sm {
+  color: #FFFFFF;
 }
 /*# sourceMappingURL=products.css.map */

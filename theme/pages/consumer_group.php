@@ -1,14 +1,24 @@
 <?php
-include "../objects/user_object.php";
+include "../APIs/connection_api.php";
+include "../APIs/encryption_api.php";
 session_start();
 if (isset($_SESSION['user_id'])) {
+  $user_id = $_SESSION['user_id'];
   $user_name = $_SESSION['user_name'];
+
+  $group_result = $mysqli->query("SELECT * FROM consumer_group WHERE user_id=$user_id");
+  if (mysqli_num_rows($group_result) > 0) {
+    $group_row = $group_result->fetch_array();
+    $group_id = $group_row['group_id'];
+    $group_name = $group_row['group_name'];
+    $user_result = $mysqli->query("SELECT * FROM consumer INNER JOIN user ON user.user_id=consumer.user_id INNER JOIN next_of_kin ON next_of_kin.consumer_id=consumer.consumer_id WHERE group_id=$group_id");
+  } else {
+    $group_name = "No group registered";
+  }
 } else {
   header("Location: ../../index.php");
 }
-
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -17,13 +27,15 @@ if (isset($_SESSION['user_id'])) {
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Ukulima</title>
+  <title>Ukulima | Users</title>
+  <script src="../js/jquery.js"></script>
   <!-- Favicon icon -->
   <link rel="icon" type="image/png" sizes="16x16" href="../assets/logo.PNG" />
   <!-- Custom Stylesheet -->
+  <link href="../plugins/tables/css/datatable/dataTables.bootstrap4.min.css" rel="stylesheet" />
+  <link href="../css/bootstrap/bootstrap.min.css" rel="stylesheet" />
   <link href="../css/style.css" rel="stylesheet" />
-
-  <link href="../css/custom_css/add_admin_user.css" rel="stylesheet/css" />
+  <link rel="stylesheet" href="../css/custom_css/consumer_group.css" />
 </head>
 
 <body>
@@ -106,77 +118,97 @@ if (isset($_SESSION['user_id'])) {
         </div>
         <div class="header-right">
           <ul class="clearfix">
-            <li class="icons dropdown">
-              <a href="javascript:void(0)" data-toggle="dropdown">
-                <i class="mdi mdi-email-outline"></i>
-                <span class="badge gradient-1 badge-pill badge-primary">3</span>
-              </a>
-              <div class="drop-down animated fadeIn dropdown-menu">
-                <div class="dropdown-content-heading d-flex justify-content-between">
-                  <span class="">3 New Messages</span>
+            <!-- <li class="icons dropdown">
+                <a href="javascript:void(0)" data-toggle="dropdown">
+                  <i class="mdi mdi-email-outline"></i>
+                  <span class="badge gradient-1 badge-pill badge-primary"
+                    >3</span
+                  >
+                </a>
+                <div class="drop-down animated fadeIn dropdown-menu">
+                  <div
+                    class="dropdown-content-heading d-flex justify-content-between"
+                  >
+                    <span class="">3 New Messages</span>
+                  </div>
+                  <div class="dropdown-content-body">
+                    <ul>
+                      <li class="notification-unread">
+                        <a href="javascript:void()">
+                          <img
+                            class="float-left mr-3 avatar-img"
+                            src="images/avatar/1.jpg"
+                            alt=""
+                          />
+                          <div class="notification-content">
+                            <div class="notification-heading">Saiful Islam</div>
+                            <div class="notification-timestamp">
+                              08 Hours ago
+                            </div>
+                            <div class="notification-text">
+                              Hi Teddy, Just wanted to let you ...
+                            </div>
+                          </div>
+                        </a>
+                      </li>
+                      <li class="notification-unread">
+                        <a href="javascript:void()">
+                          <img
+                            class="float-left mr-3 avatar-img"
+                            src="images/avatar/2.jpg"
+                            alt=""
+                          />
+                          <div class="notification-content">
+                            <div class="notification-heading">Adam Smith</div>
+                            <div class="notification-timestamp">
+                              08 Hours ago
+                            </div>
+                            <div class="notification-text">
+                              Can you do me a favour?
+                            </div>
+                          </div>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="javascript:void()">
+                          <img
+                            class="float-left mr-3 avatar-img"
+                            src="images/avatar/3.jpg"
+                            alt=""
+                          />
+                          <div class="notification-content">
+                            <div class="notification-heading">Barak Obama</div>
+                            <div class="notification-timestamp">
+                              08 Hours ago
+                            </div>
+                            <div class="notification-text">
+                              Hi Teddy, Just wanted to let you ...
+                            </div>
+                          </div>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="javascript:void()">
+                          <img
+                            class="float-left mr-3 avatar-img"
+                            src="images/avatar/4.jpg"
+                            alt=""
+                          />
+                          <div class="notification-content">
+                            <div class="notification-heading">
+                              Hilari Clinton
+                            </div>
+                            <div class="notification-timestamp">
+                              08 Hours ago
+                            </div>
+                            <div class="notification-text">Hello</div>
+                          </div>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
                 </div>
-                <div class="dropdown-content-body">
-                  <ul>
-                    <li class="notification-unread">
-                      <a href="javascript:void()">
-                        <img class="float-left mr-3 avatar-img" src="../images/avatar/1.jpg" alt="" />
-                        <div class="notification-content">
-                          <div class="notification-heading">Saiful Islam</div>
-                          <div class="notification-timestamp">
-                            08 Hours ago
-                          </div>
-                          <div class="notification-text">
-                            Hi Teddy, Just wanted to let you ...
-                          </div>
-                        </div>
-                      </a>
-                    </li>
-                    <li class="notification-unread">
-                      <a href="javascript:void()">
-                        <img class="float-left mr-3 avatar-img" src="../images/avatar/2.jpg" alt="" />
-                        <div class="notification-content">
-                          <div class="notification-heading">Adam Smith</div>
-                          <div class="notification-timestamp">
-                            08 Hours ago
-                          </div>
-                          <div class="notification-text">
-                            Can you do me a favour?
-                          </div>
-                        </div>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="javascript:void()">
-                        <img class="float-left mr-3 avatar-img" src="../images/avatar/3.jpg" alt="" />
-                        <div class="notification-content">
-                          <div class="notification-heading">Barak Obama</div>
-                          <div class="notification-timestamp">
-                            08 Hours ago
-                          </div>
-                          <div class="notification-text">
-                            Hi Teddy, Just wanted to let you ...
-                          </div>
-                        </div>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="javascript:void()">
-                        <img class="float-left mr-3 avatar-img" src="../images/avatar/4.jpg" alt="" />
-                        <div class="notification-content">
-                          <div class="notification-heading">
-                            Hilari Clinton
-                          </div>
-                          <div class="notification-timestamp">
-                            08 Hours ago
-                          </div>
-                          <div class="notification-text">Hello</div>
-                        </div>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </li>
+              </li> -->
             <li class="icons dropdown">
               <a href="javascript:void(0)" data-toggle="dropdown">
                 <i class="mdi mdi-bell-outline"></i>
@@ -261,7 +293,7 @@ if (isset($_SESSION['user_id'])) {
                 <div class="dropdown-content-body">
                   <ul>
                     <li>
-                      <a href="app-profile.html"><i class="icon-user"></i> <span><?php echo decrypt_data($user_name); ?></span></a>
+                      <a href="#"><i class="icon-user"></i> <span><?php echo decrypt_data($user_name); ?></span></a>
                     </li>
                     <li>
                       <a href="email-inbox.html"><i class="icon-envelope-open"></i> <span>Inbox</span>
@@ -303,7 +335,7 @@ if (isset($_SESSION['user_id'])) {
             </a>
             <ul aria-expanded="false" class="bg-success">
               <li><a href="./home.php">Home</a></li>
-              <li><a href="./Admin_users.php">Users</a></li>
+              <li><a href="./consumer_group.php">Group</a></li>
               <li><a href="./products.php">Products</a></li>
               <li><a href="./orders.php">Orders</a></li>
             </ul>
@@ -508,189 +540,178 @@ if (isset($_SESSION['user_id'])) {
             Content body start
         ***********************************-->
     <div class="content-body">
-      <div class="row page-titles mx-0">
+      <div class="row page-titles mx-0 px-4">
+        <h4><?php echo $group_name; ?></h4>
         <div class="col p-md-0">
-          <h4 class="text-center text-success">Add New User</h4>
           <ol class="breadcrumb">
-            <li class="breadcrumb-item">
-              <a href="javascript:void(0)">Dashboard</a>
-            </li>
+            <!-- <li class="breadcrumb-item">
+                            <a href="javascript:void(0)">Dashboard</a>
+                        </li> -->
             <li class="breadcrumb-item active">
-              <a href="javascript:void(0)">User form</a>
+              <button class="btn btn-sm btn-warning" id="show_group_form">Register a group</button>
             </li>
           </ol>
         </div>
       </div>
+      <div class="container px-4" id="consumer_group_form">
+        <h3 class="text-center col-12">Group registration</h3>
+        <form class="col-md-8">
+          <div class="form-group col-md-6 px-4 row">
+            <label class="col-md-12">Group name<span class="text-danger">*</span></label>
+            <input class="form-control" id="group_name" />
+            <small class="col-md-12"></small>
+          </div>
+          <div class="form-group col-md-6 px-4 row">
+            <label class="col-md-12">Registration type<span class="text-danger">*</span></label>
+            <select class="form-control" id="registration_type">
+              <option value="">Select registration type</option>
+              <option value="Company">Company</option>
+              <option value="NGO">NGO</option>
+              <option value="CBO">CBO</option>
+            </select>
+            <small class="col-md-12"></small>
+          </div>
+          <div class="form-group col-md-6 px-4 row">
+            <label class="col-md-12">Registration number<span class="text-danger">*</span></label>
+            <input class="form-control" id="registration_number" />
+            <small class="col-md-12"></small>
+          </div>
+          <div class="form-group col-md-6 px-4 row">
+            <label class="col-md-12">Group type<span class="text-danger">*</span></label>
+            <select class="form-control" id="group_type">
+              <option value="">Select group type</option>
+              <option value="VSLA">VSLA</option>
+              <option value="ASCA">ASCA</option>
+              <option value="ROSCA">ROSCA</option>
+              <option value="FM Grp">FM Grp</option>
+            </select>
+            <small class="col-md-12"></small>
+          </div>
+
+          <div class="form-group col-md-6 row">
+            <input type="submit" value="submit" id="register_group" class="btn btn-success col-md-12" />
+          </div>
+
+        </form>
+      </div>
       <!-- row -->
 
       <div class="container-fluid">
-        <div class="row justify-content-center">
-          <div class="col-lg-12">
+        <div class="row">
+          <div class="col-12">
             <div class="card">
               <div class="card-body">
-                <div class="form-validation">
-                  <form class="form-valide" action="#" method="post">
-                    <div class="form-group row">
-                      <label class="col-lg-4 col-form-label text-right" for="val-firstname">First name <span class="text-danger">*</span>
-                      </label>
-                      <div class="col-lg-6">
-                        <input type="text" class="form-control" id="val-firstname" name="val-firstname" placeholder="Enter a first name" />
-                      </div>
-                    </div>
-                    <div class="form-group row">
-                      <label class="col-lg-4 col-form-label text-right" for="val-othernames">Other names <span class="text-danger">*</span>
-                      </label>
-                      <div class="col-lg-6">
-                        <input type="text" class="form-control" id="val-othernames" name="val-othernames" placeholder="Enter other names" />
-                      </div>
-                    </div>
-                    <div class="form-group row">
-                      <label class="col-lg-4 col-form-label text-right" for="val-employeeNumber">Employee number <span class="text-danger">*</span>
-                      </label>
-                      <div class="col-lg-6">
-                        <input type="text" class="form-control" id="val-employeeNumber" name="val-employeeNumber" placeholder="Enter employee number" />
-                      </div>
-                    </div>
-                    <div class="form-group row">
-                      <label class="col-lg-4 col-form-label text-right" for="val-email">Email <span class="text-danger">*</span>
-                      </label>
-                      <div class="col-lg-6">
-                        <input type="text" class="form-control" id="val-email" name="val-email" placeholder="Enter your valid email" />
-                      </div>
-                    </div>
-                    <div class="form-group row">
-                      <label class="col-lg-4 col-form-label text-right" for="val-telephone">Telephone <span class="text-danger">*</span>
-                      </label>
-                      <div class="col-lg-6">
-                        <input type="text" class="form-control" id="val-telephone" name="val-telephone" placeholder="Enter the user's telephone" />
-                      </div>
-                    </div>
-                    <div class="form-group row">
-                      <label class="col-lg-4 col-form-label text-right" for="val-gender">Gender <span class="text-danger">*</span>
-                      </label>
-                      <div class="col-lg-6">
-                        <select type="text" class="form-control" id="val-gender" name="val-gender">
-                          <option value="">Select gender</option>
-                          <option value="male">Male</option>
-                          <option value="female">Female</option>
-                          <option value="others">Others</option>
-                        </select>
-                      </div>
-                    </div>
-                    <div class="form-group row">
-                      <label class="col-lg-4 col-form-label text-right" for="val-password">Password <span class="text-danger">*</span>
-                      </label>
-                      <div class="col-lg-6">
-                        <input type="password" class="form-control" id="val-password" name="val-password" placeholder="Choose a safe one.." />
-                      </div>
-                    </div>
-                    <div class="form-group row">
-                      <label class="col-lg-4 col-form-label text-right" for="val-confirm-password">Confirm Password <span class="text-danger">*</span>
-                      </label>
-                      <div class="col-lg-6">
-                        <input type="password" class="form-control" id="val-confirm-password" name="val-confirm-password" placeholder="
-                            Confirm password" />
-                      </div>
-                    </div>
-                    <div class="form-group row">
-                      <label class="col-lg-4 col-form-label text-right" for="val-address">Address <span class="text-danger">*</span>
-                      </label>
-                      <div class="col-lg-6">
-                        <textarea class="form-control" id="val-address" name="val-address" rows="5" placeholder="Enter your full address here."></textarea>
-                      </div>
-                    </div>
-                    <div class="form-group row">
-                      <label class="col-lg-4 col-form-label text-right" for="val-nationality">Nationality <span class="text-danger">*</span>
-                      </label>
-                      <div class="col-lg-6">
-                        <input class="form-control" id="val-nationality" name="val-nationality" placeholder="Enter user's nationality here" />
-                      </div>
-                    </div>
-                    <div class="form-group row">
-                      <label class="col-lg-4 col-form-label text-right" for="val-marital">Marital status <span class="text-danger">*</span>
-                      </label>
-                      <div class="col-lg-6">
-                        <select type="text" class="form-control" id="val-marital" name="val-marital">
-                          <option value="">Select marital status</option>
-                          <option value="Single">Single</option>
-                          <option value="Married">Married</option>
-                          <option value="Divorced">Divorced</option>
-                        </select>
-                      </div>
-                    </div>
-                    <div class="form-group row">
-                      <label class="col-lg-4 col-form-label text-right" for="val-image">Profile Image <span class="text-danger"></span>
-                      </label>
-                      <div class="col-lg-6">
-                        <input type="file" accept="image/*" class="form-control" id="val-image" name="val-image" />
-                      </div>
-                    </div>
-                    <div class="form-group row">
-                      <label class="col-lg-4 col-form-label text-right" for="val-identity-type">Identity Type <span class="text-danger">*</span>
-                      </label>
-                      <div class="col-lg-6">
-                        <select type="text" class="form-control" id="val-identity-type" name="val-identity-type">
-                          <option value="">Select Identity Type</option>
-                          <option value="National ID">Natinal ID</option>
-                          <option value="Passport">Passport</option>
-                          <option value="Driver's Licence">
-                            Driver's Licence
-                          </option>
-                        </select>
-                      </div>
-                    </div>
-                    <div class="form-group row">
-                      <label class="col-lg-4 col-form-label text-right" for="val-identity-number">Identity Number <span class="text-danger">*</span>
-                      </label>
-                      <div class="col-lg-6">
-                        <input type="text" class="form-control" id="val-identity-number" name="val-identity-number" placeholder="Enter NIN / passprot number / driver's licence number" />
-                      </div>
-                    </div>
-                    <div class="form-group row">
-                      <label class="col-lg-4 col-form-label text-right" for="val-date-of-birth">Date of birth <span class="text-danger">*</span>
-                      </label>
-                      <div class="col-lg-6">
-                        <input type="date" class="form-control" id="val-date-of-birth" name="val-date-of-birth" placeholder="5.0" />
-                      </div>
-                    </div>
-                    <div class="form-group row">
-                      <label class="col-lg-4 col-form-label text-right" for="val-staff-category">Staff category <span class="text-danger">*</span>
-                      </label>
-                      <div class="col-lg-6">
-                        <input type="text" class="form-control" id="val-staff-category" name="val-staff-category" placeholder="Enter staff category" />
-                      </div>
-                    </div>
-                    <!-- <div class="form-group row">
-                        <label class="col-lg-4 col-form-label text-right"
-                          ><a href="#">Terms &amp; Conditions</a>
-                          <span class="text-danger">*</span>
-                        </label>
-                        <div class="col-lg-8">
-                          <label
-                            class="css-control css-control-primary css-checkbox"
-                            for="val-terms"
-                          >
-                            <input
-                              type="checkbox"
-                              class="css-control-input"
-                              id="val-terms"
-                              name="val-terms"
-                              value="1"
-                            />
-                            <span class="css-control-indicator"></span> I agree
-                            to the terms</label
-                          >
-                        </div>
-                      </div> -->
-                    <div class="form-group row">
-                      <div class="col-lg-8 ml-auto">
-                        <button type="submit" class="btn btn-success">
-                          Submit
-                        </button>
-                      </div>
-                    </div>
-                  </form>
+                <h4 class="card-title">Group members</h4>
+                <div class="table-responsive">
+                  <div id="add_user">
+                    <a href="./group_member_form.php?group_id=<?php echo $group_id; ?>" class="badge badge-pill gradient-1"><i class="btn btn-sm fa fa-plus fa-2x p-2" id="" data-toggle="tooltip" data-placement="top" title="Add member"></i></a>
+                  </div>
+                  <table class="table table-striped table-bordered zero-configuration">
+                    <thead>
+                      <tr>
+                        <th>User ID</th>
+                        <th>Name</th>
+                        <th>Gender</th>
+                        <th>Telephone</th>
+                        <th>Email</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                        <!-- <th>Age</th>
+                          <th>Start date</th>
+                          <th>Salary</th> -->
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                      <?php while ($user_row = $user_result->fetch_array()) : ?>
+                        <tr>
+                          <td>Emp-<?php echo $user_row['user_id']; ?></td>
+                          <td><?php echo decrypt_data($user_row['first_name']) . " " . decrypt_data($user_row['last_name']); ?></td>
+                          <td><?php echo $user_row['user_gender']; ?></td>
+                          <td><?php echo decrypt_data($user_row['user_telephone']); ?></td>
+                          <td><?php echo decrypt_data($user_row['user_email']); ?></td>
+                          <td>Online</td>
+                          <td id="action_buttons">
+                            <i class="fa fa-info btn btn-info" id="show-user-details<?php echo $user_row['user_id']; ?>" data-toggle="tooltip" data-placement="top" title="Details"></i>
+                            <a href="./group_member_form.php?edit_member=2&user_id=<?php echo $user_row['user_id']; ?>&group_id=<?php echo $user_row['group_id']; ?>"><i class="fa fa-pencil btn btn-primary" data-toggle="tooltip" data-placement="top" title="Edit"></i></a>
+                            <i class="fa fa-trash btn btn-danger" data-toggle="tooltip" data-placement="top" title="Delete"></i>
+                          </td>
+                        </tr>
+
+                        <script>
+                          $(() => {
+                            $("#show-user-details<?php echo $user_row['user_id']; ?>").on('click', () => {
+                              $("#user-details").addClass("show");
+                              $("#user_id").text("<?php echo 'User_' . $user_row['user_id']; ?>");
+                              $("#user_name").text("<?php echo decrypt_data($user_row['first_name']); ?> <?php echo decrypt_data($user_row['last_name']); ?>");
+                              $("#user_email").text("<?php echo decrypt_data($user_row['user_email']); ?>");
+                              $("#telephone").text("<?php echo decrypt_data($user_row['user_telephone']); ?>");
+                              $("#gender").text("<?php echo $user_row['user_gender']; ?>");
+                              $("#user_type").text("<?php echo $user_row['user_category']; ?>");
+                            })
+                          })
+                        </script>
+                      <?php endwhile; ?>
+                    </tbody>
+                    <tfoot>
+                      <tr>
+                        <th>User ID</th>
+                        <th>Name</th>
+                        <th>Gender</th>
+                        <th>Telephone</th>
+                        <th>Email</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                      </tr>
+                    </tfoot>
+                  </table>
                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="user-details">
+        <div class="details-inner bg-light alert container my-4 mt-4 py-4 col-md-8">
+          <i class="fa fa-times fa-2x" id="close-user"></i>
+          <div class="row justify-content-center align-content-center py-5">
+            <div class="left col-md-4">
+              <h1 class="text-center text-success">User details</h1>
+              <img src="../images/users/2.jpg" class="col-12" />
+              <div class="col-md--12 row justify-content-center my-3 py-4">
+                <a href="" class="btn btn-danger mx-1 p-2">Block</a>
+                <a href="../add_admin_user" class="btn btn-info mx-1 p-2">Edit</a>
+                <a href="" class="btn btn-danger mx-1 p-2">Delete</a>
+              </div>
+            </div>
+            <div class="right col-md-6 row justify-content-left">
+              <div class="left text-right alert col-6">
+                <p><b>User_id: </b></p>
+                <p><b>Name: </b></p>
+                <p><b>Email: </b></p>
+                <p><b>Telephone: </b></p>
+                <p><b>Gender: </b></p>
+                <p><b>Address: </b></p>
+                <p><b>Nationality: </b></p>
+                <p><b>Marital status: </b></p>
+                <p><b>Identity type: </b></p>
+                <p><b>Identity number: </b></p>
+                <p><b>Date of Birth: </b></p>
+                <p><b>Staff category: </b></p>
+              </div>
+              <div class="right alert col-6">
+                <p id="user_id">Emp-0001</p>
+                <p id="user_name">Anatoli kuwebwa</p>
+                <p id="user_email">akuwebwa@gmail.com</p>
+                <p id="telephone">0779320075</p>
+                <p id="gender">Male</p>
+                <p id="addredd">Lunguja Lubaga division</p>
+                <p id="country">Uganda</p>
+                <p id="marital_status">Single</p>
+                <p id="id_type">National ID</p>
+                <p id="id_number">CM92301933HEK</p>
+                <p id="date_of_birth">28th/02/2014</p>
+                <p id="user_type">Admin</p>
               </div>
             </div>
           </div>
@@ -709,7 +730,7 @@ if (isset($_SESSION['user_id'])) {
       <div class="copyright">
         <p>
           Copyright &copy; Designed & Developed by
-          <a href="https://themeforest.net/user/quixlab">Quixlab</a> 2018
+          <a href="https://themeforest.net/user/quixlab">Anatoli</a> 2022
         </p>
       </div>
     </div>
@@ -726,12 +747,15 @@ if (isset($_SESSION['user_id'])) {
     ***********************************-->
   <script src="../plugins/common/common.min.js"></script>
   <script src="../js/custom.min.js"></script>
+  <script src="../js/bootstrap/bootstrap.min.js"></script>
   <script src="../js/settings.js"></script>
   <script src="../js/gleek.js"></script>
   <script src="../js/styleSwitcher.js"></script>
+  <script src="../js/custom_js/consumer_group.js"></script>
 
-  <script src="../plugins/validation/jquery.validate.min.js"></script>
-  <script src="../plugins/validation/form-validation-user.js"></script>
+  <script src="../plugins/tables/js/jquery.dataTables.min.js"></script>
+  <script src="../plugins/tables/js/datatable/dataTables.bootstrap4.min.js"></script>
+  <script src="../plugins/tables/js/datatable-init/datatable-basic.min.js"></script>
 </body>
 
 </html>

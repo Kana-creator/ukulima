@@ -68,10 +68,10 @@ if (isset($_SESSION['user_id'])) {
         <!--**********************************
             Nav header start
         ***********************************-->
-        <div class="nav-header" style="border-bottom: 2px solid green; padding: 0; height: fit-content">
+        <div class="nav-header" style="border-bottom: 2px solid #00FF7F; padding: 0; height: fit-content">
             <div class="brand-logo my-0 py-0" style="
             background-color: #ffffffff;
-            border-bottom: 3px solid green;
+            border-bottom: 3px solid #00FF7F;
             padding: 0;
             max-height: 78px;
             display: flex;
@@ -95,7 +95,7 @@ if (isset($_SESSION['user_id'])) {
         <!--**********************************
             Header start
         ***********************************-->
-        <div class="header" style="border-bottom: 5px solid green">
+        <div class="header" style="border-bottom: 5px solid #00FF7F">
             <div class="header-content clearfix">
                 <div class="nav-control">
                     <div class="hamburger">
@@ -251,7 +251,7 @@ if (isset($_SESSION['user_id'])) {
                         </a>
                         <ul aria-expanded="false" class="bg-success">
                             <li><a href="./consumer_page.php">Home</a></li>
-                            <li><a href="./Admin_users.php">Users</a></li>
+                            <li><a href="./consumer_group.php"><i class="fa fa-users"></i>Group</a></li>
                             <li><a href="./products.php">Products</a></li>
                             <li><a href="./consumer_cart.php">Orders</a></li>
                         </ul>
@@ -268,7 +268,7 @@ if (isset($_SESSION['user_id'])) {
             Content body start
         ***********************************-->
         <div class="content-body">
-            <div class="row page-titles mx-0">
+            <!-- <div class="row page-titles mx-0">
                 <div class="col p-md-0">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item">
@@ -279,7 +279,7 @@ if (isset($_SESSION['user_id'])) {
                         </li>
                     </ol>
                 </div>
-            </div>
+            </div> -->
             <!-- row -->
 
             <div class="container-fluid">

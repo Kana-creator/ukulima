@@ -1,6 +1,28 @@
-div {
-  font-weight: 300;
-  color: black;
+* {
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-weight: 400;
+  font-size: 99%;
+  color: #000000;
+}
+
+.nk-sidebar {
+  background-color: #00FF7F;
+}
+
+.nk-sidebar .nk-nav-scroll {
+  background-color: #00FF7F;
+}
+
+.nk-sidebar .nk-nav-scroll .metismenu {
+  background-color: #00FF7F;
+}
+
+.nk-sidebar .nk-nav-scroll .metismenu .nav-label {
+  background-color: #00FF7F;
+}
+
+.nk-sidebar .nk-nav-scroll .metismenu .nav-label ul {
+  background-color: #00FF7F;
 }
 
 #product-details {
@@ -30,7 +52,7 @@ div {
 }
 
 #product-details .details-inner #close-user:hover {
-  color: #7d7;
+  color: #00FF7F;
 }
 
 #product-details.show {
@@ -75,17 +97,14 @@ div {
 
 .card .card-inner {
   background-color: #ffffff;
-  padding: 20px;
+  padding: 10px;
   position: relative;
   overflow: hidden;
+  border: 1px solid #ffffff;
 }
 
 .card .card-inner:hover {
-  -webkit-transform: scale(1.01);
-          transform: scale(1.01);
-  -webkit-box-shadow: 0px 0px 10px 5px rgba(119, 221, 119, 0.5);
-          box-shadow: 0px 0px 10px 5px rgba(119, 221, 119, 0.5);
-  z-index: 10;
+  border: 1px solid #00FF7F;
 }
 
 .card .card-inner .card-body h4 {

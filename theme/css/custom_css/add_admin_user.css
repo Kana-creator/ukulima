@@ -1,0 +1,31 @@
+* {
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-weight: 400;
+  font-size: 99%;
+  color: #000000;
+}
+
+.nk-sidebar {
+  background-color: #00FF7F;
+}
+
+.nk-sidebar .nk-nav-scroll {
+  background-color: #00FF7F;
+}
+
+.nk-sidebar .nk-nav-scroll .metismenu {
+  background-color: #00FF7F;
+}
+
+.nk-sidebar .nk-nav-scroll .metismenu .nav-label {
+  background-color: #00FF7F;
+}
+
+.nk-sidebar .nk-nav-scroll .metismenu .nav-label ul {
+  background-color: #00FF7F;
+}
+
+form .form-group label {
+  font-weight: 900;
+}
+/*# sourceMappingURL=add_admin_user.css.map */

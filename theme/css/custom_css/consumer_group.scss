@@ -95,6 +95,43 @@ $error_color: #d35;
   transform: scale(1);
 }
 
+.btn,
 .btn-sm {
-  color: #FFFFFF;
+  color: #ffffff;
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+#consumer_group_form {
+  background-color: #efefef;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  height: 0;
+  overflow: hidden;
+  transition: 20.7s;
+
+  form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+
+    .form-group {
+      .form-control {
+        height: 5px;
+        padding: 0 10px;
+      }
+
+      small {
+        color: $error_color;
+      }
+    }
+  }
+}
+
+#consumer_group_form.show {
+  height: fit-content;
 }

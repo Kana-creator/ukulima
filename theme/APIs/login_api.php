@@ -19,6 +19,8 @@ function user_login($mysqli, $user_name, $password)
                     $_SESSION['user_id'] = $row['user_id'];
                     $_SESSION['user_name'] = $row['first_name'];
                     $_SESSION['user_category'] = $row['user_category'];
+                    $user_id = $row['user_id'];
+                    $mysqli->query("UPDATE User SET login_status=1 WHERE user_id=$user_id");
                     echo json_encode(array("status" => "success", "message" => "Login successful", "user_type" => $_SESSION['user_category']));
                 } else {
                     echo json_encode(array("status" => "error", "message" => "Wrong password!"));

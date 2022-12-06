@@ -63,10 +63,10 @@ if (isset($_SESSION['user_id'])) {
     <!--**********************************
             Nav header start
         ***********************************-->
-    <div class="nav-header" style="border-bottom: 2px solid green; padding: 0; height: fit-content">
+    <div class="nav-header" style="">
       <div class="brand-logo my-0 py-0" style="
             background-color: #ffffffff;
-            border-bottom: 3px solid green;
+            border-bottom: 5px solid #00FF7F;
             padding: 0;
             max-height: 78px;
             display: flex;
@@ -90,7 +90,7 @@ if (isset($_SESSION['user_id'])) {
     <!--**********************************
             Header start
         ***********************************-->
-    <div class="header" style="border-bottom: 5px solid green">
+    <div class="header" style="border-bottom: 5px solid #00FF7F;">
       <div class="header-content clearfix">
         <div class="nav-control">
           <div class="hamburger">
@@ -99,10 +99,10 @@ if (isset($_SESSION['user_id'])) {
         </div>
         <div class="header-left">
           <div class="input-group icons">
-            <div class="input-group-prepend">
+            <!-- <div class="input-group-prepend">
               <span class="input-group-text bg-transparent border-0 pr-2 pr-sm-3" id="basic-addon1"><i class="mdi mdi-magnify"></i></span>
-            </div>
-            <input type="search" class="form-control" placeholder="Search Dashboard" aria-label="Search Dashboard" />
+            </div> -->
+            <!-- <input type="search" class="form-control" placeholder="Search Dashboard" aria-label="Search Dashboard" /> -->
             <div class="drop-down d-md-none">
               <form action="#">
                 <input type="text" class="form-control" placeholder="Search" />
@@ -112,97 +112,7 @@ if (isset($_SESSION['user_id'])) {
         </div>
         <div class="header-right">
           <ul class="clearfix">
-            <!-- <li class="icons dropdown">
-                <a href="javascript:void(0)" data-toggle="dropdown">
-                  <i class="mdi mdi-email-outline"></i>
-                  <span class="badge gradient-1 badge-pill badge-primary"
-                    >3</span
-                  >
-                </a>
-                <div class="drop-down animated fadeIn dropdown-menu">
-                  <div
-                    class="dropdown-content-heading d-flex justify-content-between"
-                  >
-                    <span class="">3 New Messages</span>
-                  </div>
-                  <div class="dropdown-content-body">
-                    <ul>
-                      <li class="notification-unread">
-                        <a href="javascript:void()">
-                          <img
-                            class="float-left mr-3 avatar-img"
-                            src="images/avatar/1.jpg"
-                            alt=""
-                          />
-                          <div class="notification-content">
-                            <div class="notification-heading">Saiful Islam</div>
-                            <div class="notification-timestamp">
-                              08 Hours ago
-                            </div>
-                            <div class="notification-text">
-                              Hi Teddy, Just wanted to let you ...
-                            </div>
-                          </div>
-                        </a>
-                      </li>
-                      <li class="notification-unread">
-                        <a href="javascript:void()">
-                          <img
-                            class="float-left mr-3 avatar-img"
-                            src="images/avatar/2.jpg"
-                            alt=""
-                          />
-                          <div class="notification-content">
-                            <div class="notification-heading">Adam Smith</div>
-                            <div class="notification-timestamp">
-                              08 Hours ago
-                            </div>
-                            <div class="notification-text">
-                              Can you do me a favour?
-                            </div>
-                          </div>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="javascript:void()">
-                          <img
-                            class="float-left mr-3 avatar-img"
-                            src="images/avatar/3.jpg"
-                            alt=""
-                          />
-                          <div class="notification-content">
-                            <div class="notification-heading">Barak Obama</div>
-                            <div class="notification-timestamp">
-                              08 Hours ago
-                            </div>
-                            <div class="notification-text">
-                              Hi Teddy, Just wanted to let you ...
-                            </div>
-                          </div>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="javascript:void()">
-                          <img
-                            class="float-left mr-3 avatar-img"
-                            src="images/avatar/4.jpg"
-                            alt=""
-                          />
-                          <div class="notification-content">
-                            <div class="notification-heading">
-                              Hilari Clinton
-                            </div>
-                            <div class="notification-timestamp">
-                              08 Hours ago
-                            </div>
-                            <div class="notification-text">Hello</div>
-                          </div>
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </li> -->
+
             <li class="icons dropdown" title="Notifications" data-toggle="tooltip" data-placement="top">
               <a href="javascript:void(0)" data-toggle="dropdown">
                 <i class="mdi mdi-bell-outline"></i>
@@ -289,7 +199,7 @@ if (isset($_SESSION['user_id'])) {
                     <li>
                       <a href="#"><i class="icon-user"></i> <span><?php echo decrypt_data($user_name); ?></span></a>
                     </li>
-                    <li>
+                    <!-- <li>
                       <a href="email-inbox.html"><i class="icon-envelope-open"></i> <span>Inbox</span>
                         <div class="badge gradient-3 badge-pill badge-primary">
                           3
@@ -300,7 +210,7 @@ if (isset($_SESSION['user_id'])) {
                     <hr class="my-2" />
                     <li>
                       <a href="page-lock.html"><i class="icon-lock"></i> <span>Lock Screen</span></a>
-                    </li>
+                    </li> -->
                     <li>
                       <a href="../APIs/logout_api.php"><i class="icon-key"></i> <span>Logout</span></a>
                     </li>
@@ -319,15 +229,15 @@ if (isset($_SESSION['user_id'])) {
     <!--**********************************
             Sidebar start
         ***********************************-->
-    <div class="nk-sidebar bg-success">
-      <div class="nk-nav-scroll bg-success">
-        <ul class="metismenu bg-success" id="menu">
+    <div class="nk-sidebar">
+      <div class="nk-nav-scroll">
+        <ul class="metismenu" id="menu">
           <li class="nav-label">Dashboard</li>
-          <li>
-            <a class="has-arrow bg-success" href="javascript:void()" aria-expanded="fals">
+          <li class="nav-label">
+            <!-- <a class="has-arrow" href="javascript:void()" aria-expanded="fals">
               <i class="icon-speedometer menu-icon"></i><span class="nav-text">Dashboard</span>
-            </a>
-            <ul aria-expanded="false" class="bg-success">
+            </a> -->
+            <ul aria-expanded="false" class="nav-label">
               <li><a href="./home.php">Home</a></li>
               <li><a href="./Admin_users.php">Users</a></li>
               <li><a href="./products.php">Products</a></li>
@@ -534,7 +444,7 @@ if (isset($_SESSION['user_id'])) {
             Content body start
         ***********************************-->
     <div class="content-body">
-      <div class="row page-titles mx-0">
+      <!-- <div class="row page-titles mx-0">
         <div class="col p-md-0">
           <ol class="breadcrumb">
             <li class="breadcrumb-item">
@@ -545,7 +455,7 @@ if (isset($_SESSION['user_id'])) {
             </li>
           </ol>
         </div>
-      </div>
+      </div> -->
       <!-- row -->
 
       <div class="container-fluid">
@@ -553,12 +463,12 @@ if (isset($_SESSION['user_id'])) {
           <div class="col-12">
             <div class="card">
               <div class="card-body">
-                <h4 class="card-title">Products</h4>
+                <h4 class=" card-title">Products</h4>
                 <div class="table-responsive">
                   <div id="add_product">
-                    <a href="./Add_product.php" class="badge badge-pill gradient-1"><i class="fa fa-plus fa-2x  p-2" id="" data-toggle="tooltip" data-placement="top" title="Add product"></i></a>
-                    <a href="./Add_product.php" class="badge badge-pill gradient-3"><i class="fa fa-upload fa-2x p-2" id="" data-toggle="tooltip" data-placement="top" title="Upload list"></i></a>
-                    <a href="./Add_product.php" class="badge badge-pill gradient-4"><i class="fa fa-download fa-2x p-2" id="" data-toggle="tooltip" data-placement="top" title="Download list"></i></a>
+                    <a href="./Add_product.php" class="badge badge-pill gradient-1"><i class="fa fa-plus fa-2x btn btn-sm  p-2" id="" data-toggle="tooltip" data-placement="top" title="Add product"></i></a>
+                    <a href="./Add_product.php" class="badge badge-pill gradient-3"><i class="fa fa-upload fa-2x btn-sm p-2" id="" data-toggle="tooltip" data-placement="top" title="Upload list"></i></a>
+                    <a href="./Add_product.php" class="badge badge-pill gradient-4"><i class="fa fa-download fa-2x btn-sm p-2" id="" data-toggle="tooltip" data-placement="top" title="Download list"></i></a>
                   </div>
                   <table class="table table-striped table-bordered zero-configuration">
                     <thead>
@@ -581,13 +491,13 @@ if (isset($_SESSION['user_id'])) {
                         $product_status = "";
                         $status_title = "";
                         if ($now->diff($expiry)->format('%a') <= 5) {
-                          $product_status = "text-warning";
+                          $product_status = "#FF00F7F";
                           $status_title = "Soon expiring";
                         } else if ($expiry <= $now) {
-                          $product_status = "text-danger";
+                          $product_status = "#FF007F";
                           $status_title = "Expired";
                         } else {
-                          $product_status = "text-success";
+                          $product_status = "#00FF7F";
                           $status_title = "Current";
                         }
                       ?>
@@ -597,7 +507,7 @@ if (isset($_SESSION['user_id'])) {
                           <td><?php echo decrypt_data($product_row['batch_number']); ?></td>
                           <td><?php echo decrypt_data($product_row['serial_number']); ?></td>
                           <td><?php echo $product_row['date_of_manufacture']; ?></td>
-                          <td class="badge-pill text-center <?php echo $product_status; ?>" data-toggle="tooltip" data-placement="top" title="<?php echo $status_title; ?>">
+                          <td class="badge-pill text-center" data-toggle="tooltip" data-placement="top" title="<?php echo $status_title; ?>" style="color: <?php echo $product_status; ?>">
                             <?php echo $product_row['product_expiry_date']; ?>
                           </td>
                           <td id="action_buttons">
