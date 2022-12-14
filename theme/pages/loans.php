@@ -1,8 +1,21 @@
 <?php
-include "../objects/user_object.php";
+include "../APIs/connection_api.php";
+include "../APIs/encryption_api.php";
 session_start();
 if (isset($_SESSION['user_id'])) {
+  $user_id = $_SESSION['user_id'];
   $user_name = $_SESSION['user_name'];
+
+  $group_result = $mysqli->query("SELECT * FROM consumer_group WHERE user_id=$user_id");
+  $group_row = $group_result->fetch_array();
+  $group_id = $group_row['group_id'];
+
+  $consumer_result = $mysqli->query("SELECT * FROM consumer INNER JOIN User ON consumer.user_id = User.user_id WHERE group_id=$group_id");
+
+  $cart_result = $mysqli->query("SELECT SUM(number_of_items) AS number_of_items FROM user_order WHERE user_id=$user_id AND check_out_status=0");
+
+  $cart_row = $cart_result->fetch_array();
+  $number_of_items = $cart_row['number_of_items'];
 } else {
   header("Location: ../../index.php");
 }
@@ -23,7 +36,7 @@ if (isset($_SESSION['user_id'])) {
   <link href="../plugins/tables/css/datatable/dataTables.bootstrap4.min.css" rel="stylesheet" />
   <link href="../css/bootstrap/bootstrap.min.css" rel="stylesheet" />
   <link href="../css/style.css" rel="stylesheet" />
-  <link rel="stylesheet" href="../css/custom_css/admin_users.css" />
+  <link rel="stylesheet" href="../css/custom_css/savings.css" />
 </head>
 
 <body>
@@ -57,10 +70,10 @@ if (isset($_SESSION['user_id'])) {
     <!--**********************************
             Nav header start
         ***********************************-->
-    <div class="nav-header" style="border-bottom: 2px solid #00FF7F; padding: 0; height: fit-content">
+    <div class="nav-header" style="border-bottom: 2px solid #00ff7f; padding: 0; height: fit-content">
       <div class="brand-logo my-0 py-0" style="
             background-color: #ffffffff;
-            border-bottom: 3px solid #00FF7F;
+            border-bottom: 3px solid #00ff7f;
             padding: 0;
             max-height: 78px;
             display: flex;
@@ -84,7 +97,7 @@ if (isset($_SESSION['user_id'])) {
     <!--**********************************
             Header start
         ***********************************-->
-    <div class="header" style="border-bottom: 5px solid #00FF7F">
+    <div class="header" style="border-bottom: 5px solid #00ff7f">
       <div class="header-content clearfix">
         <div class="nav-control">
           <div class="hamburger">
@@ -106,6 +119,33 @@ if (isset($_SESSION['user_id'])) {
         </div>
         <div class="header-right">
           <ul class="clearfix">
+            <li class="icons dropdown" title="Cart" data-toggle="tooltip" data-placement="top">
+              <a href="javascript:void(0)" data-toggle="dropdown">
+                <i class="fa fa-shopping-cart"></i>
+                <span class="badge badge-pill gradient-3 badge-primary" id="number_of_cat"><?php echo $number_of_items; ?></span>
+              </a>
+              <div class="drop-down animated fadeIn dropdown-menu dropdown-notfication">
+                <div class="dropdown-content-heading d-flex justify-content-between">
+                  <span class=""><b><?php echo $number_of_items; ?></b> Items Pending in cart</span>
+                </div>
+                <div class="dropdown-content-body">
+                  <ul>
+                    <li>
+                      <a href="./consumer_cart.php">
+                        Check out
+                        <!-- <span class="mr-3 avatar-icon bg-success-lighten-2"><i class="icon-present"></i></span>
+                                                <div class="notification-content">
+                                                    <h6 class="notification-heading">
+                                                        Events near you
+                                                    </h6>
+                                                    <span class="notification-text">Within next 5 days</span>
+                                                </div> -->
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </li>
             <!-- <li class="icons dropdown">
                 <a href="javascript:void(0)" data-toggle="dropdown">
                   <i class="mdi mdi-email-outline"></i>
@@ -313,20 +353,22 @@ if (isset($_SESSION['user_id'])) {
     <!--**********************************
             Sidebar start
         ***********************************-->
-
-    <div class="nk-sidebar" style="background-color: #00FF7F">
-      <div class="nk-nav-scroll" style="background-color: #00FF7F">
-        <ul class="metismenu" id="menu" style="background-color: #00FF7F">
+    <div class="nk-sidebar" style="background-color: #00ff7f;">
+      <div class="nk-nav-scroll" style="background-color: #00ff7f;">
+        <ul class="metismenu" id="menu" style="background-color: #00ff7f;">
           <li class="nav-label">Dashboard</li>
           <li>
-            <a class="has-arrow" href="javascript:void()" aria-expanded="fals" style="background-color: #00FF7F">
+            <a class="has-arrow " href="javascript:void()" aria-expanded="fals" style="background-color: #00ff7f;">
               <i class="icon-speedometer menu-icon"></i><span class="nav-text">Dashboard</span>
             </a>
-            <ul aria-expanded="false" class="" style="background-color: #00FF7F">
-              <li><a href="./home.php">Home</a></li>
-              <li><a href="./Admin_users.php">Users</a></li>
-              <li><a href="./groups.php">Groups</a></li>
-              <!-- <li><a href="./orders.php">Orders</a></li> -->
+            <ul aria-expanded="false" class="" style="background-color: #00ff7f;">
+              <li><a href="./consumer_page.php">Home</a></li>
+              <li><a href="./consumer_group.php">Group</a></li>
+              <!-- <li><a href="./groups.php">Groups</a></li> -->
+              <li><a href="./savings.php">Savings</a></li>
+              <li><a href="./loans.php">Loans</a></li>
+              <!-- <li><a href="./products.php">Products</a></li> -->
+              <li><a href="./consumer_cart.php">Orders</a></li>
             </ul>
           </li>
           <!-- <li class="mega-menu mega-menu-sm">
@@ -529,18 +571,60 @@ if (isset($_SESSION['user_id'])) {
             Content body start
         ***********************************-->
     <div class="content-body">
-      <!-- <div class="row page-titles mx-0">
-        <div class="col p-md-0">
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item">
-              <a href="javascript:void(0)">Dashboard</a>
-            </li>
-            <li class="breadcrumb-item active">
-              <a href="javascript:void(0)">users</a>
-            </li>
-          </ol>
-        </div>
-      </div> -->
+      <!-- <div class="row page-titles mx-0 px-4">
+                <h4 class="text-center col-10"><?php echo $group_name; ?></h4>
+                <div class="col p-md-0">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="javascript:void(0)">Dashboard</a>
+                        </li>
+                        <li class="breadcrumb-item active">
+                            <button class="btn btn-sm btn-warning" id="show_group_form">Register a group</button>
+                        </li>
+                    </ol>
+                </div>
+            </div> -->
+      <!-- <div class="container px-4" id="consumer_group_form">
+                <h3 class="text-center col-12">Consumer groups</h3>
+                <form class="col-md-8">
+                    <div class="form-group col-md-6 px-4 row">
+                        <label class="col-md-12">Group name<span class="text-danger">*</span></label>
+                        <input class="form-control" id="group_name" />
+                        <small class="col-md-12"></small>
+                    </div>
+                    <div class="form-group col-md-6 px-4 row">
+                        <label class="col-md-12">Registration type<span class="text-danger">*</span></label>
+                        <select class="form-control" id="registration_type">
+                            <option value="">Select registration type</option>
+                            <option value="Company">Company</option>
+                            <option value="NGO">NGO</option>
+                            <option value="CBO">CBO</option>
+                        </select>
+                        <small class="col-md-12"></small>
+                    </div>
+                    <div class="form-group col-md-6 px-4 row">
+                        <label class="col-md-12">Registration number<span class="text-danger">*</span></label>
+                        <input class="form-control" id="registration_number" />
+                        <small class="col-md-12"></small>
+                    </div>
+                    <div class="form-group col-md-6 px-4 row">
+                        <label class="col-md-12">Group type<span class="text-danger">*</span></label>
+                        <select class="form-control" id="group_type">
+                            <option value="">Select group type</option>
+                            <option value="VSLA">VSLA</option>
+                            <option value="ASCA">ASCA</option>
+                            <option value="ROSCA">ROSCA</option>
+                            <option value="FM Grp">FM Grp</option>
+                        </select>
+                        <small class="col-md-12"></small>
+                    </div>
+
+                    <div class="form-group col-md-6 row">
+                        <input type="submit" value="submit" id="register_group" class="btn btn-success col-md-12" />
+                    </div>
+
+                </form>
+            </div> -->
       <!-- row -->
 
       <div class="container-fluid">
@@ -548,70 +632,82 @@ if (isset($_SESSION['user_id'])) {
           <div class="col-12">
             <div class="card">
               <div class="card-body">
-                <h4 class="card-title">Users</h4>
+                <h4 class="card-title">Group loans</h4>
                 <div class="table-responsive">
                   <div id="add_user">
-                    <!-- <a href="./add_admin_user.php" class="badge badge-pill gradient-1"><i class="fa fa-plus fa-2x p-2 btn btn-sm" id="" data-toggle="tooltip" data-placement="top" title="Add user"></i></a> -->
+                    <p class="badge badge-pill gradient-1" id="add_saving"><i class="btn btn-sm fa fa-plus fa-2x p-2" id="" data-toggle="tooltip" data-placement="top" title="Add a loan"></i></p>
+                    <p class="badge badge-pill gradient-1" id="add_loan_payment"><i class="btn btn-sm fa fa-minus fa-2x p-2" id="" data-toggle="tooltip" data-placement="top" title="Add loan payment"></i></p>
                   </div>
-                  <table class="table table-striped table-bordered zero-configuration">
-                    <thead>
-                      <tr>
-                        <th>User ID</th>
-                        <th>Name</th>
-                        <th>Gender</th>
-                        <th>Telephone</th>
-                        <th>Email</th>
-                        <th>Status</th>
-                        <th>Action</th>
-                        <!-- <th>Age</th>
+                  <?php
+                  // $total_result = $mysqli->query("SELECT SUM(savings_amount) AS total FROM savings");
+                  // $total_row = $total_result->fetch_array();
+                  // echo $total_row['total'];
+                  while ($consumer_row = $consumer_result->fetch_array()) :
+                    // $group_row = $group_result->fetch_array();
+                    $consumer_id = $consumer_row['consumer_id'];
+                    $consumer_name = $consumer_row['first_name'];
+                    $savings_result = $mysqli->query("SELECT * FROM loan WHERE consumer_id=$consumer_id");
+
+                    $total_result = $mysqli->query("SELECT SUM(savings_amount) AS total FROM loan WHERE consumer_id=$consumer_id");
+                    $total_row = $total_result->fetch_array();
+
+                  ?>
+                    <div class="d-flex justify-space-between mt-4 alert alert-info" style="justify-content: space-between; align-items: center;">
+                      <h6><?php echo decrypt_data($consumer_row['first_name']) . " " . decrypt_data($consumer_row['last_name']) . " : " . decrypt_data($consumer_row['user_telephone']); ?></h6>
+                      <h6>Total loan <?php echo " : " . number_format($total_row['total']); ?></h6>
+                      <i class="fa fa-angle-right btn" style="font-size: 19px;color: black"></i>
+                    </div>
+                    <div id="consumer_group">
+                      <table class="table table-bordered zero-configuration">
+                        <thead>
+                          <tr>
+                            <th>Date</th>
+                            <th>Amount</th>
+                            <th>Taken by (name)</th>
+                            <th>Taken by (phone number)</th>
+                            <th>savings</th>
+                            <!-- <th>Loan</th> -->
+                            <!-- <th>Action</th> -->
+                            <!-- <th>Age</th>
                           <th>Start date</th>
                           <th>Salary</th> -->
-                      </tr>
-                    </thead>
+                          </tr>
+                        </thead>
 
-                    <tbody>
-                      <?php while ($user_row = $user_result->fetch_array()) : ?>
-                        <tr>
-                          <td>Emp-<?php echo $user_row['user_id']; ?></td>
-                          <td><?php echo decrypt_data($user_row['first_name']) . " " . decrypt_data($user_row['last_name']); ?></td>
-                          <td><?php echo $user_row['user_gender']; ?></td>
-                          <td><?php echo decrypt_data($user_row['user_telephone']); ?></td>
-                          <td><?php echo decrypt_data($user_row['user_email']); ?></td>
-                          <td>Online</td>
-                          <td id="action_buttons">
-                            <i class="fa fa-info btn btn-info" id="show-user-details<?php echo $user_row['user_id']; ?>" data-toggle="tooltip" data-placement="top" title="Details"></i>
-                            <!-- <a href="./add_admin_user.php"><i class="fa fa-pencil btn btn-primary" data-toggle="tooltip" data-placement="top" title="Edit"></i></a> -->
-                            <!-- <i class="fa fa-trash btn btn-danger" data-toggle="tooltip" data-placement="top" title="Delete"></i> -->
-                          </td>
-                        </tr>
+                        <tbody>
+                          <?php while ($savings_row = $savings_result->fetch_array()) : ?>
+                            <tr>
+                              <td><?php echo $savings_row['savings_date']; ?></td>
+                              <td><?php echo number_format($savings_row['savings_amount']); ?></td>
+                              <td><?php echo decrypt_data($savings_row['brought_by_name']); ?></td>
+                              <td><?php echo decrypt_data($savings_row['brought_by_phone']); ?></td>
+                              <td>0</td>
+                              <!-- <td>Online</td> -->
+                              <!-- <td id="action_buttons">
+                                                                <i class="fa fa-info btn btn-info" id="show-user-details<?php echo $user_row['user_id']; ?>" data-toggle="tooltip" data-placement="top" title="Details"></i>
+                                                                <a href="./group_member_form.php?edit_member=2&user_id=<?php echo $user_row['user_id']; ?>&group_id=<?php echo $user_row['group_id']; ?>"><i class="fa fa-pencil btn btn-primary" data-toggle="tooltip" data-placement="top" title="Edit"></i></a>
+                                                                <i class="fa fa-trash btn btn-danger" data-toggle="tooltip" data-placement="top" title="Delete" id="delete_member<?php echo $user_row['user_id']; ?>"></i>
+                                                            </td> -->
+                            </tr>
 
-                        <script>
-                          $(() => {
-                            $("#show-user-details<?php echo $user_row['user_id']; ?>").on('click', () => {
-                              $("#user-details").addClass("show");
-                              $("#user_id").text("<?php echo 'User_' . $user_row['user_id']; ?>");
-                              $("#user_name").text("<?php echo decrypt_data($user_row['first_name']); ?> <?php echo decrypt_data($user_row['last_name']); ?>");
-                              $("#user_email").text("<?php echo decrypt_data($user_row['user_email']); ?>");
-                              $("#telephone").text("<?php echo decrypt_data($user_row['user_telephone']); ?>");
-                              $("#gender").text("<?php echo $user_row['user_gender']; ?>");
-                              $("#user_type").text("<?php echo $user_row['user_category']; ?>");
-                            })
-                          })
-                        </script>
-                      <?php endwhile; ?>
-                    </tbody>
-                    <tfoot>
-                      <tr>
-                        <th>User ID</th>
-                        <th>Name</th>
-                        <th>Gender</th>
-                        <th>Telephone</th>
-                        <th>Email</th>
-                        <th>Status</th>
-                        <th>Action</th>
-                      </tr>
-                    </tfoot>
-                  </table>
+
+                          <?php endwhile; ?>
+                        </tbody>
+                        <tfoot>
+                          <tr>
+                            <th>Date</th>
+                            <th>Amount</th>
+                            <th>Taken by (name)</th>
+                            <th>Taken by (phone number)</th>
+                            <th>Savings</th>
+                            <!-- <th>Loan</th> -->
+                            <!-- <th>Action</th> -->
+                          </tr>
+                        </tfoot>
+                      </table>
+                    </div>
+                  <?php endwhile; ?>
+
                 </div>
               </div>
             </div>
@@ -619,69 +715,75 @@ if (isset($_SESSION['user_id'])) {
         </div>
       </div>
       <div id="user-details">
-        <div class="details-inner bg-light alert container my-4 mt-4 py-4 col-md-8">
+        <div class="details-inner bg-light alert container my-4 mt-4 p-4 col-md-8">
           <i class="fa fa-times fa-2x" id="close-user"></i>
-          <div class="row justify-content-center align-content-center py-5">
-            <div class="left col-md-4">
-              <h1 class="text-center text-success">User details</h1>
-              <img src="../images/users/2.jpg" class="col-12" />
-              <!-- <div class="col-md--12 row justify-content-center my-3 py-4">
-                <a href="" class="btn btn-danger mx-1 p-2">Block</a>
-                <a href="../add_admin_user" class="btn btn-info mx-1 p-2">Edit</a>
-                <a href="" class="btn btn-danger mx-1 p-2">Delete</a>
-              </div> -->
-            </div>
-            <div class="right col-md-6 row justify-content-left">
-              <div class="left text-right alert col-6">
-                <p><b>User_id: </b></p>
-                <p><b>Name: </b></p>
-                <p><b>Email: </b></p>
-                <p><b>Telephone: </b></p>
-                <p><b>Gender: </b></p>
-                <p><b>Address: </b></p>
-                <p><b>Nationality: </b></p>
-                <p><b>Marital status: </b></p>
-                <p><b>Identity type: </b></p>
-                <p><b>Identity number: </b></p>
-                <p><b>Date of Birth: </b></p>
-                <p><b>Staff category: </b></p>
+          <div class="d-flex justify-content-center align-items-center mx-4" style="position: relative;">
+            <form class="col-md-6">
+              <h4 class="text-center col-md-8 py-4">Add a member's loan</h4>
+              <div class="form-group row">
+                <label>Member's phone number <span class="text-danger">*</span></label>
+                <input class="form-control" id="phone_number" />
+                <small>error</small>
               </div>
-              <div class="right alert col-6">
-                <p id="user_id">Emp-0001</p>
-                <p id="user_name">Anatoli kuwebwa</p>
-                <p id="user_email">akuwebwa@gmail.com</p>
-                <p id="telephone">0779320075</p>
-                <p id="gender">Male</p>
-                <p id="addredd">Lunguja Lubaga division</p>
-                <p id="country">Uganda</p>
-                <p id="marital_status">Single</p>
-                <p id="id_type">National ID</p>
-                <p id="id_number">CM92301933HEK</p>
-                <p id="date_of_birth">28th/02/2014</p>
-                <p id="user_type">Admin</p>
+              <div class="form-group row">
+                <label>Amount <span class="text-danger">*</span></label>
+                <input type="number" class="form-control" id="savings_amount" />
+                <small>error</small>
               </div>
-            </div>
+              <div class="form-group row">
+                <label>Date <span class="text-danger">*</span></label>
+                <input type="date" class=" form-control" id="savings_date" />
+                <small>error</small>
+              </div>
+              <h4 class="text-success text-center my-4" id="next_of_kin">Signed by</h4>
+              <div class="form-group row">
+                <label>Full name <span class="text-danger">*</span></label>
+                <input class="form-control" id="brought_full_name" />
+                <small>error</small>
+              </div>
+              <div class="form-group row">
+                <label>Phone number <span class="text-danger">*</span></label>
+                <input class="form-control" id="brought_phone_number" />
+                <small>error</small>
+              </div>
+              <div class="form-group row">
+                <input type="submit" class="form-control btn btn-success btn-sm" id="save_saving" />
+              </div>
+            </form>
           </div>
         </div>
       </div>
-      <!-- #/ container -->
     </div>
-    <!--**********************************
+    <!-- #/ container -->
+  </div>
+  <?php
+  if (isset($_GET['error'])) {
+  ?>
+    <script>
+      $(() => {
+        alert("<?php echo $_GET['error']; ?>");
+        window.location.href = "./consumer_group.php";
+      })
+    </script>
+  <?php
+  }
+  ?>
+  <!--**********************************
             Content body end
         ***********************************-->
 
-    <!--**********************************
+  <!--**********************************
             Footer start
         ***********************************-->
-    <div class="footer">
-      <div class="copyright">
-        <p>
-          Copyright &copy; Designed & Developed by
-          <a href="https://themeforest.net/user/quixlab">Anatoli</a> 2022
-        </p>
-      </div>
+  <div class="footer">
+    <div class="copyright">
+      <p>
+        Copyright &copy; Designed & Developed by
+        <a href="https://themeforest.net/user/quixlab">Anatoli</a> 2022
+      </p>
     </div>
-    <!--**********************************
+  </div>
+  <!--**********************************
             Footer end
         ***********************************-->
   </div>
@@ -698,7 +800,7 @@ if (isset($_SESSION['user_id'])) {
   <script src="../js/settings.js"></script>
   <script src="../js/gleek.js"></script>
   <script src="../js/styleSwitcher.js"></script>
-  <script src="../js/custom_js/Admin_users.js"></script>
+  <script src="../js/custom_js/loans.js"></script>
 
   <script src="../plugins/tables/js/jquery.dataTables.min.js"></script>
   <script src="../plugins/tables/js/datatable/dataTables.bootstrap4.min.js"></script>

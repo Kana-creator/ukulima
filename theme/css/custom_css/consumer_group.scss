@@ -37,8 +37,12 @@ $error_color: #d35;
   }
 
   table {
+    th{
+      font-weight: 900;
+    }
     tbody {
       tr {
+        // display: none;
         #action_buttons {
           opacity: 0;
           display: flex;
@@ -109,7 +113,6 @@ $error_color: #d35;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  height: 0;
   overflow: hidden;
   transition: 20.7s;
 

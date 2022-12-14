@@ -63,7 +63,7 @@ if (isset($_SESSION['user_id'])) {
     <!--**********************************
             Nav header start
         ***********************************-->
-    <div class="nav-header" style="">
+    <div class="nav-header">
       <div class="brand-logo my-0 py-0" style="
             background-color: #ffffffff;
             border-bottom: 5px solid #00FF7F;
@@ -114,10 +114,10 @@ if (isset($_SESSION['user_id'])) {
           <ul class="clearfix">
 
             <li class="icons dropdown" title="Notifications" data-toggle="tooltip" data-placement="top">
-              <a href="javascript:void(0)" data-toggle="dropdown">
+              <!-- <a href="javascript:void(0)" data-toggle="dropdown">
                 <i class="mdi mdi-bell-outline"></i>
                 <span class="badge badge-pill gradient-2 badge-primary">3</span>
-              </a>
+              </a> -->
               <div class="drop-down animated fadeIn dropdown-menu dropdown-notfication">
                 <div class="dropdown-content-heading d-flex justify-content-between">
                   <span class="">2 New Notifications</span>
@@ -205,10 +205,10 @@ if (isset($_SESSION['user_id'])) {
                           3
                         </div>
                       </a>
-                    </li>
+                    </li>-->
 
                     <hr class="my-2" />
-                    <li>
+                    <!-- <li>
                       <a href="page-lock.html"><i class="icon-lock"></i> <span>Lock Screen</span></a>
                     </li> -->
                     <li>
@@ -229,17 +229,20 @@ if (isset($_SESSION['user_id'])) {
     <!--**********************************
             Sidebar start
         ***********************************-->
-    <div class="nk-sidebar">
-      <div class="nk-nav-scroll">
-        <ul class="metismenu" id="menu">
+    <div class="nk-sidebar" style="background: #00FF7F">
+      <div class="nk-nav-scroll" style="background: #00FF7F">
+        <ul class="metismenu" id="menu" style="background: #00FF7F">
           <li class="nav-label">Dashboard</li>
-          <li class="nav-label">
-            <!-- <a class="has-arrow" href="javascript:void()" aria-expanded="fals">
+          <li>
+            <a class="has-arrow" href="javascript:void()" aria-expanded="fals" style="background: #00FF7F">
               <i class="icon-speedometer menu-icon"></i><span class="nav-text">Dashboard</span>
-            </a> -->
-            <ul aria-expanded="false" class="nav-label">
-              <li><a href="./home.php">Home</a></li>
-              <li><a href="./Admin_users.php">Users</a></li>
+            </a>
+            <ul aria-expanded="false" class="" style="background: #00FF7F">
+              <!-- <li><a href="./home.php">Home</a></li> -->
+              <!-- <li><a href="./consumer_group.php">Group</a></li> -->
+              <!-- <li><a href="./products.php">Products</a></li> -->
+              <!-- <li><a href="./savings.php">Savings</a></li> -->
+              <!-- <li><a href="./loans.php">Loans</a></li> -->
               <li><a href="./products.php">Products</a></li>
               <li><a href="./orders.php">Orders</a></li>
             </ul>

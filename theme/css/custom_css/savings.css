@@ -60,7 +60,8 @@
 }
 
 #user-details {
-  position: absolute;
+  position: fixed;
+  overflow: auto;
   right: 0;
   left: 0;
   top: 0;
@@ -71,10 +72,6 @@
           transform: scale(0);
   -webkit-transition: all 1s;
   transition: all 1s;
-}
-
-#user-details .details-inner {
-  min-height: 100vh;
 }
 
 #user-details .details-inner #close-user {
@@ -141,12 +138,11 @@
 }
 
 #consumer_group_form form .form-group small {
+  display: none;
   color: #d35;
 }
 
-#consumer_group_form.show {
-  height: -webkit-fit-content;
-  height: -moz-fit-content;
-  height: fit-content;
+#consumer_group_form form .form_group.show small {
+  display: block;
 }
-/*# sourceMappingURL=consumer_group.css.map */
+/*# sourceMappingURL=savings.css.map */

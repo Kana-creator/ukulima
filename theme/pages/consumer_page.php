@@ -145,10 +145,10 @@ if (isset($_SESSION['user_id'])) {
                         </li>
 
                         <li class="icons dropdown" title="Notifications" data-toggle="tooltip" data-placement="top">
-                            <a href="javascript:void(0)" data-toggle="dropdown">
+                            <!-- <a href="javascript:void(0)" data-toggle="dropdown">
                                 <i class="mdi mdi-bell-outline"></i>
                                 <span class="badge badge-pill gradient-2 badge-primary">3</span>
-                            </a>
+                            </a> -->
                             <div class="drop-down animated fadeIn dropdown-menu dropdown-notfication">
                                 <div class="dropdown-content-heading d-flex justify-content-between">
                                     <span class="">2 New Notifications</span>
@@ -211,18 +211,18 @@ if (isset($_SESSION['user_id'])) {
                                         <li>
                                             <a href="#"><i class="icon-user"></i> <span><?php echo decrypt_data($user_name); ?></span></a>
                                         </li>
-                                        <li>
+                                        <!-- <li>
                                             <a href="email-inbox.html"><i class="icon-envelope-open"></i> <span>Inbox</span>
                                                 <div class="badge gradient-3 badge-pill badge-primary">
                                                     3
                                                 </div>
                                             </a>
-                                        </li>
+                                        </li> -->
 
                                         <hr class="my-2" />
-                                        <li>
+                                        <!-- <li>
                                             <a href="page-lock.html"><i class="icon-lock"></i> <span>Lock Screen</span></a>
-                                        </li>
+                                        </li> -->
                                         <li>
                                             <a href="../APIs/logout_api.php"><i class="icon-key"></i> <span>Logout</span></a>
                                         </li>
@@ -241,22 +241,24 @@ if (isset($_SESSION['user_id'])) {
         <!--**********************************
             Sidebar start
         ***********************************-->
-        <div class="nk-sidebar bg-success">
-            <div class="nk-nav-scroll bg-success">
-                <ul class="metismenu bg-success" id="menu">
+        <div class="nk-sidebar" style="background: #00FF7F">
+            <div class="nk-nav-scroll" style="background: #00FF7F">
+                <ul class="metismenu" id="menu" style="background: #00FF7F">
                     <li class="nav-label">Dashboard</li>
                     <li>
-                        <a class="has-arrow bg-success" href="javascript:void()" aria-expanded="fals">
+                        <a class="has-arrow" href="javascript:void()" aria-expanded="fals" style="background: #00FF7F">
                             <i class="icon-speedometer menu-icon"></i><span class="nav-text">Dashboard</span>
                         </a>
-                        <ul aria-expanded="false" class="bg-success">
+                        <ul aria-expanded="false" class="" style="background: #00FF7F">
                             <li><a href="./consumer_page.php">Home</a></li>
-                            <li><a href="./consumer_group.php"><i class="fa fa-users"></i>Group</a></li>
-                            <li><a href="./products.php">Products</a></li>
+                            <li><a href="./consumer_group.php">Group</a></li>
+                            <!-- <li><a href="./groups.php">Groups</a></li> -->
+                            <li><a href="./savings.php">Savings</a></li>
+                            <li><a href="./loans.php">Loans</a></li>
+                            <!-- <li><a href="./products.php">Products</a></li> -->
                             <li><a href="./consumer_cart.php">Orders</a></li>
                         </ul>
                     </li>
-
                 </ul>
             </div>
         </div>
@@ -339,6 +341,8 @@ if (isset($_SESSION['user_id'])) {
                                     $("#p_batch_number").text("<?php echo decrypt_data($product_row['batch_number']); ?>");
                                     $("#p_serial_number").text("<?php echo decrypt_data($product_row['serial_number']); ?>");
                                     $("#p_unit_cost").text("Ugx. <?php echo number_format(decrypt_data($product_row['unit_cost'])); ?>/=");
+                                    $("#product_id").text("<?php echo decrypt_data($product_row['serial_number']); ?>");
+                                    $("#product_name").text("<?php echo decrypt_data($product_row['brand_name']); ?>");
                                     $("#p_user_guid").text("<?php echo decrypt_data($product_row['user_guid']); ?>");
                                 });
 
@@ -356,7 +360,8 @@ if (isset($_SESSION['user_id'])) {
 
 
                                 $("#cancel_add_to_cat<?php echo $product_row['product_id']; ?>").on('click', () => {
-                                    $("#cat_div<?php echo $product_row['product_id']; ?>").removeClass("show");
+                                    $("#card_inner<?php echo $product_row['product_id']; ?>").removeClass("show");
+                                    $("#number_of_items<?php echo $product_row['product_id']; ?>").val("");
                                 });
 
 
@@ -398,7 +403,8 @@ if (isset($_SESSION['user_id'])) {
                     <i class="fa fa-times fa-2x" id="close-user"></i>
                     <div class="row justify-content-center align-content-center py-5">
                         <div class="left col-md-4">
-                            <h1 class="text-success text-center">Product details</h1>
+                            <h3 class="text-success text-center" id="product_name"></h3>
+                            <h3 class="text-success text-center" id="product_id"></h3>
                             <img class="col-12" id="product_image" />
                             <!-- <div class="col-12 row justify-content-center my-3 py-4">
                                 <a href="" class="btn btn-danger mx-1">Delete</a>

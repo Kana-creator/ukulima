@@ -1,6 +1,8 @@
-div {
-  font-weight: 300;
-  color: black;
+* {
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-weight: 400;
+  font-size: 99%;
+  color: #000000;
 }
 
 .table-responsive #add_product {
@@ -26,7 +28,7 @@ div {
 }
 
 .table-responsive table tbody tr:hover {
-  background-color: rgba(119, 221, 119, 0.075);
+  background-color: rgba(0, 255, 127, 0.075);
 }
 
 .table-responsive table tbody tr td:hover {
@@ -75,7 +77,7 @@ div {
 }
 
 #order-details .details-inner #close-order:hover {
-  color: #7d7;
+  color: #00FF7F;
 }
 
 #order-details.show {
@@ -110,5 +112,9 @@ div {
 #message_div.active {
   -webkit-transform: scale(1);
           transform: scale(1);
+}
+
+.btn-sm {
+  color: #FFFFFF;
 }
 /*# sourceMappingURL=orders.css.map */

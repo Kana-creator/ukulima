@@ -107,10 +107,10 @@ if (isset($_SESSION['user_id'])) {
         <div class="header-right">
           <ul class="clearfix">
             <li class="icons dropdown">
-              <a href="javascript:void(0)" data-toggle="dropdown">
+              <!-- <a href="javascript:void(0)" data-toggle="dropdown">
                 <i class="mdi mdi-email-outline"></i>
                 <span class="badge gradient-1 badge-pill badge-primary">3</span>
-              </a>
+              </a> -->
               <div class="drop-down animated fadeIn dropdown-menu">
                 <div class="dropdown-content-heading d-flex justify-content-between">
                   <span class="">3 New Messages</span>
@@ -178,10 +178,10 @@ if (isset($_SESSION['user_id'])) {
               </div>
             </li>
             <li class="icons dropdown">
-              <a href="javascript:void(0)" data-toggle="dropdown">
+              <!-- <a href="javascript:void(0)" data-toggle="dropdown">
                 <i class="mdi mdi-bell-outline"></i>
                 <span class="badge badge-pill gradient-2 badge-primary">3</span>
-              </a>
+              </a> -->
               <div class="drop-down animated fadeIn dropdown-menu dropdown-notfication">
                 <div class="dropdown-content-heading d-flex justify-content-between">
                   <span class="">2 New Notifications</span>
@@ -263,52 +263,52 @@ if (isset($_SESSION['user_id'])) {
                     <li>
                       <a href="app-profile.html"><i class="icon-user"></i> <span><?php echo decrypt_data($user_name); ?></span></a>
                     </li>
-                    <li>
+                    <!-- <li>
                       <a href="email-inbox.html"><i class="icon-envelope-open"></i> <span>Inbox</span>
                         <div class="badge gradient-3 badge-pill badge-primary">
                           3
                         </div>
                       </a>
-                    </li>
+                    </li> -->
 
                     <hr class="my-2" />
-                    <li>
+                    <!-- <li>
                       <a href="page-lock.html"><i class="icon-lock"></i> <span>Lock Screen</span></a>
                     </li>
-                    <li>
-                      <a href="../APIs/logout_api.php"><i class="icon-key"></i> <span>Logout</span></a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
+                    <li> -->
+                    <a href="../APIs/logout_api.php"><i class="icon-key"></i> <span>Logout</span></a>
             </li>
           </ul>
         </div>
       </div>
+      </li>
+      </ul>
     </div>
-    <!--**********************************
+  </div>
+  </div>
+  <!--**********************************
             Header end ti-comment-alt
         ***********************************-->
 
-    <!--**********************************
+  <!--**********************************
             Sidebar start
         ***********************************-->
-    <div class="nk-sidebar bg-success">
-      <div class="nk-nav-scroll bg-success">
-        <ul class="metismenu bg-success" id="menu">
-          <li class="nav-label">Dashboard</li>
-          <li>
-            <a class="has-arrow bg-success" href="javascript:void()" aria-expanded="fals">
-              <i class="icon-speedometer menu-icon"></i><span class="nav-text">Dashboard</span>
-            </a>
-            <ul aria-expanded="false" class="bg-success">
-              <li><a href="./home.php">Home</a></li>
-              <li><a href="./Admin_users.php">Users</a></li>
-              <li><a href="./products.php">Products</a></li>
-              <li><a href="./orders.php">Orders</a></li>
-            </ul>
-          </li>
-          <!-- <li class="mega-menu mega-menu-sm">
+  <div class="nk-sidebar bg-success">
+    <div class="nk-nav-scroll bg-success">
+      <ul class="metismenu bg-success" id="menu">
+        <li class="nav-label">Dashboard</li>
+        <li>
+          <a class="has-arrow bg-success" href="javascript:void()" aria-expanded="fals">
+            <i class="icon-speedometer menu-icon"></i><span class="nav-text">Dashboard</span>
+          </a>
+          <ul aria-expanded="false" class="bg-success">
+            <li><a href="./home.php">Home</a></li>
+            <li><a href="./Admin_users.php">Users</a></li>
+            <li><a href="./products.php">Products</a></li>
+            <li><a href="./orders.php">Orders</a></li>
+          </ul>
+        </li>
+        <!-- <li class="mega-menu mega-menu-sm">
               <a
                 class="has-arrow"
                 href="javascript:void()"
@@ -497,170 +497,170 @@ if (isset($_SESSION['user_id'])) {
                 </li>
               </ul>
             </li> -->
-        </ul>
-      </div>
+      </ul>
     </div>
-    <!--**********************************
+  </div>
+  <!--**********************************
             Sidebar end
         ***********************************-->
 
-    <!--**********************************
+  <!--**********************************
             Content body start
         ***********************************-->
-    <div class="content-body">
-      <div class="row page-titles mx-0">
-        <div class="col p-md-0">
-          <h4 class="text-center text-success">Add New User</h4>
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item">
-              <a href="javascript:void(0)">Dashboard</a>
-            </li>
-            <li class="breadcrumb-item active">
-              <a href="javascript:void(0)">User form</a>
-            </li>
-          </ol>
-        </div>
+  <div class="content-body">
+    <div class="row page-titles mx-0">
+      <div class="col p-md-0">
+        <h4 class="text-center text-success">Add New User</h4>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="javascript:void(0)">Dashboard</a>
+          </li>
+          <li class="breadcrumb-item active">
+            <a href="javascript:void(0)">User form</a>
+          </li>
+        </ol>
       </div>
-      <!-- row -->
+    </div>
+    <!-- row -->
 
-      <div class="container-fluid">
-        <div class="row justify-content-center">
-          <div class="col-lg-12">
-            <div class="card">
-              <div class="card-body">
-                <div class="form-validation">
-                  <form class="form-valide" action="#" method="post">
-                    <div class="form-group row">
-                      <label class="col-lg-4 col-form-label text-right" for="val-firstname">First name <span class="text-danger">*</span>
-                      </label>
-                      <div class="col-lg-6">
-                        <input type="text" class="form-control" id="val-firstname" name="val-firstname" placeholder="Enter a first name" />
-                      </div>
+    <div class="container-fluid">
+      <div class="row justify-content-center">
+        <div class="col-lg-12">
+          <div class="card">
+            <div class="card-body">
+              <div class="form-validation">
+                <form class="form-valide" action="#" method="post">
+                  <div class="form-group row">
+                    <label class="col-lg-4 col-form-label text-right" for="val-firstname">First name <span class="text-danger">*</span>
+                    </label>
+                    <div class="col-lg-6">
+                      <input type="text" class="form-control" id="val-firstname" name="val-firstname" placeholder="Enter a first name" />
                     </div>
-                    <div class="form-group row">
-                      <label class="col-lg-4 col-form-label text-right" for="val-othernames">Other names <span class="text-danger">*</span>
-                      </label>
-                      <div class="col-lg-6">
-                        <input type="text" class="form-control" id="val-othernames" name="val-othernames" placeholder="Enter other names" />
-                      </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-lg-4 col-form-label text-right" for="val-othernames">Other names <span class="text-danger">*</span>
+                    </label>
+                    <div class="col-lg-6">
+                      <input type="text" class="form-control" id="val-othernames" name="val-othernames" placeholder="Enter other names" />
                     </div>
-                    <div class="form-group row">
-                      <label class="col-lg-4 col-form-label text-right" for="val-employeeNumber">Employee number <span class="text-danger">*</span>
-                      </label>
-                      <div class="col-lg-6">
-                        <input type="text" class="form-control" id="val-employeeNumber" name="val-employeeNumber" placeholder="Enter employee number" />
-                      </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-lg-4 col-form-label text-right" for="val-employeeNumber">Employee number <span class="text-danger">*</span>
+                    </label>
+                    <div class="col-lg-6">
+                      <input type="text" class="form-control" id="val-employeeNumber" name="val-employeeNumber" placeholder="Enter employee number" />
                     </div>
-                    <div class="form-group row">
-                      <label class="col-lg-4 col-form-label text-right" for="val-email">Email <span class="text-danger">*</span>
-                      </label>
-                      <div class="col-lg-6">
-                        <input type="text" class="form-control" id="val-email" name="val-email" placeholder="Enter your valid email" />
-                      </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-lg-4 col-form-label text-right" for="val-email">Email <span class="text-danger">*</span>
+                    </label>
+                    <div class="col-lg-6">
+                      <input type="text" class="form-control" id="val-email" name="val-email" placeholder="Enter your valid email" />
                     </div>
-                    <div class="form-group row">
-                      <label class="col-lg-4 col-form-label text-right" for="val-telephone">Telephone <span class="text-danger">*</span>
-                      </label>
-                      <div class="col-lg-6">
-                        <input type="text" class="form-control" id="val-telephone" name="val-telephone" placeholder="Enter the user's telephone" />
-                      </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-lg-4 col-form-label text-right" for="val-telephone">Telephone <span class="text-danger">*</span>
+                    </label>
+                    <div class="col-lg-6">
+                      <input type="text" class="form-control" id="val-telephone" name="val-telephone" placeholder="Enter the user's telephone" />
                     </div>
-                    <div class="form-group row">
-                      <label class="col-lg-4 col-form-label text-right" for="val-gender">Gender <span class="text-danger">*</span>
-                      </label>
-                      <div class="col-lg-6">
-                        <select type="text" class="form-control" id="val-gender" name="val-gender">
-                          <option value="">Select gender</option>
-                          <option value="male">Male</option>
-                          <option value="female">Female</option>
-                          <option value="others">Others</option>
-                        </select>
-                      </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-lg-4 col-form-label text-right" for="val-gender">Gender <span class="text-danger">*</span>
+                    </label>
+                    <div class="col-lg-6">
+                      <select type="text" class="form-control" id="val-gender" name="val-gender">
+                        <option value="">Select gender</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="others">Others</option>
+                      </select>
                     </div>
-                    <div class="form-group row">
-                      <label class="col-lg-4 col-form-label text-right" for="val-password">Password <span class="text-danger">*</span>
-                      </label>
-                      <div class="col-lg-6">
-                        <input type="password" class="form-control" id="val-password" name="val-password" placeholder="Choose a safe one.." />
-                      </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-lg-4 col-form-label text-right" for="val-password">Password <span class="text-danger">*</span>
+                    </label>
+                    <div class="col-lg-6">
+                      <input type="password" class="form-control" id="val-password" name="val-password" placeholder="Choose a safe one.." />
                     </div>
-                    <div class="form-group row">
-                      <label class="col-lg-4 col-form-label text-right" for="val-confirm-password">Confirm Password <span class="text-danger">*</span>
-                      </label>
-                      <div class="col-lg-6">
-                        <input type="password" class="form-control" id="val-confirm-password" name="val-confirm-password" placeholder="
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-lg-4 col-form-label text-right" for="val-confirm-password">Confirm Password <span class="text-danger">*</span>
+                    </label>
+                    <div class="col-lg-6">
+                      <input type="password" class="form-control" id="val-confirm-password" name="val-confirm-password" placeholder="
                             Confirm password" />
-                      </div>
                     </div>
-                    <div class="form-group row">
-                      <label class="col-lg-4 col-form-label text-right" for="val-address">Address <span class="text-danger">*</span>
-                      </label>
-                      <div class="col-lg-6">
-                        <textarea class="form-control" id="val-address" name="val-address" rows="5" placeholder="Enter your full address here."></textarea>
-                      </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-lg-4 col-form-label text-right" for="val-address">Address <span class="text-danger">*</span>
+                    </label>
+                    <div class="col-lg-6">
+                      <textarea class="form-control" id="val-address" name="val-address" rows="5" placeholder="Enter your full address here."></textarea>
                     </div>
-                    <div class="form-group row">
-                      <label class="col-lg-4 col-form-label text-right" for="val-nationality">Nationality <span class="text-danger">*</span>
-                      </label>
-                      <div class="col-lg-6">
-                        <input class="form-control" id="val-nationality" name="val-nationality" placeholder="Enter user's nationality here" />
-                      </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-lg-4 col-form-label text-right" for="val-nationality">Nationality <span class="text-danger">*</span>
+                    </label>
+                    <div class="col-lg-6">
+                      <input class="form-control" id="val-nationality" name="val-nationality" placeholder="Enter user's nationality here" />
                     </div>
-                    <div class="form-group row">
-                      <label class="col-lg-4 col-form-label text-right" for="val-marital">Marital status <span class="text-danger">*</span>
-                      </label>
-                      <div class="col-lg-6">
-                        <select type="text" class="form-control" id="val-marital" name="val-marital">
-                          <option value="">Select marital status</option>
-                          <option value="Single">Single</option>
-                          <option value="Married">Married</option>
-                          <option value="Divorced">Divorced</option>
-                        </select>
-                      </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-lg-4 col-form-label text-right" for="val-marital">Marital status <span class="text-danger">*</span>
+                    </label>
+                    <div class="col-lg-6">
+                      <select type="text" class="form-control" id="val-marital" name="val-marital">
+                        <option value="">Select marital status</option>
+                        <option value="Single">Single</option>
+                        <option value="Married">Married</option>
+                        <option value="Divorced">Divorced</option>
+                      </select>
                     </div>
-                    <div class="form-group row">
-                      <label class="col-lg-4 col-form-label text-right" for="val-image">Profile Image <span class="text-danger"></span>
-                      </label>
-                      <div class="col-lg-6">
-                        <input type="file" accept="image/*" class="form-control" id="val-image" name="val-image" />
-                      </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-lg-4 col-form-label text-right" for="val-image">Profile Image <span class="text-danger"></span>
+                    </label>
+                    <div class="col-lg-6">
+                      <input type="file" accept="image/*" class="form-control" id="val-image" name="val-image" />
                     </div>
-                    <div class="form-group row">
-                      <label class="col-lg-4 col-form-label text-right" for="val-identity-type">Identity Type <span class="text-danger">*</span>
-                      </label>
-                      <div class="col-lg-6">
-                        <select type="text" class="form-control" id="val-identity-type" name="val-identity-type">
-                          <option value="">Select Identity Type</option>
-                          <option value="National ID">Natinal ID</option>
-                          <option value="Passport">Passport</option>
-                          <option value="Driver's Licence">
-                            Driver's Licence
-                          </option>
-                        </select>
-                      </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-lg-4 col-form-label text-right" for="val-identity-type">Identity Type <span class="text-danger">*</span>
+                    </label>
+                    <div class="col-lg-6">
+                      <select type="text" class="form-control" id="val-identity-type" name="val-identity-type">
+                        <option value="">Select Identity Type</option>
+                        <option value="National ID">Natinal ID</option>
+                        <option value="Passport">Passport</option>
+                        <option value="Driver's Licence">
+                          Driver's Licence
+                        </option>
+                      </select>
                     </div>
-                    <div class="form-group row">
-                      <label class="col-lg-4 col-form-label text-right" for="val-identity-number">Identity Number <span class="text-danger">*</span>
-                      </label>
-                      <div class="col-lg-6">
-                        <input type="text" class="form-control" id="val-identity-number" name="val-identity-number" placeholder="Enter NIN / passprot number / driver's licence number" />
-                      </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-lg-4 col-form-label text-right" for="val-identity-number">Identity Number <span class="text-danger">*</span>
+                    </label>
+                    <div class="col-lg-6">
+                      <input type="text" class="form-control" id="val-identity-number" name="val-identity-number" placeholder="Enter NIN / passprot number / driver's licence number" />
                     </div>
-                    <div class="form-group row">
-                      <label class="col-lg-4 col-form-label text-right" for="val-date-of-birth">Date of birth <span class="text-danger">*</span>
-                      </label>
-                      <div class="col-lg-6">
-                        <input type="date" class="form-control" id="val-date-of-birth" name="val-date-of-birth" placeholder="5.0" />
-                      </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-lg-4 col-form-label text-right" for="val-date-of-birth">Date of birth <span class="text-danger">*</span>
+                    </label>
+                    <div class="col-lg-6">
+                      <input type="date" class="form-control" id="val-date-of-birth" name="val-date-of-birth" placeholder="5.0" />
                     </div>
-                    <div class="form-group row">
-                      <label class="col-lg-4 col-form-label text-right" for="val-staff-category">Staff category <span class="text-danger">*</span>
-                      </label>
-                      <div class="col-lg-6">
-                        <input type="text" class="form-control" id="val-staff-category" name="val-staff-category" placeholder="Enter staff category" />
-                      </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-lg-4 col-form-label text-right" for="val-staff-category">Staff category <span class="text-danger">*</span>
+                    </label>
+                    <div class="col-lg-6">
+                      <input type="text" class="form-control" id="val-staff-category" name="val-staff-category" placeholder="Enter staff category" />
                     </div>
-                    <!-- <div class="form-group row">
+                  </div>
+                  <!-- <div class="form-group row">
                         <label class="col-lg-4 col-form-label text-right"
                           ><a href="#">Terms &amp; Conditions</a>
                           <span class="text-danger">*</span>
@@ -682,38 +682,38 @@ if (isset($_SESSION['user_id'])) {
                           >
                         </div>
                       </div> -->
-                    <div class="form-group row">
-                      <div class="col-lg-8 ml-auto">
-                        <button type="submit" class="btn btn-success">
-                          Submit
-                        </button>
-                      </div>
+                  <div class="form-group row">
+                    <div class="col-lg-8 ml-auto">
+                      <button type="submit" class="btn btn-success">
+                        Submit
+                      </button>
                     </div>
-                  </form>
-                </div>
+                  </div>
+                </form>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <!-- #/ container -->
     </div>
-    <!--**********************************
+    <!-- #/ container -->
+  </div>
+  <!--**********************************
             Content body end
         ***********************************-->
 
-    <!--**********************************
+  <!--**********************************
             Footer start
         ***********************************-->
-    <div class="footer">
-      <div class="copyright">
-        <p>
-          Copyright &copy; Designed & Developed by
-          <a href="https://themeforest.net/user/quixlab">Quixlab</a> 2018
-        </p>
-      </div>
+  <div class="footer">
+    <div class="copyright">
+      <p>
+        Copyright &copy; Designed & Developed by
+        <a href="https://themeforest.net/user/quixlab">Quixlab</a> 2018
+      </p>
     </div>
-    <!--**********************************
+  </div>
+  <!--**********************************
             Footer end
         ***********************************-->
   </div>

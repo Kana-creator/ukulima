@@ -61,12 +61,12 @@ $(() => {
             check_required(input_array);
         } else {
             $.ajax({
-                url: "./theme/APIs/login_api.php",
+                url: "../APIs/login_api.php",
                 type: "POST",
                 dataType: "JSON",
                 data: {
                     action: "login",
-                    user_type: "any_user",
+                    user_type: "dev",
                     user_name: user_name.value,
                     password: password.value,
                 }, 
@@ -74,13 +74,8 @@ $(() => {
                 success: (res) => {
                     alert(res['message']);
                     if (res['status'] === 'success') {
-                        if (res['user_type'] === "consumer") {                            
-                            window.location.href = "theme/pages/consumer_page.php";
-                        } else if (res['user_type'] === "producer") {                            
-                            window.location.href = "theme/pages/products.php";
-                        } else if (re['user_type'] === "supplier") {                            
-                            window.location.href = "theme/pages/products.php";
-                        }
+                            window.location.href = "../pages/settings.php";
+                        
                     }
                 },
             })

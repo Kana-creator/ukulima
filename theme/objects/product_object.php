@@ -53,4 +53,6 @@ class Product
 
 session_start();
 $user_id = $_SESSION['user_id'];
+$user_category = $_SESSION['user_category'];
+
 $product_result = $mysqli->query("SELECT * FROM Product WHERE user_id=$user_id");

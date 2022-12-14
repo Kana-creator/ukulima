@@ -9,7 +9,7 @@ function add_next_of_kin($mysqli, $group_id, $consumer_id, $full_name, $phone_nu
 {
     $result = $mysqli->query("SELECT * FROM next_of_kin WHERE phone_number='$phone_number'");
     if (!$result) {
-        header("Location: ../pages/group_member_form.php?error=$mysqli->error&group_id=$group_id");
+        header("Location: ../pages/group_member_form.php?error=1$mysqli->error&group_id=$group_id");
     } else {
         if (mysqli_num_rows($result) > 0) {
             header("Location: ../pages/group_member_form.php?error=Same next of kin already exists&group_id=$group_id");
@@ -48,7 +48,7 @@ function create_consumer(
 ) {
     $result = $mysqli->query("SELECT * FROM consumer WHERE user_id=$user_id");
     if (!$result) {
-        header("Location: ../pages/group_member_form.php?error=$mysqli->error&group_id=$group_id");
+        header("Location: ../pages/group_member_form.php?error=3$mysqli->error&group_id=$group_id");
         // echo "error1" . $mysqli->error;
     } else {
         if (mysqli_num_rows($result) > 0) {
@@ -57,13 +57,13 @@ function create_consumer(
             $query = $mysqli->query("INSERT INTO consumer(user_id, group_id, consumer_type, occupation, date_of_birth, identity_type, identity_number, estimated_acreage, major_economic_activity, estimated_monthly_income, consumer_location, disability, nationality, marital_status) VALUES($user_id, $group_id, '$consumer_type', '$occupation', '$date_of_birth', '$identity_type', '$identity_number', $estimated_acreage, '$major_economic_activity', $estimated_monthly_income,'$location','$disability', '$nationality', '$marital_status')");
 
             if (!$query) {
-                header("Location: ../pages/group_member_form.php?error=$mysqli->error&group_id=$group_id");
+                header("Location: ../pages/group_member_form.php?error=4$mysqli->error&group_id=$group_id");
                 // echo "error2" . $mysqli->error;
             } else {
 
                 $result = $mysqli->query("SELECT * FROM consumer WHERE user_id=$user_id");
                 if (!$result) {
-                    header("Location: ../pages/group_member_form.php?error=$mysqli->error&group_id=$group_id");
+                    header("Location: ../pages/group_member_form.php?error=5$mysqli->error&group_id=$group_id");
                 } else {
                     $row = $result->fetch_array();
                     $consumer_id = $row['consumer_id'];
@@ -105,7 +105,7 @@ function create_user(
 ) {
     $result = $mysqli->query("SELECT * FROM user WHERE user_email='$user_email' OR user_telephone='$user_telephone'");
     if (!$result) {
-        header("Location: ../pages/group_member_form.php?error=$mysqli->error&group_id=$group_id");
+        header("Location: ../pages/group_member_form.php?error=6$mysqli->error&group_id=$group_id");
         // echo "error3" . $mysqli->error;
     } else {
         if (mysqli_num_rows($result) > 0) {
@@ -114,12 +114,12 @@ function create_user(
             $query = $mysqli->query("INSERT INTO user(first_name, last_name, user_email, user_telephone, user_category, user_gender, user_password) VALUES('$first_name', '$last_name', '$user_email', '$user_telephone', '$user_category', '$user_gender', '$user_password')");
 
             if (!$query) {
-                header("Location: ../pages/group_member_form.php?error=$mysqli->error&group_id=$group_id");
+                header("Location: ../pages/group_member_form.php?error=7$mysqli->error&group_id=$group_id");
                 // echo "error4" . $mysqli->error;
             } else {
                 $result = $mysqli->query("SELECT user_id FROM user WHERE user_telephone='$user_telephone'");
                 if (!$result) {
-                    header("Location: ../pages/group_member_form.php?error=$mysqli->error&group_id=$group_id");
+                    header("Location: ../pages/group_member_form.php?error=8$mysqli->error&group_id=$group_id");
                     // echo "error5" . $mysqli->error;
                 } else {
 
@@ -160,7 +160,7 @@ function update_next_of_kin($mysqli, $group_id, $consumer_id, $full_name, $phone
     $query = $mysqli->query("UPDATE next_of_kin SET full_name='$full_name', phone_number='$phone_number' WHERE consumer_id=$consumer_id");
 
     if (!$query) {
-        header("Location: ../pages/group_member_form.php?error=2$mysqli->error&group_id=$group_id");
+        header("Location: ../pages/group_member_form.php?error=9$mysqli->error&group_id=$group_id");
     } else {
         header("Location: ../pages/consumer_group.php?error=Member has been updated successfully.&group_id=$group_id");
     }
@@ -193,11 +193,11 @@ function update_consumer(
     $query = $mysqli->query("UPDATE consumer SET consumer_type='$consumer_type', occupation='$occupation', date_of_birth='$date_of_birth', identity_type='$identity_type', identity_number='$identity_number', estimated_acreage=$estimated_acreage, major_economic_activity='$major_economic_activity', estimated_monthly_income=$estimated_monthly_income, consumer_location='$location', disability='$disability', nationality='$nationality', marital_status='$marital_status' WHERE user_id=$user_id");
 
     if (!$query) {
-        header("Location: ../pages/group_member_form.php?edit_member&error=$mysqli->error&group_id=$group_id&user_id=$user_id");
+        header("Location: ../pages/group_member_form.php?edit_member&error=10$mysqli->error&group_id=$group_id&user_id=$user_id");
     } else {
         $result = $mysqli->query("SELECT * FROM consumer WHERE user_id=$user_id");
         if (!$result) {
-            header("Location: ../pages/group_member_form.php?error=1$mysqli->error&group_id=$group_id");
+            header("Location: ../pages/group_member_form.php?error=11$mysqli->error&group_id=$group_id");
         } else {
             $row = $result->fetch_array();
             $consumer_id = $row['consumer_id'];
@@ -240,7 +240,7 @@ function update_user(
 ) {
     $query = $mysqli->query("UPDATE user SET first_name='$first_name', last_name='$last_name', user_email='$user_email', user_telephone='$user_telephone', user_category='$user_category', user_gender='$user_gender' WHERE user_id=$user_id");
     if (!$query) {
-        header("Location: ../pages/group_member_form.php?error=1$mysqli->error&group_id=$group_id&user_id=$user_id");
+        header("Location: ../pages/group_member_form.php?error=12$mysqli->error&group_id=$group_id&user_id=$user_id");
     } else {
         update_consumer(
             $mysqli,
@@ -300,7 +300,7 @@ if (isset($_POST['action'])) {
             $last_name,
             $user_email,
             $user_telephone,
-            "Consumer",
+            "consumer",
             $user_gender,
             $user_password,
             $group_id,
@@ -328,7 +328,7 @@ if (isset($_POST['action'])) {
             $last_name,
             $user_email,
             $user_telephone,
-            "Consumer",
+            "consumer",
             $user_gender,
             $user_password,
             $group_id,
@@ -348,5 +348,42 @@ if (isset($_POST['action'])) {
             $full_name,
             $phone_number
         );
+    }
+}
+
+if (isset($_GET['delete_user'])) {
+    $user_id = $_GET['user_id'];
+    $group_id = $_GET['group_id'];
+
+    $consumer_result = $mysqli->query("SELECT * FROM consumer WHERE user_id=$user_id");
+    $consumer_row = $consumer_result->fetch_array();
+    $consumer_id = $consumer_row['consumer_id'];
+
+    $delete_next_of_kin = $mysqli->query("DELETE FROM next_of_kin WHERE consumer_id=$consumer_id");
+    if (!$delete_next_of_kin) {
+        header("Location: ../pages/consumer_group.php?error=17$mysqli->error&group_id=$group_id&user_id=$user_id");
+    } else {
+
+        $delete_saving = $mysqli->query("DELETE FROM savings WHERE consumer_id=$consumer_id");
+        if (!$delete_saving) {
+            header("Location: ../pages/consumer_group.php?error=13$mysqli->error&group_id=$group_id&user_id=$user_id");
+        } else {
+            $delete_loan = $mysqli->query("DELETE FROM loan WHERE consumer_id=$consumer_id");
+            if (!$delete_loan) {
+                header("Location: ../pages/consumer_group.php?error=14$mysqli->error&group_id=$group_id&user_id=$user_id");
+            } else {
+                $delete_consumer = $mysqli->query("DELETE FROM consumer WHERE consumer_id=$consumer_id");
+                if (!$delete_consumer) {
+                    header("Location: ../pages/consumer_group.php?error=15$mysqli->error&group_id=$group_id&user_id=$user_id");
+                } else {
+                    $delete_user = $mysqli->query("DELETE FROM User WHERE user_id=$user_id");
+                    if (!$delete_user) {
+                        header("Location: ../pages/consumer_group.php?error=16$mysqli->error&group_id=$group_id&user_id=$user_id");
+                    } else {
+                        header("Location: ../pages/consumer_group.php?error=Member has been deleted successfully&group_id=$group_id&user_id=$user_id");
+                    }
+                }
+            }
+        }
     }
 }
