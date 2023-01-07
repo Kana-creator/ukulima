@@ -22,7 +22,7 @@ if (isset($_SESSION['user_id'])) {
     // $group_name = "No group registered";
   }
 } else {
-  header("Location: ../../index.php");
+  header("Location: ../../index.html");
 }
 ?>
 
@@ -33,10 +33,10 @@ if (isset($_SESSION['user_id'])) {
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Ukulima | Users</title>
+  <title>Ukulima | Group members</title>
   <script src="../js/jquery.js"></script>
   <!-- Favicon icon -->
-  <link rel="icon" type="image/png" sizes="16x16" href="../assets/logo.PNG" />
+  <link rel="icon" type="image/png" sizes="16x16" href="../assets/logo.png" />
   <!-- Custom Stylesheet -->
   <link href="../plugins/tables/css/datatable/dataTables.bootstrap4.min.css" rel="stylesheet" />
   <link href="../css/bootstrap/bootstrap.min.css" rel="stylesheet" />
@@ -50,7 +50,7 @@ if (isset($_SESSION['user_id'])) {
     ********************-->
   <div id="preloader">
     <div class="loader">
-      <img src="../assets/logo.PNG" alt="" class="logo" />
+      <img src="../assets/logo.png" alt="" class="logo" />
       <!-- <svg class="circular" viewBox="25 25 50 50">
           <circle
             class="path"
@@ -363,19 +363,25 @@ if (isset($_SESSION['user_id'])) {
     <div class="nk-sidebar" style="background: #00FF7F">
       <div class="nk-nav-scroll" style="background: #00FF7F">
         <ul class="metismenu" id="menu" style="background: #00FF7F">
-          <li class="nav-label">Dashboard</li>
+          <!-- <li class="nav-label">Dashboard</li> -->
           <li>
             <a class="has-arrow" href="javascript:void()" aria-expanded="fals" style="background: #00FF7F">
               <i class="icon-speedometer menu-icon"></i><span class="nav-text">Dashboard</span>
             </a>
             <ul aria-expanded="false" class="" style="background: #00FF7F">
-              <li><a href="./consumer_page.php">Home</a></li>
-              <li><a href="./consumer_group.php">Group</a></li>
-              <!-- <li><a href="./groups.php">Groups</a></li> -->
+              <li><a href="./consumer_page.php">Products</a></li>
+              <li><a href="./verify_product.php">Verify product</a></li>
+              <li><a href="./consumer_cart.php">Orders</a></li>
+            </ul>
+          </li>
+          <li>
+            <a class="has-arrow" href="javascript:void()" aria-expanded="fals" style="background: #00FF7F">
+              <i class="fa fa-group menu-icon"></i><span class="nav-text">Group Management</span>
+            </a>
+            <ul aria-expanded="false" class="" style="background: #00FF7F">
+              <li><a href="./consumer_group.php">Group Members</a></li>
               <li><a href="./savings.php">Savings</a></li>
               <li><a href="./loans.php">Loans</a></li>
-              <!-- <li><a href="./products.php">Products</a></li> -->
-              <li><a href="./orders.php">Orders</a></li>
             </ul>
           </li>
         </ul>

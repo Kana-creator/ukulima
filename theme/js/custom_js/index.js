@@ -77,9 +77,9 @@ $(() => {
                         if (res['user_type'] === "consumer") {                            
                             window.location.href = "theme/pages/consumer_page.php";
                         } else if (res['user_type'] === "producer") {                            
-                            window.location.href = "theme/pages/products.php";
-                        } else if (re['user_type'] === "supplier") {                            
-                            window.location.href = "theme/pages/products.php";
+                            window.location.href = "./theme/pages/products.php";
+                        } else if (res['user_type'] === "supplier") {                            
+                            window.location.href = "./theme/pages/products.php";
                         }
                     }
                 },

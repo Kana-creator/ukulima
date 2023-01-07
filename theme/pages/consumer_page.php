@@ -2,7 +2,7 @@
 include "../APIs/connection_api.php";
 include "../APIs/encryption_api.php";
 $now = new DateTime('now');
-$product_result = $mysqli->query("SELECT * FROM Product GROUP BY product_image");
+$product_result = $mysqli->query("SELECT * FROM product GROUP BY product_image");
 session_start();
 
 if (isset($_SESSION['user_id'])) {
@@ -13,7 +13,7 @@ if (isset($_SESSION['user_id'])) {
     $cart_row = $cart_result->fetch_array();
     $number_of_items = $cart_row['number_of_items'];
 } else {
-    header("Location: ../../index.php");
+    header("Location: ../../index.html");
 }
 
 
@@ -30,7 +30,7 @@ if (isset($_SESSION['user_id'])) {
     <title>Ukulima | Products</title>
     <script src="../js/jquery.js"></script>
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="../assets/logo.PNG" />
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/logo.png" />
     <!-- Custom Stylesheet -->
     <link href="../plugins/tables/css/datatable/dataTables.bootstrap4.min.css" rel="stylesheet" />
     <link href="../css/style.css" rel="stylesheet" />
@@ -43,7 +43,7 @@ if (isset($_SESSION['user_id'])) {
     ********************-->
     <div id="preloader">
         <div class="loader">
-            <img src="../assets/logo.PNG" alt="" class="logo" />
+            <img src="../assets/logo.png" alt="" class="logo" />
             <!-- <svg class="circular" viewBox="25 25 50 50">
           <circle
             class="path"
@@ -244,19 +244,25 @@ if (isset($_SESSION['user_id'])) {
         <div class="nk-sidebar" style="background: #00FF7F">
             <div class="nk-nav-scroll" style="background: #00FF7F">
                 <ul class="metismenu" id="menu" style="background: #00FF7F">
-                    <li class="nav-label">Dashboard</li>
+                    <!-- <li class="nav-label">Dashboard</li> -->
                     <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="fals" style="background: #00FF7F">
                             <i class="icon-speedometer menu-icon"></i><span class="nav-text">Dashboard</span>
                         </a>
                         <ul aria-expanded="false" class="" style="background: #00FF7F">
-                            <li><a href="./consumer_page.php">Home</a></li>
-                            <li><a href="./consumer_group.php">Group</a></li>
-                            <!-- <li><a href="./groups.php">Groups</a></li> -->
+                            <li><a href="./consumer_page.php">Products</a></li>
+                            <li><a href="./verify_product.php">Verify product</a></li>
+                            <li><a href="./consumer_cart.php">Orders</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="has-arrow" href="javascript:void()" aria-expanded="fals" style="background: #00FF7F">
+                            <i class="fa fa-group menu-icon"></i><span class="nav-text">Group Management</span>
+                        </a>
+                        <ul aria-expanded="false" class="" style="background: #00FF7F">
+                            <li><a href="./consumer_group.php">Group Members</a></li>
                             <li><a href="./savings.php">Savings</a></li>
                             <li><a href="./loans.php">Loans</a></li>
-                            <!-- <li><a href="./products.php">Products</a></li> -->
-                            <li><a href="./consumer_cart.php">Orders</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -285,7 +291,7 @@ if (isset($_SESSION['user_id'])) {
             <!-- row -->
 
             <div class="container-fluid">
-                <div class="col-md-8 my-4 row">
+                <!-- <div class="col-md-8 my-4 row">
                     <form class="container-fluid p-2 col-12">
                         <h4 class="col-12">Verify Product</h4>
                         <div class="form-group col-md-12">
@@ -294,7 +300,7 @@ if (isset($_SESSION['user_id'])) {
                         </div>
                         <b id="verification_message" class="col-12 text-danger"></b>
                     </form>
-                </div>
+                </div> -->
 
                 <div class="col-12 row">
                     <?php while ($product_row = $product_result->fetch_array()) : ?>
@@ -307,7 +313,7 @@ if (isset($_SESSION['user_id'])) {
                                     <p class="text-success">Ugx. <?php echo number_format(decrypt_data($product_row['unit_cost']), 1); ?>/=</p>
                                     <div>
                                         <button id="product_details<?php echo $product_row['product_id']; ?>" class="btn btn-sm btn-warning">Details</button>
-                                        <button id="add_to_cat<?php echo $product_row['product_id']; ?>" class="btn btn-sm btn-info">Add to cat</button>
+                                        <button id="add_to_cat<?php echo $product_row['product_id']; ?>" class="btn btn-sm btn-info"><i class="btn-sm fa fa-shopping-cart" style="color: #ffffff;"></i>Add to cat</button>
                                     </div>
 
                                 </div>

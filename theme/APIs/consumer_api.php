@@ -1,6 +1,8 @@
 
 <?php
 
+//  sudo chmod 777 -R /var/www/html/theme/image/avatar/
+
 include "./connection_api.php";
 include "./encryption_api.php";
 
@@ -44,7 +46,9 @@ function create_consumer(
     $marital_status,
     $consumer_id,
     $full_name,
-    $phone_number
+    $phone_number,
+    $profile_image,
+    $target
 ) {
     $result = $mysqli->query("SELECT * FROM consumer WHERE user_id=$user_id");
     if (!$result) {
@@ -101,7 +105,9 @@ function create_user(
     $marital_status,
     $consumer_id,
     $full_name,
-    $phone_number
+    $phone_number,
+    $profile_image,
+    $target
 ) {
     $result = $mysqli->query("SELECT * FROM user WHERE user_email='$user_email' OR user_telephone='$user_telephone'");
     if (!$result) {
@@ -111,7 +117,7 @@ function create_user(
         if (mysqli_num_rows($result) > 0) {
             header("Location: ../pages/group_member_form.php?error=User with the same details already saved.&group_id=$group_id");
         } else {
-            $query = $mysqli->query("INSERT INTO user(first_name, last_name, user_email, user_telephone, user_category, user_gender, user_password) VALUES('$first_name', '$last_name', '$user_email', '$user_telephone', '$user_category', '$user_gender', '$user_password')");
+            $query = $mysqli->query("INSERT INTO user(first_name, last_name, user_email, user_telephone, user_category, user_gender, user_password, profile_image) VALUES('$first_name', '$last_name', '$user_email', '$user_telephone', '$user_category', '$user_gender', '$user_password', '$profile_image')");
 
             if (!$query) {
                 header("Location: ../pages/group_member_form.php?error=7$mysqli->error&group_id=$group_id");
@@ -122,30 +128,37 @@ function create_user(
                     header("Location: ../pages/group_member_form.php?error=8$mysqli->error&group_id=$group_id");
                     // echo "error5" . $mysqli->error;
                 } else {
+                    if (!move_uploaded_file($_FILES['val-image']['tmp_name'], $target)) {
+                        header("Location: ../pages/group_member_form.php?error=8$mysqli->error&group_id=$group_id");
+                    } else {
 
-                    if (mysqli_num_rows($result) > 0) {
-                        $row = $result->fetch_array();
-                        $user_id = $row['user_id'];
-                        create_consumer(
-                            $mysqli,
-                            $user_id,
-                            $group_id,
-                            $consumer_type,
-                            $occupation,
-                            $date_of_birth,
-                            $identity_type,
-                            $identity_number,
-                            $estimated_acreage,
-                            $major_economic_activity,
-                            $estimated_monthly_income,
-                            $location,
-                            $disability,
-                            $nationality,
-                            $marital_status,
-                            $consumer_id,
-                            $full_name,
-                            $phone_number
-                        );
+
+                        if (mysqli_num_rows($result) > 0) {
+                            $row = $result->fetch_array();
+                            $user_id = $row['user_id'];
+                            create_consumer(
+                                $mysqli,
+                                $user_id,
+                                $group_id,
+                                $consumer_type,
+                                $occupation,
+                                $date_of_birth,
+                                $identity_type,
+                                $identity_number,
+                                $estimated_acreage,
+                                $major_economic_activity,
+                                $estimated_monthly_income,
+                                $location,
+                                $disability,
+                                $nationality,
+                                $marital_status,
+                                $consumer_id,
+                                $full_name,
+                                $phone_number,
+                                $profile_image,
+                                $target
+                            );
+                        }
                     }
                 }
             }
@@ -188,7 +201,9 @@ function update_consumer(
     $marital_status,
     // $consumer_id,
     $full_name,
-    $phone_number
+    $phone_number,
+    $profile_image,
+    $target
 ) {
     $query = $mysqli->query("UPDATE consumer SET consumer_type='$consumer_type', occupation='$occupation', date_of_birth='$date_of_birth', identity_type='$identity_type', identity_number='$identity_number', estimated_acreage=$estimated_acreage, major_economic_activity='$major_economic_activity', estimated_monthly_income=$estimated_monthly_income, consumer_location='$location', disability='$disability', nationality='$nationality', marital_status='$marital_status' WHERE user_id=$user_id");
 
@@ -236,7 +251,9 @@ function update_user(
     $marital_status,
     // $consumer_id,
     $full_name,
-    $phone_number
+    $phone_number,
+    $profile_image,
+    $target
 ) {
     $query = $mysqli->query("UPDATE user SET first_name='$first_name', last_name='$last_name', user_email='$user_email', user_telephone='$user_telephone', user_category='$user_category', user_gender='$user_gender' WHERE user_id=$user_id");
     if (!$query) {
@@ -260,7 +277,9 @@ function update_user(
             $marital_status,
             // $consumer_id,
             $full_name,
-            $phone_number
+            $phone_number,
+            $profile_image,
+            $target
         );
     }
 }
@@ -293,6 +312,8 @@ if (isset($_POST['action'])) {
     $marital_status = encrypt_data($_POST['val-marital']);
     $full_name = encrypt_data($_POST['val-full-name']);
     $phone_number = encrypt_data($_POST['val-phone-number']);
+    $profile_image = $_FILES['val-image']['name'];
+    $target = "../images/avatar/" . basename($profile_image);
     if ($_POST['action'] == "add_member") {
         create_user(
             $mysqli,
@@ -318,7 +339,9 @@ if (isset($_POST['action'])) {
             $marital_status,
             $consumer_id,
             $full_name,
-            $phone_number
+            $phone_number,
+            $profile_image,
+            $target
         );
     } else if ($_POST['action'] == "edit_member") {
         update_user(
@@ -346,7 +369,9 @@ if (isset($_POST['action'])) {
             $marital_status,
             // $consumer_id,
             $full_name,
-            $phone_number
+            $phone_number,
+            $profile_image,
+            $target
         );
     }
 }

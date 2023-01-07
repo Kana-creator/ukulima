@@ -4,7 +4,7 @@ session_start();
 if (isset($_SESSION['user_id'])) {
   $user_name = $_SESSION['user_name'];
 } else {
-  header("Location: ../../index.php");
+  header("Location: ../../index.html");
 }
 
 ?>

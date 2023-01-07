@@ -6,7 +6,7 @@ if (isset($_SESSION['user_id'])) {
     $user_id = $_SESSION['user_id'];
     $user_name = $_SESSION['user_name'];
 } else {
-    header("Location: ../../index.php");
+    header("Location: ../../index.html");
 }
 ?>
 
@@ -226,22 +226,29 @@ if (isset($_SESSION['user_id'])) {
             Sidebar start
         ***********************************-->
         <div class="nk-sidebar" style="background-color: #00ff7f;">
-            <div class="nk-nav-scroll" style="background-color: #00ff7f;">
-                <ul class="metismenu" id="menu" style="background-color: #00ff7f;">
-                    <li class="nav-label">Dashboard</li>
+            <div class="nk-nav-scroll" style="background: #00FF7F">
+                <ul class="metismenu" id="menu" style="background: #00FF7F">
+                    <!-- <li class="nav-label">Dashboard</li> -->
                     <li>
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="fals" style="background-color: #00ff7f;">
+                        <a class="has-arrow" href="javascript:void()" aria-expanded="fals" style="background: #00FF7F">
                             <i class="icon-speedometer menu-icon"></i><span class="nav-text">Dashboard</span>
                         </a>
-                        <ul aria-expanded="false" class="" style="background-color: #00ff7f;">
-                            <li><a href="./consumer_page.php">Home</a></li>
-                            <li><a href="./consumer_group.php">Group</a></li>
-                            <li><a href="./groups.php">Groups</a></li>
-                            <li><a href="./products.php">Products</a></li>
-                            <li><a href="./orders.php">Orders</a></li>
+                        <ul aria-expanded="false" class="" style="background: #00FF7F">
+                            <li><a href="./consumer_page.php">Products</a></li>
+                            <li><a href="./verify_product.php">Verify product</a></li>
+                            <li><a href="./consumer_cart.php">Orders</a></li>
                         </ul>
                     </li>
-
+                    <li>
+                        <a class="has-arrow" href="javascript:void()" aria-expanded="fals" style="background: #00FF7F">
+                            <i class="fa fa-group menu-icon"></i><span class="nav-text">Group Management</span>
+                        </a>
+                        <ul aria-expanded="false" class="" style="background: #00FF7F">
+                            <li><a href="./consumer_group.php">Group Members</a></li>
+                            <li><a href="./savings.php">Savings</a></li>
+                            <li><a href="./loans.php">Loans</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </div>

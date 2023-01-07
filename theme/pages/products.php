@@ -3,13 +3,32 @@
 // include "../objects/product_object.php";
 include "../APIs/connection_api.php";
 include "../APIs/encryption_api.php";
+
+// include_once '../APIs/generate_qr_api.php';
+include_once '../../phpqrcode/qrlib.php';
+
+class Qrcodegenerator
+{
+  public function generate_qr($serial_number)
+  {
+    $path =  '../../phpqrcode/qr_images/';
+    $qrcode = $path . $serial_number . '.png';
+    QRcode::png($serial_number, $qrcode, 'H', 4, 4);
+
+    return $qrcode;
+  }
+}
+$qrcodegenerator = new Qrcodegenerator();
+
+
+
 session_start();
 if (isset($_SESSION['user_id'])) {
   $user_id = $_SESSION['user_id'];
   $user_name = $_SESSION['user_name'];
-  $product_result = $mysqli->query("SELECT * FROM Product WHERE user_id=$user_id");
+  $product_result = $mysqli->query("SELECT * FROM product WHERE user_id=$user_id");
 } else {
-  header("Location: ../../index.php");
+  header("Location: ../../index.html");
 }
 
 
@@ -25,7 +44,7 @@ if (isset($_SESSION['user_id'])) {
   <title>Ukulima | Products</title>
   <script src="../js/jquery.js"></script>
   <!-- Favicon icon -->
-  <link rel="icon" type="image/png" sizes="16x16" href="../assets/logo.PNG" />
+  <link rel="icon" type="image/png" sizes="16x16" href="../assets/logo.png" />
   <!-- Custom Stylesheet -->
   <link href="../plugins/tables/css/datatable/dataTables.bootstrap4.min.css" rel="stylesheet" />
   <link href="../css/style.css" rel="stylesheet" />
@@ -38,7 +57,7 @@ if (isset($_SESSION['user_id'])) {
     ********************-->
   <div id="preloader">
     <div class="loader">
-      <img src="../assets/logo.PNG" alt="" class="logo" />
+      <img src="../assets/logo.png" alt="" class="logo" />
       <!-- <svg class="circular" viewBox="25 25 50 50">
           <circle
             class="path"
@@ -470,13 +489,13 @@ if (isset($_SESSION['user_id'])) {
                 <div class="table-responsive">
                   <div id="add_product">
                     <a href="./Add_product.php" class="badge badge-pill gradient-1"><i class="fa fa-plus fa-2x btn btn-sm  p-2" id="" data-toggle="tooltip" data-placement="top" title="Add product"></i></a>
-                    <a href="./Add_product.php" class="badge badge-pill gradient-3"><i class="fa fa-upload fa-2x btn-sm p-2" id="" data-toggle="tooltip" data-placement="top" title="Upload list"></i></a>
-                    <a href="./Add_product.php" class="badge badge-pill gradient-4"><i class="fa fa-download fa-2x btn-sm p-2" id="" data-toggle="tooltip" data-placement="top" title="Download list"></i></a>
+                    <a href="#" class="badge badge-pill gradient-3"><i class="fa fa-upload fa-2x btn-sm p-2" id="" data-toggle="tooltip" data-placement="top" title="Upload list"></i></a>
+                    <a href="#" class="badge badge-pill gradient-4"><i class="fa fa-download fa-2x btn-sm p-2" id="" data-toggle="tooltip" data-placement="top" title="Download list"></i></a>
                   </div>
                   <table class="table table-striped table-bordered zero-configuration">
                     <thead>
                       <tr>
-                        <th>Product ID</th>
+                        <th>QR Code</th>
                         <th>Brand Name</th>
                         <th>Batch number</th>
                         <th>Serial number</th>
@@ -489,6 +508,9 @@ if (isset($_SESSION['user_id'])) {
                     <tbody>
                       <?php
                       while ($product_row = $product_result->fetch_array()) :
+                        $serial_number = decrypt_data($product_row['serial_number']);
+                        $Qrcode = $qrcodegenerator->generate_qr($serial_number);
+
                         $expiry = new DateTime($product_row['product_expiry_date']);
                         $now = new DateTime("now");
                         $product_status = "";
@@ -505,7 +527,7 @@ if (isset($_SESSION['user_id'])) {
                         }
                       ?>
                         <tr>
-                          <td>Prod-<?php echo $product_row['product_id']; ?></td>
+                          <td><a href="../../phpqrcode/qr_images/<?php echo decrypt_data($product_row['serial_number']); ?>.png" target="_blank" download>download QR</a></td>
                           <td><?php echo decrypt_data($product_row['brand_name']); ?></td>
                           <td><?php echo decrypt_data($product_row['batch_number']); ?></td>
                           <td><?php echo decrypt_data($product_row['serial_number']); ?></td>
@@ -538,6 +560,11 @@ if (isset($_SESSION['user_id'])) {
                               $("#p_unit_cost").text("Ugx. <?php echo  number_format(decrypt_data($product_row['unit_cost']), 1); ?>/=");
 
                               $("#product_image").attr("src", "../assets/product_images/<?php echo decrypt_data($product_row['product_image']); ?>");
+
+
+                              $("#qrcode").attr("src", "../../phpqrcode/qr_images/<?php echo decrypt_data($product_row['serial_number']) . ".png"; ?>");
+
+
 
                             })
 
@@ -578,7 +605,7 @@ if (isset($_SESSION['user_id'])) {
                     </tbody>
                     <tfoot>
                       <tr>
-                        <th>Product ID</th>
+                        <th>QR Code</th>
                         <th>Brand Name</th>
                         <th>Batch number</th>
                         <th>Serial number</th>
@@ -599,12 +626,14 @@ if (isset($_SESSION['user_id'])) {
           <i class="fa fa-times fa-2x" id="close-user"></i>
           <div class="row justify-content-center align-content-center py-5">
             <div class="left col-md-4">
-              <h1 class="text-success text-center">Product details</h1>
+
               <img class="col-12" id="product_image" />
-              <!-- <div class="col-12 row justify-content-center my-3 py-4">
-                <a href="" class="btn btn-danger mx-1">Delete</a>
-                <a href="./Add_product.php" class="btn btn-info mx-1">Edit</a>
-              </div> -->
+
+
+              <div class="col-12 text-center py-4">
+                <img center id="qrcode" />
+              </div>
+
             </div>
             <div class="right col-md-6 row justify-content-left">
               <div class="left text-right alert col-6">

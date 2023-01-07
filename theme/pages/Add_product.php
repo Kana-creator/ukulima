@@ -86,10 +86,10 @@ if (isset($_GET['product_id'])) {
     <!--**********************************
             Nav header start
         ***********************************-->
-    <div class="nav-header" style="border-bottom: 2px solid green; padding: 0; height: fit-content">
+    <div class="nav-header" style="border-bottom: 2px solid #00FF7F; padding: 0; height: fit-content">
       <div class="brand-logo my-0 py-0" style="
             background-color: #ffffffff;
-            border-bottom: 3px solid green;
+            border-bottom: 3px solid #00FF7F;
             padding: 0;
             max-height: 78px;
             display: flex;
@@ -113,7 +113,7 @@ if (isset($_GET['product_id'])) {
     <!--**********************************
             Header start
         ***********************************-->
-    <div class="header" style="border-bottom: 5px solid green">
+    <div class="header" style="border-bottom: 5px solid #00FF7F">
       <div class="header-content clearfix">
         <div class="nav-control">
           <div class="hamburger">
@@ -136,10 +136,10 @@ if (isset($_GET['product_id'])) {
         <div class="header-right">
           <ul class="clearfix">
             <li class="icons dropdown">
-              <a href="javascript:void(0)" data-toggle="dropdown">
+              <!-- <a href="javascript:void(0)" data-toggle="dropdown">
                 <i class="mdi mdi-email-outline"></i>
                 <span class="badge gradient-1 badge-pill badge-primary">3</span>
-              </a>
+              </a> -->
               <div class="drop-down animated fadeIn dropdown-menu">
                 <div class="dropdown-content-heading d-flex justify-content-between">
                   <span class="">3 New Messages</span>
@@ -207,10 +207,10 @@ if (isset($_GET['product_id'])) {
               </div>
             </li>
             <li class="icons dropdown">
-              <a href="javascript:void(0)" data-toggle="dropdown">
+              <!-- <a href="javascript:void(0)" data-toggle="dropdown">
                 <i class="mdi mdi-bell-outline"></i>
                 <span class="badge badge-pill gradient-2 badge-primary">3</span>
-              </a>
+              </a> -->
               <div class="drop-down animated fadeIn dropdown-menu dropdown-notfication">
                 <div class="dropdown-content-heading d-flex justify-content-between">
                   <span class="">2 New Notifications</span>
@@ -303,10 +303,11 @@ if (isset($_GET['product_id'])) {
                     <hr class="my-2" />
                     <!-- <li>
                       <a href="page-lock.html"><i class="icon-lock"></i> <span>Lock Screen</span></a>
-                    </li>
+                    </li> -->
                     <li>
                       <a href="../APIs/logout_api.php"><i class="icon-key"></i> <span>Logout</span></a>
-                    </li> -->
+                    </li>
+
                   </ul>
                 </div>
               </div>
@@ -548,14 +549,14 @@ if (isset($_GET['product_id'])) {
 
             <h4 class="text-center text-success">Add New Product</h4>
           <?php endif; ?>
-          <ol class="breadcrumb">
+          <!-- <ol class="breadcrumb">
             <li class="breadcrumb-item">
               <a href="javascript:void(0)">Dashboard</a>
             </li>
             <li class="breadcrumb-item active">
               <a href="javascript:void(0)">Product form</a>
             </li>
-          </ol>
+          </ol> -->
         </div>
       </div>
       <!-- row -->

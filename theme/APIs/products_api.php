@@ -124,7 +124,7 @@ function edit_product(
 // FUNCTION FOR DELETING A PRODUCT 
 function delete_product($mysqli, $product_id)
 {
-    $result = $mysqli->query("SELECT product_id FROM Product WHERE product_id=$product_id");
+    $result = $mysqli->query("SELECT product_id FROM product WHERE product_id=$product_id");
     if (!$result) {
         echo json_encode(array("status" => "error", "message" => "Error occured, product could not be deleted"));
     } else {

@@ -8,7 +8,7 @@ if (isset($_SESSION['user_id'])) {
 
   $group_result = $mysqli->query("SELECT * FROM consumer_group");
 } else {
-  header("Location: ../../index.php");
+  header("Location: ../../index.html");
 }
 ?>
 
@@ -22,7 +22,7 @@ if (isset($_SESSION['user_id'])) {
   <title>Ukulima | Users</title>
   <script src="../js/jquery.js"></script>
   <!-- Favicon icon -->
-  <link rel="icon" type="image/png" sizes="16x16" href="../assets/logo.PNG" />
+  <link rel="icon" type="image/png" sizes="16x16" href="../assets/logo.png" />
   <!-- Custom Stylesheet -->
   <link href="../plugins/tables/css/datatable/dataTables.bootstrap4.min.css" rel="stylesheet" />
   <link href="../css/bootstrap/bootstrap.min.css" rel="stylesheet" />
@@ -36,7 +36,7 @@ if (isset($_SESSION['user_id'])) {
     ********************-->
   <div id="preloader">
     <div class="loader">
-      <img src="../assets/logo.PNG" alt="" class="logo" />
+      <img src="../assets/logo.png" alt="" class="logo" />
       <!-- <svg class="circular" viewBox="25 25 50 50">
           <circle
             class="path"

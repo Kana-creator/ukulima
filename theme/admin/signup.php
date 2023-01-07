@@ -21,7 +21,7 @@
     ********************-->
     <div id="preloader">
         <div class="loader">
-            <img src="../assets/logo.PNG" alt="" class="logo" />
+            <img src="../assets/logo.png" alt="" class="logo" />
 
             <!-- <svg class="circular" viewBox="25 25 50 50">
                 <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="3" stroke-miterlimit="10" />
@@ -38,7 +38,7 @@
                 <div class="col-xl-6">
                     <div class="form-input-content m-4">
                         <div class="card login-form mb-0">
-                            <a class="text-center logo-link" href="/ukulima"><img src="../assets/logo.PNG" alt="" class="logo"></a>
+                            <a class="text-center logo-link" href="/"><img src="../assets/logo.png" alt="" class="logo"></a>
                             <div class="card-body pt-5">
 
 
@@ -95,7 +95,7 @@
                                     </div>
                                     <button class="btn btn-sm login-form__btn submit w-100" id="signup_btn">Signup</button>
                                 </form>
-                                <p class="mt-5 login-form__footer">Have account <a href="./index.php" class="text-primary">Login </a> now</p>
+                                <p class="mt-5 login-form__footer">Have account <a href="./index.html" class="text-primary">Login </a> now</p>
                                 </p>
                             </div>
                         </div>

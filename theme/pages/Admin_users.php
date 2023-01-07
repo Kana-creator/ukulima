@@ -4,7 +4,7 @@ session_start();
 if (isset($_SESSION['user_id'])) {
   $user_name = $_SESSION['user_name'];
 } else {
-  header("Location: ../../index.php");
+  header("Location: ../../index.html");
 }
 ?>
 
@@ -638,12 +638,12 @@ if (isset($_SESSION['user_id'])) {
                 <p><b>Email: </b></p>
                 <p><b>Telephone: </b></p>
                 <p><b>Gender: </b></p>
-                <p><b>Address: </b></p>
-                <p><b>Nationality: </b></p>
-                <p><b>Marital status: </b></p>
-                <p><b>Identity type: </b></p>
-                <p><b>Identity number: </b></p>
-                <p><b>Date of Birth: </b></p>
+                <!-- <p><b>Address: </b></p> -->
+                <!-- <p><b>Nationality: </b></p> -->
+                <!-- <p><b>Marital status: </b></p> -->
+                <!-- <p><b>Identity type: </b></p> -->
+                <!-- <p><b>Identity number: </b></p> -->
+                <!-- <p><b>Date of Birth: </b></p> -->
                 <p><b>Staff category: </b></p>
               </div>
               <div class="right alert col-6">
@@ -652,12 +652,12 @@ if (isset($_SESSION['user_id'])) {
                 <p id="user_email">akuwebwa@gmail.com</p>
                 <p id="telephone">0779320075</p>
                 <p id="gender">Male</p>
-                <p id="addredd">Lunguja Lubaga division</p>
-                <p id="country">Uganda</p>
-                <p id="marital_status">Single</p>
-                <p id="id_type">National ID</p>
-                <p id="id_number">CM92301933HEK</p>
-                <p id="date_of_birth">28th/02/2014</p>
+                <!-- <p id="address">Lunguja Lubaga division</p> -->
+                <!-- <p id="country">Uganda</p> -->
+                <!-- <p id="marital_status">Single</p> -->
+                <!-- <p id="id_type">National ID</p> -->
+                <!-- <p id="id_number">CM92301933HEK</p> -->
+                <!-- <p id="date_of_birth">28th/02/2014</p> -->
                 <p id="user_type">Admin</p>
               </div>
             </div>

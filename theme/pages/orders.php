@@ -11,7 +11,7 @@ if (isset($_SESSION['user_id'])) {
 
   
 } else {
-  header("Location: ../../index.php");
+  header("Location: ../../index.html");
 }
 
 ?>
@@ -329,8 +329,8 @@ if (isset($_SESSION['user_id'])) {
               <i class="icon-speedometer menu-icon"></i><span class="nav-text">Dashboard</span>
             </a>
             <ul aria-expanded="false" class="" style="background-color: #00FF7F">
-              <li><a href="./consumer_page.php">Home</a></li>
-              <li><a href="./Admin_users.php">Users</a></li>
+              <!-- <li><a href="./consumer_page.php">Home</a></li> -->
+              <!-- <li><a href="./Admin_users.php">Users</a></li> -->
               <li><a href="./products.php">Products</a></li>
               <li><a href="./orders.php">Orders</a></li>
             </ul>

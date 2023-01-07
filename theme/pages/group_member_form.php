@@ -4,11 +4,16 @@ include "../objects/user_object.php";
 session_start();
 if (isset($_SESSION['user_id'])) {
     $user_name = $_SESSION['user_name'];
+    $user_id = $_SESSION['user_id'];
+    $user_result = $mysqli->query("SELECT * FROM User WHERE user_id=$user_id");
+    $user_row = $user_result->fetch_array();
+    $profile_image = $user_row['profile_image'];
     if (isset($_GET['edit_member'])) {
         $action = "edit_member";
         $group_id = $_GET['group_id'];
         $user_id = $_GET['user_id'];
         $member_result = $mysqli->query("SELECT * FROM consumer INNER JOIN user ON user.user_id=consumer.user_id INNER JOIN next_of_kin ON consumer.consumer_id=next_of_kin.consumer_id WHERE group_id=$group_id AND user.user_id=$user_id");
+        $user_row = $member_result->fetch_array();
         $member_row = $member_result->fetch_array();
         $first_name = decrypt_data($member_row['first_name']);
         $second_name = decrypt_data($member_row['last_name']);
@@ -57,7 +62,7 @@ if (isset($_SESSION['user_id'])) {
         $password_status = "";
     }
 } else {
-    header("Location: ../../index.php");
+    header("Location: ../../index.html");
 }
 
 ?>
@@ -309,7 +314,7 @@ if (isset($_SESSION['user_id'])) {
                         <li class="icons dropdown">
                             <div class="user-img c-pointer position-relative" data-toggle="dropdown">
                                 <span class="activity active"></span>
-                                <img src="../images/user/1.png" height="40" width="40" alt="" />
+                                <img src="../images/avatar/<?php echo decrypt_data($profile_image) ?>" height="40" width="40" alt="" />
                             </div>
                             <div class="drop-down dropdown-profile dropdown-menu">
                                 <div class="dropdown-content-body">

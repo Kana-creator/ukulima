@@ -23,5 +23,5 @@ if ($user_category == "dev") {
 } else {
     $mysqli->query("UPDATE User SET login_status=0 WHERE user_id = $user_id");
     session_destroy();
-    header("Location: ../../index.php");
+    header("Location: ../../index.html");
 }
