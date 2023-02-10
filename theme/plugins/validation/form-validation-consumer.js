@@ -28,6 +28,7 @@ jQuery(".form-valide").validate({
         "val-estimated-monthly-income": {required: !0},
         "val-full-name": {required: !0},
         "val-phone-number": {required: !0},
+        "val-branch-number": {required: !0},
         
     },
 
@@ -54,6 +55,7 @@ jQuery(".form-valide").validate({
         "val-estimated-monthly-income": "Please enter member's estimated monthly income.",
         "val-full-name": "This field is required",
         "val-phone-number": "This field is required",
+        "val-branch-number": "This field is required",
     }
 
 });

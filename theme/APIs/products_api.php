@@ -19,11 +19,12 @@ function add_product(
     $unit_of_measure,
     $batch_number,
     $serial_number,
+    $product_category,
     $unit_cost,
     $user_guid
 ) {
 
-    $result = $mysqli->query("SELECT * FROM Product WHERE serial_number='$serial_number'");
+    $result = $mysqli->query("SELECT * FROM product WHERE serial_number='$serial_number'");
     $message = "";
     $status = "";
     if (!$result) {
@@ -31,7 +32,7 @@ function add_product(
         $status = "error";
     } else {
         if (mysqli_num_rows($result) > 0) {
-            $message = $mysqli->error;
+            $message = "Product with the same erial number already exists!";
             $status = "error";
         } else {
             $manufacture = new DateTime($date_of_manufacture);
@@ -48,7 +49,7 @@ function add_product(
                 $message = "Error expiry date can't be in the past";
                 $status = "error";
             } else {
-                $query = $mysqli->query("INSERT INTO Product(user_id, brand_name, product_manufacturer, product_supplier, point_of_origin, date_of_manufacture, product_expiry_date, product_image, unit_of_measure, batch_number, serial_number, unit_cost, user_guid) VALUES($user_id, '$brand_name', '$product_manufacturer', '$product_supplier', '$point_of_origin', '$date_of_manufacture', '$expiry_date', '$product_image', '$unit_of_measure', '$batch_number', '$serial_number', '$unit_cost', '$user_guid')");
+                $query = $mysqli->query("INSERT INTO product(user_id, brand_name, product_manufacturer, product_supplier, point_of_origin, date_of_manufacture, product_expiry_date, product_image, unit_of_measure, batch_number, serial_number, product_category, unit_cost, user_guid) VALUES($user_id, '$brand_name', '$product_manufacturer', '$product_supplier', '$point_of_origin', '$date_of_manufacture', '$expiry_date', '$product_image', '$unit_of_measure', '$batch_number', '$serial_number', '$product_category', '$unit_cost', '$user_guid')");
 
                 if (!$query) {
                     $message = $mysqli->error;
@@ -83,10 +84,11 @@ function edit_product(
     $unit_of_measure,
     $batch_number,
     $serial_number,
+    $product_category,
     $unit_cost,
     $user_guid
 ) {
-    $result = $mysqli->query("SELECT * FROM Product WHERE product_id=$product_id");
+    $result = $mysqli->query("SELECT * FROM product WHERE product_id=$product_id");
     $message = "";
     $status = "";
     if (!$result) {
@@ -100,9 +102,9 @@ function edit_product(
 
             if (!empty($product_image)) {
 
-                $query = $mysqli->query("UPDATE Product SET user_id=$user_id, brand_name='$brand_name', product_manufacturer='$product_manufacturer', product_supplier='$product_supplier', point_of_origin='$point_of_origin', date_of_manufacture='$date_of_manufacture', product_expiry_date='$expiry_date', product_image='$product_image', unit_of_measure='$unit_of_measure', batch_number='$batch_number', serial_number='$serial_number', unit_cost='$unit_cost', user_guid='$user_guid' WHERE product_id=$product_id");
+                $query = $mysqli->query("UPDATE product SET user_id=$user_id, brand_name='$brand_name', product_manufacturer='$product_manufacturer', product_supplier='$product_supplier', point_of_origin='$point_of_origin', date_of_manufacture='$date_of_manufacture', product_expiry_date='$expiry_date', product_image='$product_image', unit_of_measure='$unit_of_measure', batch_number='$batch_number', serial_number='$serial_number', product_category='$product_category', unit_cost='$unit_cost', user_guid='$user_guid' WHERE product_id=$product_id");
             } else {
-                $query = $mysqli->query("UPDATE Product SET user_id=$user_id, brand_name='$brand_name', product_manufacturer='$product_manufacturer', product_supplier='$product_supplier', point_of_origin='$point_of_origin', date_of_manufacture='$date_of_manufacture', product_expiry_date='$expiry_date', unit_of_measure='$unit_of_measure', batch_number='$batch_number', serial_number='$serial_number', unit_cost='$unit_cost', user_guid='$user_guid' WHERE product_id=$product_id");
+                $query = $mysqli->query("UPDATE product SET user_id=$user_id, brand_name='$brand_name', product_manufacturer='$product_manufacturer', product_supplier='$product_supplier', point_of_origin='$point_of_origin', date_of_manufacture='$date_of_manufacture', product_expiry_date='$expiry_date', unit_of_measure='$unit_of_measure', batch_number='$batch_number', serial_number='$serial_number', product_category='$product_category', unit_cost='$unit_cost', user_guid='$user_guid' WHERE product_id=$product_id");
             }
 
             if (!$query) {
@@ -128,7 +130,7 @@ function delete_product($mysqli, $product_id)
     if (!$result) {
         echo json_encode(array("status" => "error", "message" => "Error occured, product could not be deleted"));
     } else {
-        $query = $mysqli->query("DELETE FROM Product WHERE product_id=$product_id");
+        $query = $mysqli->query("DELETE FROM product WHERE product_id=$product_id");
         if (!$query) {
             echo json_encode(array("status" => "error", "message" => "Error occured, product could not be deleted"));
         } else {
@@ -155,6 +157,7 @@ if (isset($_POST['add_product'])) {
         $_POST['val-unit-of-measure'],
         $_POST['val-batch-number'],
         $_POST['val-serial-number'],
+        $_POST['val-product-category'],
         $_POST['val-unit-cost'],
         $_POST['val-e-extension']
     );
@@ -172,6 +175,7 @@ if (isset($_POST['add_product'])) {
     $unit_of_measure = encrypt_data($product_properties['unit_of_measure']);
     $batch_number = encrypt_data($product_properties['batch_number']);
     $serial_number = encrypt_data($product_properties['serial_number']);
+    $product_category = encrypt_data($product_properties['product_category']);
     $unit_cost = encrypt_data($product_properties['unit_cost']);
     $user_guid = encrypt_data($product_properties['user_guid']);
 
@@ -189,6 +193,7 @@ if (isset($_POST['add_product'])) {
         $unit_of_measure,
         $batch_number,
         $serial_number,
+        $product_category,
         $unit_cost,
         $user_guid
     );
@@ -209,6 +214,7 @@ if (isset($_POST['add_product'])) {
         $_POST['val-unit-of-measure'],
         $_POST['val-batch-number'],
         $_POST['val-serial-number'],
+        $_POST['val-product-category'],
         $_POST['val-unit-cost'],
         $_POST['val-e-extension']
     );
@@ -228,6 +234,7 @@ if (isset($_POST['add_product'])) {
     $unit_of_measure = encrypt_data($product_properties['unit_of_measure']);
     $batch_number = encrypt_data($product_properties['batch_number']);
     $serial_number = encrypt_data($product_properties['serial_number']);
+    $product_category = encrypt_data($product_properties['product_category']);
     $unit_cost = encrypt_data($product_properties['unit_cost']);
     $user_guid = encrypt_data($product_properties['user_guid']);
 
@@ -246,6 +253,7 @@ if (isset($_POST['add_product'])) {
         $unit_of_measure,
         $batch_number,
         $serial_number,
+        $product_category,
         $unit_cost,
         $user_guid
     );

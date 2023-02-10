@@ -36,7 +36,8 @@ $(() => {
                         $("#p_unit_cost").text("Ugx. "+res['unit_cost']+"/=");
                         $("#p_user_guid").text(res['user_guid']);
                     } else {
-                        verification_message.innerText = res['message'];
+                        $("#product_not_found").addClass("show");
+                        // verification_message.innerText = res['message'];
                     
                     }
                 },
@@ -48,6 +49,10 @@ $(() => {
 
     $("#close-user").on('click', () => {
         $("#product-details").removeClass("show");
+    });
+
+    $("#close-product-not-found").on('click', () => {
+        $("#product_not_found").removeClass("show");
     });
 
 

@@ -23,12 +23,11 @@ function reset_password($mysqli, $user_name, $confirm_new_password)
                 echo json_encode(array("status" => "success", "message" => "Password has been updated successfully.", "user_type" => $user_category));
             }
         } else {
-            echo json_encode(array("status" => "error", "message" => "No user with such a user email orphone number was found!", "user_type" => ""));
+            echo json_encode(array("status" => "error", "message" => "No user with such email or phone number was found!", "user_type" => ""));
         }
     }
 }
 
-// reset_password($mysqli, "user_name", "confirm_new_password");
 
 
 if (isset($_POST['action'])) {

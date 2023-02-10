@@ -1,13 +1,13 @@
 <?php
 include "../APIs/connection_api.php";
 include "../APIs/encryption_api.php";
-$product_result = $mysqli->query("SELECT * FROM Product");
+$product_result = $mysqli->query("SELECT * FROM product");
 session_start();
 
 if (isset($_SESSION['user_id'])) {
   $user_name = $_SESSION['user_name'];
   $user_id = $_SESSION['user_id'];
-  $cart_result = $mysqli->query("SELECT user_order.order_id AS order_id, user_order.user_id AS order_user_id, user_order.number_of_items AS number_of_items, user_order.order_date AS order_date, user_order.number_of_items AS number_of_items, user_order.check_out_status AS check_out_status, product.unit_cost AS unit_cost, product.unit_of_measure AS unit_of_measure, product.brand_name AS brand_name FROM user_order INNER JOIN product ON product.product_id = user_order.product_id  WHERE user_order.user_id=$user_id");
+  $cart_result = $mysqli->query("SELECT user_order.order_id AS order_id, user_order.user_id AS order_user_id, user_order.number_of_items AS number_of_items, user_order.order_date AS order_date, user_order.number_of_items AS number_of_items, user_order.check_out_status AS check_out_status, product.unit_cost AS unit_cost, product.unit_of_measure AS unit_of_measure, product.brand_name AS brand_name FROM user_order INNER JOIN product ON product.product_id = user_order.product_id  WHERE user_order.user_id=$user_id GROUP BY product.user_id");
 
   $cart_result2 = $mysqli->query("SELECT SUM(number_of_items) AS number_of_items FROM user_order WHERE user_id=$user_id AND check_out_status=0");
 
@@ -362,6 +362,7 @@ if (isset($_SESSION['user_id'])) {
             <ul aria-expanded="false" class="" style="background: #00FF7F">
               <li><a href="./consumer_page.php">Products</a></li>
               <li><a href="./verify_product.php">Verify product</a></li>
+              <li><a href="./product_report_form.php">Report a product</a></li>
               <li><a href="./consumer_cart.php">Orders</a></li>
             </ul>
           </li>
@@ -632,7 +633,7 @@ if (isset($_SESSION['user_id'])) {
   <script src="../js/settings.js"></script>
   <script src="../js/gleek.js"></script>
   <script src="../js/styleSwitcher.js"></script>
-  <script src="../js/custom_js/Admin_users.js"></script>
+  <script src="../js/custom_js/orders.js"></script>
 
   <script src="../plugins/tables/js/jquery.dataTables.min.js"></script>
   <script src="../plugins/tables/js/datatable/dataTables.bootstrap4.min.js"></script>

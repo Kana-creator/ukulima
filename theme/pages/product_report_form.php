@@ -16,7 +16,6 @@ if (isset($_SESSION['user_id'])) {
     header("Location: ../../index.html");
 }
 
-
 ?>
 
 
@@ -27,14 +26,14 @@ if (isset($_SESSION['user_id'])) {
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Ukulima | Verify Product</title>
+    <title>Ukulima | Product report form</title>
     <script src="../js/jquery.js"></script>
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="../assets/logo.png" />
     <!-- Custom Stylesheet -->
-    <link href="../plugins/tables/css/datatable/dataTables.bootstrap4.min.css" rel="stylesheet" />
     <link href="../css/style.css" rel="stylesheet" />
-    <link rel="stylesheet" href="../css/custom_css/consumer_page.css" />
+
+    <link href="../css/custom_css/add_admin_user.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -234,150 +233,135 @@ if (isset($_SESSION['user_id'])) {
                 </div>
             </div>
         </div>
-        <!--**********************************
+    </div>
+    </div>
+    <!--**********************************
             Header end ti-comment-alt
         ***********************************-->
 
-        <!--**********************************
+    <!--**********************************
             Sidebar start
         ***********************************-->
-        <div class="nk-sidebar" style="background: #00FF7F">
-            <div class="nk-nav-scroll" style="background: #00FF7F">
-                <ul class="metismenu" id="menu" style="background: #00FF7F">
-                    <!-- <li class="nav-label">Dashboard</li> -->
-                    <li>
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="fals" style="background: #00FF7F">
-                            <i class="icon-speedometer menu-icon"></i><span class="nav-text">Dashboard</span>
-                        </a>
-                        <ul aria-expanded="false" class="" style="background: #00FF7F">
-                            <li><a href="./consumer_page.php">Products</a></li>
-                            <li><a href="./verify_product.php">Verify product</a></li>
-                            <li><a href="./product_report_form.php">Report a product</a></li>
-                            <li><a href="./consumer_cart.php">Orders</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="fals" style="background: #00FF7F">
-                            <i class="fa fa-group menu-icon"></i><span class="nav-text">Group Management</span>
-                        </a>
-                        <ul aria-expanded="false" class="" style="background: #00FF7F">
-                            <li><a href="./consumer_group.php">Group Members</a></li>
-                            <li><a href="./savings.php">Savings</a></li>
-                            <li><a href="./loans.php">Loans</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
+    <div class="nk-sidebar" style="background: #00FF7F">
+        <div class="nk-nav-scroll" style="background: #00FF7F">
+            <ul class="metismenu" id="menu" style="background: #00FF7F">
+                <!-- <li class="nav-label">Dashboard</li> -->
+                <li>
+                    <a class="has-arrow" href="javascript:void()" aria-expanded="fals" style="background: #00FF7F">
+                        <i class="icon-speedometer menu-icon"></i><span class="nav-text">Dashboard</span>
+                    </a>
+                    <ul aria-expanded="false" class="" style="background: #00FF7F">
+                        <li><a href="./consumer_page.php">Products</a></li>
+                        <li><a href="./verify_product.php">Verify product</a></li>
+                        <li><a href="./product_report_form.php">Report a product</a></li>
+                        <li><a href="./consumer_cart.php">Orders</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a class="has-arrow" href="javascript:void()" aria-expanded="fals" style="background: #00FF7F">
+                        <i class="fa fa-group menu-icon"></i><span class="nav-text">Group Management</span>
+                    </a>
+                    <ul aria-expanded="false" class="" style="background: #00FF7F">
+                        <li><a href="./consumer_group.php">Group Members</a></li>
+                        <li><a href="./savings.php">Savings</a></li>
+                        <li><a href="./loans.php">Loans</a></li>
+                    </ul>
+                </li>
+            </ul>
         </div>
-        <!--**********************************
+    </div>
+    <!--**********************************
             Sidebar end
         ***********************************-->
 
-        <!--**********************************
+    <!--**********************************
             Content body start
         ***********************************-->
-        <div class="content-body">
-            <!-- <div class="row page-titles mx-0">
-                <div class="col p-md-0">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item">
-                            <a href="javascript:void(0)">Dashboard</a>
-                        </li>
-                        <li class="breadcrumb-item active">
-                            <a href="javascript:void(0)" id="show-user-details">Products</a>
-                        </li>
-                    </ol>
-                </div>
-            </div> -->
-            <!-- row -->
-
-            <div class="container-fluid" style="display: flex; justify-content:center; align-items: center; height: 80vh">
-                <div class="col-md-8 my-4">
-                    <form class="container-fluid p-2 col-12">
-                        <h4 class="col-12">Product Authenticator</h4>
-                        <div class="form-group col-md-12">
-                            <input type="text" class="form-control" placeholder="Enter serial number to authenticate product..." id="input_serial_number" />
-                            <button type="submit" class="btn btn-success rounded" id="verify_product"><i class="fa fa-search"></i></button>
-                        </div>
-                        <b id="verification_message" class="col-12 text-danger"></b>
-                    </form>
-                </div>
-
-
+    <div class="content-body">
+        <div class="row page-titles mx-0">
+            <div class="col p-md-0">
+                <h4 class="text-center text-success">Report a product</h4>
+                <!-- <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="javascript:void(0)">Dashboard</a>
+                    </li>
+                    <li class="breadcrumb-item active">
+                        <a href="javascript:void(0)">User form</a>
+                    </li>
+                </ol> -->
             </div>
+        </div>
+        <!-- row -->
 
-            <div id="product-details">
-                <div class="details-inner bg-light alert container py-5 pt-5">
-                    <i class="fa fa-times fa-2x" id="close-user"></i>
-                    <div class="row justify-content-center align-content-center py-5">
-                        <div class="left col-md-4">
-                            <h3 class="text-success text-center" id="product_name"></h3>
-                            <h3 class="text-success text-center" id="product_id"></h3>
-                            <img class="col-12" id="product_image" />
-                            <!-- <div class="col-12 row justify-content-center my-3 py-4">
-                                <a href="" class="btn btn-danger mx-1">Delete</a>
-                                <a href="./Add_product.php" class="btn btn-info mx-1">Edit</a>
-                            </div> -->
-                        </div>
-                        <div class="right col-md-6 row justify-content-left">
-                            <div class="left text-right alert col-6">
-                                <!-- <p><b>Product ID: </b></p> -->
-                                <p><b>Brand Name: </b></p>
-                                <p><b>Manufacturer: </b></p>
-                                <p><b>Registered supplier: </b></p>
-                                <p><b>Point of origin: </b></p>
-                                <p><b>Date of manufacture: </b></p>
-                                <p><b>Expiry date: </b></p>
-                                <p><b>Unit of measure: </b></p>
-                                <p><b>Batch number: </b></p>
-                                <p><b>Serial number: </b></p>
-                                <p><b>Unit cost: </b></p>
-                                <p><b>E-Extension: </b></p>
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="form-validation">
+                                <form class="form-valide" action="../APIs/product_report_api.php" method="post">
+                                    <div class="form-group row">
+                                        <label class="col-lg-4 col-form-label text-right" for="val-report-type">Report type <span class="text-danger">*</span>
+                                        </label>
+                                        <div class="col-lg-6">
+                                            <select type="text" class="form-control" id="val-report-type" name="val-report-type">
+                                                <option value="">SELECT A REPORT TYPE</option>
+                                                <option value="counterfeit">Counterfeit</option>
+                                                <option value="product not found">Product not found</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-lg-4 col-form-label text-right" for="val-serial-number">Serial number <span class="text-danger">*</span>
+                                        </label>
+                                        <div class="col-lg-6">
+                                            <input type="text" class="form-control" id="val-serial-number" name="val-serial-number" placeholder="Enter product serial number" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-lg-4 col-form-label text-right" for="val-batch-number">Batch number <span class="text-danger">*</span>
+                                        </label>
+                                        <div class="col-lg-6">
+                                            <input type="text" class="form-control" id="val-batch-number" name="val-batch-number" placeholder="Enter productbatch number" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-lg-4 col-form-label text-right" for="val-manufacturer">Manufacturer <span class="text-danger">*</span>
+                                        </label>
+                                        <div class="col-lg-6">
+                                            <input type="text" class="form-control" id="val-manufacturer" name="val-manufacturer" placeholder="Enter manufacturer" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-lg-4 col-form-label text-right" for="val-supplier">Supplier <span class="text-danger">*</span>
+                                        </label>
+                                        <div class="col-lg-6">
+                                            <input type="text" class="form-control" id="val-supplier" name="val-supplier" placeholder="Enter supplier" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-lg-4 col-form-label text-right" for="val-report-details">Report details <span class="text-danger">*</span>
+                                        </label>
+                                        <div class="col-lg-6">
+                                            <textarea rows="10" class="form-control" id="val-report-details" name="val-report-details" placeholder="Enter details"></textarea>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <div class="col-lg-8 ml-auto">
+                                            <button type="submit" class="btn btn-success">
+                                                Submit
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
-                            <div class="right alert col-6">
-                                <!-- <p id="p_product_id">Prod-0001</p> -->
-                                <p id="p_brand_name">Weed master</p>
-                                <p id="p_manufacturer">Kakoola Ug ltd</p>
-                                <p id="p_supplier">K&M Traders</p>
-                                <p id="p_point_of_origin">Mukono industrial Area</p>
-                                <p id="p_date_of_manufacture">25th/06/2022</p>
-                                <p id="p_expiry_date">23th/06/2023</p>
-                                <p id="p_unit_of_measure">1.5ltr</p>
-                                <p id="p_batch_number">44545Y64</p>
-                                <p id="p_serial_number">RUE4466564RTT56</p>
-                                <p id="p_unit_cost">UGX. 17500</p>
-
-                                <p id="p_user_guid">
-                                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                                    Voluptatem sapiente, consectetur dicta nostrum quas porro ex
-                                    explicabo, earum maiores dolore repudiandae sit nulla sequi
-                                    fugit, qui iure velit ratione! Exercitationem veritatis
-                                    accusantium, ab eius eum aliquam ea alias sed quod obcaecati
-                                    maxime dicta quae quas ratione nobis debitis corporis ullam.
-                                </p>
-                            </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-
-            <div id="product_not_found">
-                <div class="details-inner bg-light alert container py-5 pt-5">
-                    <i class="fa fa-times fa-2x" id="close-product-not-found"></i>
-                    <div class="row justify-content-center align-content-center py-5 ">
-                        <div class="col-12 row justify-content-center align-content-center p-4 m-4">
-                            <i class="fa fa-warning fa-4x text-danger col-12 text-center"></i>
-                            <h3 class="text-danger">No product with search a serail number was found!</h3>
-                        </div>
-
-                        <a href="./product_report_form.php" class="btn btn-danger"> Report product not found</a>
-
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- #/ container -->
+        <!-- #/ container -->
     </div>
     <!--**********************************
             Content body end
@@ -405,16 +389,30 @@ if (isset($_SESSION['user_id'])) {
     <!--**********************************
         Scripts
     ***********************************-->
+
+    <?php
+    if (isset($_GET['status'])) {
+    ?>
+
+        <script>
+            $(() => {
+
+                alert("<?php echo $_GET['message']; ?>");
+            })
+        </script>
+
+
+    <?php
+    }
+    ?>
     <script src="../plugins/common/common.min.js"></script>
     <script src="../js/custom.min.js"></script>
     <script src="../js/settings.js"></script>
     <script src="../js/gleek.js"></script>
     <script src="../js/styleSwitcher.js"></script>
-    <script src="../js/custom_js/consumer_page.js"></script>
 
-    <script src="../plugins/tables/js/jquery.dataTables.min.js"></script>
-    <script src="../plugins/tables/js/datatable/dataTables.bootstrap4.min.js"></script>
-    <script src="../plugins/tables/js/datatable-init/datatable-basic.min.js"></script>
+    <script src="../plugins/validation/jquery.validate.min.js"></script>
+    <script src="../plugins/validation/form-validation-product.js"></script>
 </body>
 
 </html>

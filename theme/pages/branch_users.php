@@ -1,37 +1,23 @@
 <?php
-
-// include "../objects/product_object.php";
+// include "../objects/user_object.php";
 include "../APIs/connection_api.php";
 include "../APIs/encryption_api.php";
 
-// include_once '../APIs/generate_qr_api.php';
-include_once '../../phpqrcode/qrlib.php';
-
-class Qrcodegenerator
-{
-  public function generate_qr($serial_number)
-  {
-    $path =  '../../phpqrcode/qr_images/';
-    $qrcode = $path . $serial_number . '.png';
-    QRcode::png($serial_number, $qrcode, 'H', 4, 4);
-
-    return $qrcode;
-  }
-}
-$qrcodegenerator = new Qrcodegenerator();
-
-
-
 session_start();
 if (isset($_SESSION['user_id'])) {
-  $user_id = $_SESSION['user_id'];
   $user_name = $_SESSION['user_name'];
-  $product_result = $mysqli->query("SELECT * FROM product WHERE user_id=$user_id");
+  $user_id = $_SESSION['user_id'];
+  $user_category = $_SESSION['user_category'];
+
+  if ($user_category == "producer") {
+    $user_result = $mysqli->query("SELECT * FROM branch INNER JOIN producer ON branch.branch_id=producer.branch_id INNER JOIN User ON producer.user_id=User.user_id");
+  } else {
+    // $user_result = $mysqli->query("SELECT * FROM User INNER JOIN supplier ON User.user_id=supplier.user_id");
+    $user_result = $mysqli->query("SELECT * FROM branch INNER JOIN supplier ON branch.branch_id=supplier.branch_id INNER JOIN User ON supplier.user_id=User.user_id");
+  }
 } else {
   header("Location: ../../index.html");
 }
-
-
 ?>
 
 <!DOCTYPE html>
@@ -41,14 +27,15 @@ if (isset($_SESSION['user_id'])) {
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Ukulima | Products</title>
+  <title>Ukulima | Users</title>
   <script src="../js/jquery.js"></script>
   <!-- Favicon icon -->
   <link rel="icon" type="image/png" sizes="16x16" href="../assets/logo.png" />
   <!-- Custom Stylesheet -->
   <link href="../plugins/tables/css/datatable/dataTables.bootstrap4.min.css" rel="stylesheet" />
+  <link href="../css/bootstrap/bootstrap.min.css" rel="stylesheet" />
   <link href="../css/style.css" rel="stylesheet" />
-  <link rel="stylesheet" href="../css/custom_css/products.css" />
+  <link rel="stylesheet" href="../css/custom_css/admin_users.css" />
 </head>
 
 <body>
@@ -82,17 +69,17 @@ if (isset($_SESSION['user_id'])) {
     <!--**********************************
             Nav header start
         ***********************************-->
-    <div class="nav-header">
+    <div class="nav-header" style="border-bottom: 2px solid #00FF7F; padding: 0; height: fit-content">
       <div class="brand-logo my-0 py-0" style="
             background-color: #ffffffff;
-            border-bottom: 5px solid #00FF7F;
+            border-bottom: 3px solid #00FF7F;
             padding: 0;
             max-height: 78px;
             display: flex;
             justify-content: center;
             align-items: center;
           ">
-        <a href="../home.php">
+        <a href="/home">
           <b class="logo-abbr"><img src="../assets/logo.png" alt="" style="height: 60px; width: 60px" />
           </b>
           <span class="logo-compact"><img src="../assets/logo.png" alt="" style="height: 60px; width: 60px" /></span>
@@ -109,7 +96,7 @@ if (isset($_SESSION['user_id'])) {
     <!--**********************************
             Header start
         ***********************************-->
-    <div class="header" style="border-bottom: 5px solid #00FF7F;">
+    <div class="header" style="border-bottom: 5px solid #00FF7F">
       <div class="header-content clearfix">
         <div class="nav-control">
           <div class="hamburger">
@@ -118,10 +105,10 @@ if (isset($_SESSION['user_id'])) {
         </div>
         <div class="header-left">
           <div class="input-group icons">
-            <!-- <div class="input-group-prepend">
+            <div class="input-group-prepend">
               <span class="input-group-text bg-transparent border-0 pr-2 pr-sm-3" id="basic-addon1"><i class="mdi mdi-magnify"></i></span>
-            </div> -->
-            <!-- <input type="search" class="form-control" placeholder="Search Dashboard" aria-label="Search Dashboard" /> -->
+            </div>
+            <input type="search" class="form-control" placeholder="Search Dashboard" aria-label="Search Dashboard" />
             <div class="drop-down d-md-none">
               <form action="#">
                 <input type="text" class="form-control" placeholder="Search" />
@@ -131,8 +118,98 @@ if (isset($_SESSION['user_id'])) {
         </div>
         <div class="header-right">
           <ul class="clearfix">
-
-            <li class="icons dropdown" title="Notifications" data-toggle="tooltip" data-placement="top">
+            <!-- <li class="icons dropdown">
+                <a href="javascript:void(0)" data-toggle="dropdown">
+                  <i class="mdi mdi-email-outline"></i>
+                  <span class="badge gradient-1 badge-pill badge-primary"
+                    >3</span
+                  >
+                </a>
+                <div class="drop-down animated fadeIn dropdown-menu">
+                  <div
+                    class="dropdown-content-heading d-flex justify-content-between"
+                  >
+                    <span class="">3 New Messages</span>
+                  </div>
+                  <div class="dropdown-content-body">
+                    <ul>
+                      <li class="notification-unread">
+                        <a href="javascript:void()">
+                          <img
+                            class="float-left mr-3 avatar-img"
+                            src="images/avatar/1.jpg"
+                            alt=""
+                          />
+                          <div class="notification-content">
+                            <div class="notification-heading">Saiful Islam</div>
+                            <div class="notification-timestamp">
+                              08 Hours ago
+                            </div>
+                            <div class="notification-text">
+                              Hi Teddy, Just wanted to let you ...
+                            </div>
+                          </div>
+                        </a>
+                      </li>
+                      <li class="notification-unread">
+                        <a href="javascript:void()">
+                          <img
+                            class="float-left mr-3 avatar-img"
+                            src="images/avatar/2.jpg"
+                            alt=""
+                          />
+                          <div class="notification-content">
+                            <div class="notification-heading">Adam Smith</div>
+                            <div class="notification-timestamp">
+                              08 Hours ago
+                            </div>
+                            <div class="notification-text">
+                              Can you do me a favour?
+                            </div>
+                          </div>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="javascript:void()">
+                          <img
+                            class="float-left mr-3 avatar-img"
+                            src="images/avatar/3.jpg"
+                            alt=""
+                          />
+                          <div class="notification-content">
+                            <div class="notification-heading">Barak Obama</div>
+                            <div class="notification-timestamp">
+                              08 Hours ago
+                            </div>
+                            <div class="notification-text">
+                              Hi Teddy, Just wanted to let you ...
+                            </div>
+                          </div>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="javascript:void()">
+                          <img
+                            class="float-left mr-3 avatar-img"
+                            src="images/avatar/4.jpg"
+                            alt=""
+                          />
+                          <div class="notification-content">
+                            <div class="notification-heading">
+                              Hilari Clinton
+                            </div>
+                            <div class="notification-timestamp">
+                              08 Hours ago
+                            </div>
+                            <div class="notification-text">Hello</div>
+                          </div>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </li> -->
+            <li class="icons dropdown">
               <!-- <a href="javascript:void(0)" data-toggle="dropdown">
                 <i class="mdi mdi-bell-outline"></i>
                 <span class="badge badge-pill gradient-2 badge-primary">3</span>
@@ -207,7 +284,7 @@ if (isset($_SESSION['user_id'])) {
                   </div>
                 </div>
               </li> -->
-            <li class="icons dropdown" title="Profile" data-toggle="tooltip" data-placement="top">
+            <li class="icons dropdown">
               <div class="user-img c-pointer position-relative" data-toggle="dropdown">
                 <span class="activity active"></span>
                 <img src="../images/user/1.png" height="40" width="40" alt="" />
@@ -224,7 +301,7 @@ if (isset($_SESSION['user_id'])) {
                           3
                         </div>
                       </a>
-                    </li>-->
+                    </li> -->
 
                     <hr class="my-2" />
                     <!-- <li>
@@ -248,6 +325,7 @@ if (isset($_SESSION['user_id'])) {
     <!--**********************************
             Sidebar start
         ***********************************-->
+
     <div class="nk-sidebar" style="background: #00FF7F">
       <div class="nk-nav-scroll" style="background: #00FF7F">
         <ul class="metismenu" id="menu" style="background: #00FF7F">
@@ -257,7 +335,7 @@ if (isset($_SESSION['user_id'])) {
               <i class="icon-speedometer menu-icon"></i><span class="nav-text">Dashboard</span>
             </a>
             <ul aria-expanded="false" class="" style="background: #00FF7F">
-              
+
               <li><a href="./products.php">Products</a></li>
               <li><a href="./orders.php">Orders</a></li>
             </ul>
@@ -268,12 +346,12 @@ if (isset($_SESSION['user_id'])) {
               <i class="icon-speedometer menu-icon"></i><span class="nav-text">Branch Management</span>
             </a>
             <ul aria-expanded="false" class="" style="background: #00FF7F">
-              
+
               <li><a href="./branches.php">Branches </a></li>
               <li><a href="./branch_users.php">Users</a></li>
             </ul>
           </li>
-          
+
         </ul>
       </div>
     </div>
@@ -292,7 +370,7 @@ if (isset($_SESSION['user_id'])) {
               <a href="javascript:void(0)">Dashboard</a>
             </li>
             <li class="breadcrumb-item active">
-              <a href="javascript:void(0)">Products</a>
+              <a href="javascript:void(0)">users</a>
             </li>
           </ol>
         </div>
@@ -304,133 +382,89 @@ if (isset($_SESSION['user_id'])) {
           <div class="col-12">
             <div class="card">
               <div class="card-body">
-                <h4 class=" card-title">Products</h4>
+                <h4 class="card-title">Users</h4>
                 <div class="table-responsive">
-                  <div id="add_product">
-                    <a href="./Add_product.php" class="badge badge-pill gradient-1"><i class="fa fa-plus fa-2x btn btn-sm  p-2" id="" data-toggle="tooltip" data-placement="top" title="Add product"></i></a>
-                    <a href="#" class="badge badge-pill gradient-3"><i class="fa fa-upload fa-2x btn-sm p-2" id="" data-toggle="tooltip" data-placement="top" title="Upload list"></i></a>
-                    <a href="#" class="badge badge-pill gradient-4"><i class="fa fa-download fa-2x btn-sm p-2" id="" data-toggle="tooltip" data-placement="top" title="Download list"></i></a>
+                  <div id="add_user">
+                    <a href="./add_branch_user.php" class="badge badge-pill gradient-1"><i class="fa fa-plus fa-2x p-2 btn btn-sm" id="" data-toggle="tooltip" data-placement="top" title="Add user"></i></a>
                   </div>
                   <table class="table table-striped table-bordered zero-configuration">
                     <thead>
                       <tr>
-                        <th>QR Code</th>
-                        <th>Brand Name</th>
-                        <th>Batch number</th>
-                        <th>Serial number</th>
-                        <th>Date of manufacture</th>
-                        <th>Expiry date</th>
+                        <th>Branch number</th>
+                        <th>Name</th>
+                        <th>Gender</th>
+                        <th>Telephone</th>
+                        <th>Email</th>
+                        <th>Status</th>
                         <th>Action</th>
+                        <!-- <th>Age</th>
+                          <th>Start date</th>
+                          <th>Salary</th> -->
                       </tr>
                     </thead>
 
                     <tbody>
-                      <?php
-                      while ($product_row = $product_result->fetch_array()) :
-                        $serial_number = decrypt_data($product_row['serial_number']);
-                        $Qrcode = $qrcodegenerator->generate_qr($serial_number);
-
-                        $expiry = new DateTime($product_row['product_expiry_date']);
-                        $now = new DateTime("now");
-                        $product_status = "";
-                        $status_title = "";
-                        if ($now->diff($expiry)->format('%a') <= 5) {
-                          $product_status = "#FF00F7F";
-                          $status_title = "Soon expiring";
-                        } else if ($expiry <= $now) {
-                          $product_status = "#FF007F";
-                          $status_title = "Expired";
-                        } else {
-                          $product_status = "#00FF7F";
-                          $status_title = "Current";
-                        }
-                      ?>
+                      <?php while ($user_row = $user_result->fetch_array()) : ?>
                         <tr>
-                          <td><a href="../../phpqrcode/qr_images/<?php echo decrypt_data($product_row['serial_number']); ?>.png" target="_blank" download>download QR</a></td>
-                          <td><?php echo decrypt_data($product_row['brand_name']); ?></td>
-                          <td><?php echo decrypt_data($product_row['batch_number']); ?></td>
-                          <td><?php echo decrypt_data($product_row['serial_number']); ?></td>
-                          <td><?php echo $product_row['date_of_manufacture']; ?></td>
-                          <td class="badge-pill text-center" data-toggle="tooltip" data-placement="top" title="<?php echo $status_title; ?>" style="color: <?php echo $product_status; ?>">
-                            <?php echo $product_row['product_expiry_date']; ?>
-                          </td>
+                          <td><?php echo decrypt_data($user_row['branch_number']); ?></td>
+                          <td><?php echo decrypt_data($user_row['first_name']) . " " . decrypt_data($user_row['last_name']); ?></td>
+                          <td><?php echo $user_row['user_gender']; ?></td>
+                          <td><?php echo decrypt_data($user_row['user_telephone']); ?></td>
+                          <td><?php echo decrypt_data($user_row['user_email']); ?></td>
+                          <td>Online</td>
                           <td id="action_buttons">
-                            <i class="fa fa-info btn btn-info" id="show-user-details<?php echo $product_row['product_id']; ?>" data-toggle="tooltip" data-placement="top" title="Details"></i>
-                            <a href="./Add_product.php?product_id=<?php echo $product_row['product_id']; ?>"><i class="fa fa-pencil btn btn-primary" data-toggle="tooltip" data-placement="top" title="Edit"></i></a>
-                            <i class="fa fa-trash btn btn-danger" data-toggle="tooltip" data-placement="top" title="Delete" id="delete_product<?php echo $product_row['product_id']; ?>"></i>
+                            <i class="fa fa-info btn btn-info" id="show-user-details<?php echo $user_row['user_id']; ?>" data-toggle="tooltip" data-placement="top" title="Details"></i>
+                            <a href="./add_branch_user.php?edit_user&user_id=<?php echo $user_row['user_id']; ?>&branch_id=<?php echo $user_row['branch_id']; ?>"><i class="fa fa-pencil btn btn-primary" data-toggle="tooltip" data-placement="top" title="Edit"></i></a>
+
+                            <i class="fa fa-trash btn btn-danger" data-toggle="tooltip" data-placement="top" title="Delete" id="delete_user<?php echo $user_row['user_id']; ?>"></i>
                           </td>
                         </tr>
 
                         <script>
                           $(() => {
-                            $("#show-user-details<?php echo $product_row['product_id']; ?>").on('click', function() {
-                              $("#product-details").addClass("show");
-                              $("#p_product_id").text("Prod-<?php echo $product_row['product_id']; ?>");
-                              $("#p_brand_name").text("<?php echo decrypt_data($product_row['brand_name']); ?>");
-                              $("#p_manufacturer").text("<?php echo decrypt_data($product_row['product_manufacturer']); ?>");
-                              $("#p_supplier").text("<?php echo decrypt_data($product_row['product_supplier']); ?>");
-                              $("#p_point_of_origin").text("<?php echo decrypt_data($product_row['point_of_origin']); ?>");
-                              $("#p_date_of_manufacture").text("<?php echo $product_row['date_of_manufacture']; ?>");
-                              $("#p_expiry_date").text("<?php echo $product_row['product_expiry_date']; ?>");
-                              $("#p_unit_of_measure").text("<?php echo decrypt_data($product_row['unit_of_measure']); ?>");
-                              $("#p_batch_number").text("<?php echo decrypt_data($product_row['batch_number']); ?>");
-                              $("#p_serial_number").text("<?php echo decrypt_data($product_row['serial_number']); ?>");
-                              $("#p_product_category").text("<?php echo decrypt_data($product_row['product_category']); ?>");
-                              $("#p_user_guid").text("<?php echo decrypt_data($product_row['user_guid']); ?>");
-                              $("#p_unit_cost").text("Ugx. <?php echo  number_format(decrypt_data($product_row['unit_cost']), 1); ?>/=");
+                            $("#show-user-details<?php echo $user_row['user_id']; ?>").on('click', () => {
+                              $("#user-details").addClass("show");
+                              $("#user_id").text("<?php echo 'User_' . $user_row['user_id']; ?>");
+                              $("#user_name").text("<?php echo decrypt_data($user_row['first_name']); ?> <?php echo decrypt_data($user_row['last_name']); ?>");
+                              $("#user_email").text("<?php echo decrypt_data($user_row['user_email']); ?>");
+                              $("#telephone").text("<?php echo decrypt_data($user_row['user_telephone']); ?>");
+                              $("#gender").text("<?php echo $user_row['user_gender']; ?>");
+                              $("#user_type").text("<?php echo $user_row['user_type']; ?>");
+                            });
 
-                              $("#product_image").attr("src", "../assets/product_images/<?php echo decrypt_data($product_row['product_image']); ?>");
-
-
-                              $("#qrcode").attr("src", "../../phpqrcode/qr_images/<?php echo decrypt_data($product_row['serial_number']) . ".png"; ?>");
-
-
-
-                            })
-
-                            $("#close-user").on('click', () => {
-                              $("#product-details").removeClass("show");
-                            })
-
-
-                            $("#delete_product<?php echo $product_row['product_id']; ?>").on('click', () => {
-                              var choise = confirm("Confirm to delete this product!");
-                              if (choise === true) {
+                            $("#delete_user<?php echo $user_row['user_id']; ?>").on('click', () => {
+                              var confirm_delete = confirm("Are you sure you want to delete this user?");
+                              if (confirm_delete === true) {
                                 $.ajax({
-                                  url: "../APIs/products_api.php",
+                                  url: "../APIs/branch_user_api.php",
                                   type: "POST",
                                   dataType: "JSON",
                                   data: {
-                                    delete_product: "delete_product",
-                                    product_id: "<?php echo $product_row['product_id']; ?>",
+                                    delete_user: "",
+                                    user_id: "<?php echo $user_row['user_id']; ?>"
                                   },
                                   Cache: false,
-                                  success: (res) => {
-                                    $("#message_div").addClass("active");
-                                    $("#alert_msg").text("Product deleted successfully");
-                                    $("#ok").on('click', () => {
-                                      $("#message_div").removeClass("active");
-                                      window.location.href = "./products.php";
-                                    })
-                                  },
+                                  success: res => {
+                                    alert(res['message']);
+                                    window.location.href = "./branch_users.php";
+                                  }
                                 })
                               }
+
                             })
+
                           })
                         </script>
-
                       <?php endwhile; ?>
-
-
                     </tbody>
                     <tfoot>
                       <tr>
-                        <th>QR Code</th>
-                        <th>Brand Name</th>
-                        <th>Batch number</th>
-                        <th>Serial number</th>
-                        <th>Date of manufacture</th>
-                        <th>Expiry date</th>
+                        <th>Branch number</th>
+                        <th>Name</th>
+                        <th>Gender</th>
+                        <th>Telephone</th>
+                        <th>Email</th>
+                        <th>Status</th>
                         <th>Action</th>
                       </tr>
                     </tfoot>
@@ -441,58 +475,47 @@ if (isset($_SESSION['user_id'])) {
           </div>
         </div>
       </div>
-      <div id="product-details">
-        <div class="details-inner bg-light alert container py-5 pt-5h">
+      <div id="user-details">
+        <div class="details-inner bg-light alert container my-4 mt-4 py-4 col-md-8">
           <i class="fa fa-times fa-2x" id="close-user"></i>
           <div class="row justify-content-center align-content-center py-5">
             <div class="left col-md-4">
-
-              <img class="col-12" id="product_image" />
-
-
-              <div class="col-12 text-center py-4">
-                <img center id="qrcode" />
-              </div>
-
+              <h1 class="text-center text-success">User details</h1>
+              <img src="../images/users/2.jpg" class="col-12" />
+              <!-- <div class="col-md--12 row justify-content-center my-3 py-4">
+                <a href="" class="btn btn-danger mx-1 p-2">Block</a>
+                <a href="../add_admin_user" class="btn btn-info mx-1 p-2">Edit</a>
+                <a href="" class="btn btn-danger mx-1 p-2">Delete</a>
+              </div> -->
             </div>
             <div class="right col-md-6 row justify-content-left">
               <div class="left text-right alert col-6">
-                <p><b>Product ID: </b></p>
-                <p><b>Brand Name: </b></p>
-                <p><b>Manufacturer: </b></p>
-                <p><b>Registered supplier: </b></p>
-                <p><b>Point of origin: </b></p>
-                <p><b>Date of manufacture: </b></p>
-                <p><b>Expiry date: </b></p>
-                <p><b>Unit of measure: </b></p>
-                <p><b>Batch number: </b></p>
-                <p><b>Serial number: </b></p>
-                <p><b>Product category: </b></p>
-                <p><b>Unit cost: </b></p>
-                <p><b>E-Extension: </b></p>
+                <p><b>User_id: </b></p>
+                <p><b>Name: </b></p>
+                <p><b>Email: </b></p>
+                <p><b>Telephone: </b></p>
+                <p><b>Gender: </b></p>
+                <!-- <p><b>Address: </b></p> -->
+                <!-- <p><b>Nationality: </b></p> -->
+                <!-- <p><b>Marital status: </b></p> -->
+                <!-- <p><b>Identity type: </b></p> -->
+                <!-- <p><b>Identity number: </b></p> -->
+                <!-- <p><b>Date of Birth: </b></p> -->
+                <p><b>Staff category: </b></p>
               </div>
               <div class="right alert col-6">
-                <p id="p_product_id">Prod-0001</p>
-                <p id="p_brand_name">Weed master</p>
-                <p id="p_manufacturer">Kakoola Ug ltd</p>
-                <p id="p_supplier">K&M Traders</p>
-                <p id="p_point_of_origin">Mukono industrial Area</p>
-                <p id="p_date_of_manufacture">25th/06/2022</p>
-                <p id="p_expiry_date">23th/06/2023</p>
-                <p id="p_unit_of_measure">1.5ltr</p>
-                <p id="p_batch_number">44545Y64</p>
-                <p id="p_serial_number">RUE4466564RTT56</p>
-                <p id="p_product_category">Animal husbandry</p>
-                <p id="p_unit_cost">UGX. 17500</p>
-
-                <p id="p_user_guid">
-                  Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                  Voluptatem sapiente, consectetur dicta nostrum quas porro ex
-                  explicabo, earum maiores dolore repudiandae sit nulla sequi
-                  fugit, qui iure velit ratione! Exercitationem veritatis
-                  accusantium, ab eius eum aliquam ea alias sed quod obcaecati
-                  maxime dicta quae quas ratione nobis debitis corporis ullam.
-                </p>
+                <p id="user_id">Emp-0001</p>
+                <p id="user_name">Anatoli kuwebwa</p>
+                <p id="user_email">akuwebwa@gmail.com</p>
+                <p id="telephone">0779320075</p>
+                <p id="gender">Male</p>
+                <!-- <p id="address">Lunguja Lubaga division</p> -->
+                <!-- <p id="country">Uganda</p> -->
+                <!-- <p id="marital_status">Single</p> -->
+                <!-- <p id="id_type">National ID</p> -->
+                <!-- <p id="id_number">CM92301933HEK</p> -->
+                <!-- <p id="date_of_birth">28th/02/2014</p> -->
+                <p id="user_type">Admin</p>
               </div>
             </div>
           </div>
@@ -523,70 +546,20 @@ if (isset($_SESSION['user_id'])) {
         Main wrapper end
     ***********************************-->
 
-
-  <div id="message_div">
-    <div class="alert msg row justify-center">
-      <i class="fa fa-check fa-4x col-12 text-center" id="alert_icon"></i>
-      <p class="text-center col-12" id="alert_msg">Sign up successfull</p>
-      <input type="submit" id="ok" class="btn btn-primary m-auto" value="Ok" />
-    </div>
-    </dive>
-
-
-    <?php
-
-    if (isset($_GET['action'])) {
-      $status = $_GET['status'];
-    ?>
-      <script>
-        $(() => {
-          $('#message_div').addClass('active');
-          $("#alert_msg").text("<?php echo $_GET['message']; ?>");
-
-          $("#ok").on('click', () => {
-            $('#message_div').removeClass('active');
-          })
-        });
-      </script>
-
-    <?php
-      if ($_GET['status'] == "error") {
-        $icon = "fa-warning";
-      } else {
-        $icon = "fa-check";
-      }
-    }
-
-    ?>
-
-
-
-    <div id="message_div">
-      <div class="alert msg row justify-center">
-        <i class="fa <?php echo $icon; ?> fa-4x col-12 text-center" id="alert_icon"></i>
-        <p class="text-center col-12" id="alert_msg">Sign up successfull</p>
-        <input type="submit" id="ok" class="btn btn-primary m-auto" value="Ok" />
-      </div>
-      </dive>
-
-
-
-
-
-
-      <!--**********************************
+  <!--**********************************
         Scripts
     ***********************************-->
-      <script src="../plugins/common/common.min.js"></script>
-      <script src="../js/custom.min.js"></script>
-      <script src="../js/settings.js"></script>
-      <script src="../js/gleek.js"></script>
-      <script src="../js/styleSwitcher.js"></script>
-      <script src="../js/custom_js/products.js"></script>
+  <script src="../plugins/common/common.min.js"></script>
+  <script src="../js/custom.min.js"></script>
+  <script src="../js/bootstrap/bootstrap.min.js"></script>
+  <script src="../js/settings.js"></script>
+  <script src="../js/gleek.js"></script>
+  <script src="../js/styleSwitcher.js"></script>
+  <script src="../js/custom_js/admin_users.js"></script>
 
-      <script src="../plugins/tables/js/jquery.dataTables.min.js"></script>
-      <script src="../plugins/tables/js/datatable/dataTables.bootstrap4.min.js"></script>
-      <script src="../plugins/tables/js/datatable-init/datatable-basic.min.js"></script>
+  <script src="../plugins/tables/js/jquery.dataTables.min.js"></script>
+  <script src="../plugins/tables/js/datatable/dataTables.bootstrap4.min.js"></script>
+  <script src="../plugins/tables/js/datatable-init/datatable-basic.min.js"></script>
 </body>
 
 </html>

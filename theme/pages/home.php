@@ -309,16 +309,16 @@ if (!isset($_SESSION['user_id'])) {
     <div class="nk-sidebar text-light" style="background-color: #00FF7F;">
       <div class="nk-nav-scroll text-light" style="background-color: #00FF7F;">
         <ul class="metismenu txt-light" id="menu" style="background-color: #00FF7F;">
-          <li class="nav-label">Dashboard</li>
+          <!-- <li class="nav-label">Dashboard</li> -->
           <li>
             <a class="has-arrow" href="javascript:void()" aria-expanded="fals" style="background-color: #00FF7F;">
               <i class="icon-speedometer menu-icon"></i><span class="nav-text">Dashboard</span>
             </a>
             <ul aria-expanded="false" class="" style="background-color: #00FF7F;">
-              <li><a href="./home.php"><span><i class="fa fa-home"></i></span> Home</a></li>
-              <li><a href="./Admin_users.php"><span><i class="fa fa-users"></i></span> Users</a></li>
-              <li><a href="./groups.php"><span><i class="fa fa-users"></i></span> Groups</a></li>
-              <!-- <li><a href="./products.php"><span><i class="fa fa-product"></i></span> Products</a></li> -->
+              <li><a href="./home.php"><span><i class="fa"></i></span> Home</a></li>
+              <li><a href="./Admin_users.php"><span><i class="fa"></i></span> Users</a></li>
+              <li><a href="./groups.php"><span><i class="fa"></i></span> Groups</a></li>
+              <li><a href="./product_report.php"><span><i class="fa"></i></span> Product reports</a></li>
               <!-- <li><a href="./orders.php"><span><i class="fab fa-basket"></i></span> Orders</a></li> -->
             </ul>
           </li>

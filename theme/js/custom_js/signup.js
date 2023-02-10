@@ -122,7 +122,7 @@ $(() => {
             if (res["status"] === "error") {
               document.getElementById("message_div").classList.remove("active");
             } else {
-              window.location.href = "/ukulima";
+              window.location.href = "/";
             }
           });
         },

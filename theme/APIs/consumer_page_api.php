@@ -9,7 +9,7 @@ include "../APIs/encryption_api.php";
 // FUNCTION FOR VERIFYING A PRODUCT
 function verify_product($mysqli, $serial_number)
 {
-    $result = $mysqli->query("SELECT * FROM Product WHERE serial_number = '$serial_number'");
+    $result = $mysqli->query("SELECT * FROM product WHERE serial_number = '$serial_number'");
     if (!$result) {
         echo json_encode(array("status" => "error", "message" => $mysqli->error));
     } else {
@@ -27,7 +27,7 @@ function verify_product($mysqli, $serial_number)
 // FUNCTION FOR ADDING A PRODUCT TO CART
 function add_to_cat($mysqli, $product_id, $user_id, $number_of_items, $order_date)
 {
-    $result = $mysqli->query("SELECT * FROM Product WHERE product_id=$product_id");
+    $result = $mysqli->query("SELECT * FROM product WHERE product_id=$product_id");
     if (!$result) {
         echo json_encode(array("status" => "error", "message" => $mysqli->error));
     } else {
@@ -47,7 +47,7 @@ function add_to_cat($mysqli, $product_id, $user_id, $number_of_items, $order_dat
                 if (!$query) {
                     echo json_encode(array("status" => "error", "message" => $mysqli->error));
                 } else {
-                    $cat_result = $mysqli->query("SELECT SUM(number_of_items) AS number_of_items FROM USER_ORDER WHERE user_id=$user_id");
+                    $cat_result = $mysqli->query("SELECT SUM(number_of_items) AS number_of_items FROM user_order WHERE user_id=$user_id");
                     $cat_row = $cat_result->fetch_array();
                     $number_of_items = $cat_row['number_of_items'];
                     if ($number_of_items > 9) {

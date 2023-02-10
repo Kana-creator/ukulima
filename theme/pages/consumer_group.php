@@ -11,7 +11,7 @@ if (isset($_SESSION['user_id'])) {
     $group_row = $group_result->fetch_array();
     $group_id = $group_row['group_id'];
     $group_name = $group_row['group_name'];
-    $user_result = $mysqli->query("SELECT * FROM consumer INNER JOIN user ON user.user_id=consumer.user_id INNER JOIN next_of_kin ON next_of_kin.consumer_id=consumer.consumer_id WHERE group_id=$group_id");
+    $user_result = $mysqli->query("SELECT * FROM consumer INNER JOIN User ON User.user_id=consumer.user_id INNER JOIN next_of_kin ON next_of_kin.consumer_id=consumer.consumer_id WHERE group_id=$group_id");
 
     $cart_result = $mysqli->query("SELECT SUM(number_of_items) AS number_of_items FROM user_order WHERE user_id=$user_id AND check_out_status=0");
 
@@ -371,6 +371,7 @@ if (isset($_SESSION['user_id'])) {
             <ul aria-expanded="false" class="" style="background: #00FF7F">
               <li><a href="./consumer_page.php">Products</a></li>
               <li><a href="./verify_product.php">Verify product</a></li>
+              <li><a href="./product_report_form.php">Report a product</a></li>
               <li><a href="./consumer_cart.php">Orders</a></li>
             </ul>
           </li>

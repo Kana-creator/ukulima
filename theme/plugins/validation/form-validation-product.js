@@ -21,6 +21,17 @@ jQuery(".form-valide").validate({
         "val-serial-number": {required: !0},
         "val-unit-cost": {required: !0},
         "val-e-extension": {required: !0},
+        "val-product-category": {required: !0},
+        "val-report-type": {required: !0},
+        "val-report-details": {required: !0 },
+        "val-branch-name": {required: !0 },
+        "val-branch-number": { required: !0 },
+        // "val-agency-number": {required: !0},
+        "val-branch-address": { required: !0 },
+        "val-contact-name": { required: !0 },
+        "val-contact-number": { required: !0 },
+        "val-contact-email": {required: !0}
+        
         
     },
 
@@ -43,6 +54,18 @@ jQuery(".form-valide").validate({
         "val-serial-number": "Please enter product serial number",
         "val-unit-cost": "please enter product unit cost",
         "val-e-extension": "Please enter product user guid (E-extension)",
+        "val-product-category": "This field is required! please enter a valid product category!",
+        "val-report-type": "This field is required! please select a report type!",
+        "val-report-details": "This field is required!",
+
+        "val-branch-name": "This field is required please enter a valid branch name",
+        "val-branch-number": "This field is required please enter a valid branch number",
+        // "val-agency-number": "This field is required please enter a valid agency number",
+        "val-branch-address": "This field is required please enter a valid branch location",
+        "val-contact-name": "This field is required please enter a valid contact name",
+        "val-contact-number": "This field is required please enter a valid contact number",
+        "val-contact-email": "This field is required please enter a valid contact email"
+  
 
     }
 

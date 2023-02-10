@@ -8,8 +8,6 @@ if (isset($_SESSION['user_id'])) {
   $user_name = $_SESSION['user_name'];
   $user_id = $_SESSION['user_id'];
   $cart_result = $mysqli->query("SELECT user_order.order_id AS order_id, user_order.user_id AS order_user_id, user_order.number_of_items AS number_of_items, user_order.order_date AS order_date, user_order.clearence_status AS clearence_status, user_order.product_id AS product_id, product.unit_of_measure AS unit_of_measure, product.brand_name AS brand_name, product.product_image AS product_image, product.unit_cost AS unit_cost FROM user_order INNER JOIN product ON product.product_id = user_order.product_id  WHERE product.user_id=$user_id AND user_order.check_out_status=1 GROUP BY user_order.product_id");
-
-  
 } else {
   header("Location: ../../index.html");
 }
@@ -26,7 +24,7 @@ if (isset($_SESSION['user_id'])) {
   <title>Ukulima | Products</title>
   <script src="../js/jquery.js"></script>
   <!-- Favicon icon -->
-  <link rel="icon" type="image/png" sizes="16x16" href="../assets/logo.PNG" />
+  <link rel="icon" type="image/png" sizes="16x16" href="../assets/logo.png" />
   <!-- Custom Stylesheet -->
   <link href="../plugins/tables/css/datatable/dataTables.bootstrap4.min.css" rel="stylesheet" />
   <link href="../css/style.css" rel="stylesheet" />
@@ -39,7 +37,7 @@ if (isset($_SESSION['user_id'])) {
     ********************-->
   <div id="preloader">
     <div class="loader">
-      <img src="../assets/logo.PNG" alt="" class="logo" />
+      <img src="../assets/logo.png" alt="" class="logo" />
       <!-- <svg class="circular" viewBox="25 25 50 50">
           <circle
             class="path"

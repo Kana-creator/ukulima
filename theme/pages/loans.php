@@ -364,6 +364,7 @@ if (isset($_SESSION['user_id'])) {
             <ul aria-expanded="false" class="" style="background: #00FF7F">
               <li><a href="./consumer_page.php">Products</a></li>
               <li><a href="./verify_product.php">Verify product</a></li>
+              <li><a href="./product_report_form.php">Report a product</a></li>
               <li><a href="./consumer_cart.php">Orders</a></li>
             </ul>
           </li>

@@ -29,7 +29,7 @@ $error_color: #d35;
     }
 }
 
-#product-details {
+#product-details, #product_not_found{
     position: fixed;
     right: 0;
     left: 0;
@@ -44,7 +44,7 @@ $error_color: #d35;
     .details-inner {
         min-height: 100vh;
 
-        #close-user {
+        #close-user, #close-product-not-found {
             color: #a45;
             position: absolute;
             right: 20px;
@@ -57,7 +57,7 @@ $error_color: #d35;
     }
 }
 
-#product-details.show {
+#product-details.show, #product_not_found.show {
     transform: scale(1);
 }
 

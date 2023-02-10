@@ -252,6 +252,7 @@ if (isset($_SESSION['user_id'])) {
                         <ul aria-expanded="false" class="" style="background: #00FF7F">
                             <li><a href="./consumer_page.php">Products</a></li>
                             <li><a href="./verify_product.php">Verify product</a></li>
+                            <li><a href="./product_report_form.php">Report a product</a></li>
                             <li><a href="./consumer_cart.php">Orders</a></li>
                         </ul>
                     </li>
@@ -346,6 +347,7 @@ if (isset($_SESSION['user_id'])) {
                                     $("#p_unit_of_measure").text("<?php echo decrypt_data($product_row['unit_of_measure']); ?>");
                                     $("#p_batch_number").text("<?php echo decrypt_data($product_row['batch_number']); ?>");
                                     $("#p_serial_number").text("<?php echo decrypt_data($product_row['serial_number']); ?>");
+                                    $("#p_product_category").text("<?php echo decrypt_data($product_row['product_category']); ?>");
                                     $("#p_unit_cost").text("Ugx. <?php echo number_format(decrypt_data($product_row['unit_cost'])); ?>/=");
                                     $("#product_id").text("<?php echo decrypt_data($product_row['serial_number']); ?>");
                                     $("#product_name").text("<?php echo decrypt_data($product_row['brand_name']); ?>");
@@ -410,7 +412,7 @@ if (isset($_SESSION['user_id'])) {
                     <div class="row justify-content-center align-content-center py-5">
                         <div class="left col-md-4">
                             <h3 class="text-success text-center" id="product_name"></h3>
-                            <h3 class="text-success text-center" id="product_id"></h3>
+                            <!-- <h3 class="text-success text-center" id="product_id"></h3> -->
                             <img class="col-12" id="product_image" />
                             <!-- <div class="col-12 row justify-content-center my-3 py-4">
                                 <a href="" class="btn btn-danger mx-1">Delete</a>
@@ -429,6 +431,7 @@ if (isset($_SESSION['user_id'])) {
                                 <p><b>Unit of measure: </b></p>
                                 <p><b>Batch number: </b></p>
                                 <p><b>Serial number: </b></p>
+                                <p><b>Product category: </b></p>
                                 <p><b>Unit cost: </b></p>
                                 <p><b>E-Extension: </b></p>
                             </div>
@@ -443,7 +446,9 @@ if (isset($_SESSION['user_id'])) {
                                 <p id="p_unit_of_measure">1.5ltr</p>
                                 <p id="p_batch_number">44545Y64</p>
                                 <p id="p_serial_number">RUE4466564RTT56</p>
+                                <p id="p_product_category">Plant husbandry</p>
                                 <p id="p_unit_cost">UGX. 17500</p>
+                                <p id="p_user_guid">ddd</p>
 
                                 <p id="p_user_guid">
                                     Lorem ipsum dolor sit, amet consectetur adipisicing elit.

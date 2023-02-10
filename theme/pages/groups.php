@@ -329,6 +329,7 @@ if (isset($_SESSION['user_id'])) {
               <li><a href="./home.php">Home</a></li>
               <li><a href="./Admin_users.php">Users</a></li>
               <li><a href="./groups.php">Groups</a></li>
+              <li><a href="./product_report.php"><span><i class="fa"></i></span> Product reports</a></li>
               <!-- <li><a href="./savings.php">Savings</a></li> -->
               <!-- <li><a href="./products.php">Products</a></li> -->
               <!-- <li><a href="./orders.php">Orders</a></li> -->
@@ -420,7 +421,7 @@ if (isset($_SESSION['user_id'])) {
                     $group_id = $group_row['group_id'];
                     $group_name = $group_row['group_name'];
 
-                    $user_result = $mysqli->query("SELECT * FROM consumer INNER JOIN user ON user.user_id=consumer.user_id INNER JOIN next_of_kin ON next_of_kin.consumer_id=consumer.consumer_id WHERE group_id=$group_id");
+                    $user_result = $mysqli->query("SELECT * FROM consumer INNER JOIN User ON User.user_id=consumer.user_id INNER JOIN next_of_kin ON next_of_kin.consumer_id=consumer.consumer_id WHERE group_id=$group_id");
 
                     if (mysqli_num_rows($user_result) > 0) {
 

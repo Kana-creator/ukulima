@@ -4,40 +4,48 @@ include "../objects/user_object.php";
 session_start();
 if (isset($_SESSION['user_id'])) {
     $user_name = $_SESSION['user_name'];
+    $user_category = $_SESSION['user_category'];
     $user_id = $_SESSION['user_id'];
     $user_result = $mysqli->query("SELECT * FROM User WHERE user_id=$user_id");
     $user_row = $user_result->fetch_array();
     $profile_image = $user_row['profile_image'];
-    if (isset($_GET['edit_member'])) {
-        $action = "edit_member";
-        $group_id = $_GET['group_id'];
-        $user_id = $_GET['user_id'];
-        $member_result = $mysqli->query("SELECT * FROM consumer INNER JOIN User ON User.user_id=consumer.user_id INNER JOIN next_of_kin ON consumer.consumer_id=next_of_kin.consumer_id WHERE group_id=$group_id AND user.user_id=$user_id");
-        $user_row = $member_result->fetch_array();
+    if (isset($_GET['edit_user'])) {
+        $action = "edit_user";
+        $branch_id = $_GET['branch_id'];
+        $user_idd = $_GET['user_id'];
+
+        if ($user_category == "producer") {
+            $member_result = $mysqli->query("SELECT * FROM branch b INNER JOIN producer p ON p.branch_id=b.branch_id INNER JOIN User u ON u.user_id=p.user_id WHERE u.user_id=$user_idd");
+        } else {
+            $member_result = $mysqli->query("SELECT * FROM branch b INNER JOIN supplier s ON s.branch_id=b.branch_id INNER JOIN User u ON u.user_id=s.user_id WHERE u.user_id=$user_idd");
+        }
+
         $member_row = $member_result->fetch_array();
+        // $member_row = $member_result->fetch_array();
         $first_name = decrypt_data($member_row['first_name']);
         $second_name = decrypt_data($member_row['last_name']);
         $user_email = decrypt_data($member_row['user_email']);
         $user_telephone = decrypt_data($member_row['user_telephone']);
         $gender = $member_row['user_gender'];
         $password = $member_row['user_password'];
-        $consumer_type = $member_row['consumer_type'];
-        $occupation = decrypt_data($member_row['occupation']);
+        $branch_number = decrypt_data($member_row['branch_number']);
+        // $occupation = decrypt_data($member_row['occupation']);
         $date_of_birth = $member_row['date_of_birth'];
         $identity_type = $member_row['identity_type'];
         $identity_number = decrypt_data($member_row['identity_number']);
-        $estimated_acreage = $member_row['estimated_acreage'];
-        $major_economic_activity = decrypt_data($member_row['major_economic_activity']);
-        $estimated_monthly_income = $member_row['estimated_monthly_income'];
-        $consumer_location = decrypt_data($member_row['consumer_location']);
-        $disability = decrypt_data($member_row['disability']);
+        // $estimated_acreage = $member_row['estimated_acreage'];
+        // $major_economic_activity = decrypt_data($member_row['major_economic_activity']);
+        // $estimated_monthly_income = $member_row['estimated_monthly_income'];
+        $consumer_location = decrypt_data($member_row['user_address']);
+        // $disability = decrypt_data($member_row['disability']);
         $nationality = decrypt_data($member_row['nationality']);
-        $marital_status = decrypt_data($member_row['marital_status']);
-        $full_name = decrypt_data($member_row['full_name']);
-        $phone_number = decrypt_data($member_row['phone_number']);
+        $marital_status = $member_row['marital_status'];
+        // $full_name = decrypt_data($member_row['full_name']);
+        // $phone_number = decrypt_data($member_row['user_telephone']);
         $password_status = "hidden";
     } else {
-        $action = "add_member";
+        $action = "add_user";
+        $user_idd = "";
         $user_id = "";
         $first_name = "";
         $second_name = "";
@@ -45,20 +53,21 @@ if (isset($_SESSION['user_id'])) {
         $user_telephone = "";
         $gender = "";
         $password = "";
+        $branch_number = "";
         $consumer_type = "";
-        $occupation = "";
+        // $occupation = "";
         $date_of_birth = "";
         $identity_type = "";
         $identity_number = "";
-        $estimated_acreage = "";
-        $major_economic_activity = "";
-        $estimated_monthly_income = "";
+        // $estimated_acreage = "";
+        // $major_economic_activity = "";
+        // $estimated_monthly_income = "";
         $consumer_location = "";
-        $disability = "";
+        // $disability = "";
         $nationality = "";
         $marital_status = "";
-        $full_name = "";
-        $phone_number = "";
+        // $full_name = "";
+        // $phone_number = "";
         $password_status = "";
     }
 } else {
@@ -381,7 +390,6 @@ if (isset($_SESSION['user_id'])) {
                 </ul>
             </div>
         </div>
-
         <!--**********************************
             Sidebar end
         ***********************************-->
@@ -406,17 +414,25 @@ if (isset($_SESSION['user_id'])) {
             <!-- row -->
 
             <div class="container-fluid">
-                <h4 class="text-center">Add new group member</h4>
+                <h4 class="text-center">Add new user</h4>
                 <div class="row justify-content-center">
                     <div class="col-lg-12">
                         <div class="card">
                             <div class="card-body">
                                 <div class="form-validation">
-                                    <form class="form-valide" action="../APIs/consumer_api.php" method="POST" enctype="multipart/form-data">
+                                    <form class="form-valide" action="../APIs/branch_user_api.php" method="POST" enctype="multipart/form-data">
                                         <div class="form-group row">
-                                            <input type="text" class="form-control" id="val-user-id" name="val-user-id" value="<?php echo $user_id; ?>" hidden />
-                                            <input type="text" class="form-control" id="val-group-id" name="val-group-id" value="<?php echo $_GET['group_id']; ?>" hidden />
+                                            <input type="text" class="form-control" id="val-user-id" name="val-user-id" value="<?php echo $user_idd; ?>" hidden />
+
                                             <input type="text" class="form-control" id="action" name="action" value="<?php echo $action; ?>" hidden />
+
+                                            <label class="col-lg-4 col-form-label text-right text-dark" for="val-branch-number">Branch number <span class="text-danger">*</span>
+                                            </label>
+                                            <div class="col-lg-6">
+                                                <input type="text" class="form-control" id="val-branch-number" name="val-branch-number" placeholder="Enter branch number" value="<?php echo $branch_number; ?>" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
 
                                             <label class="col-lg-4 col-form-label text-right text-dark" for="val-firstname">First name <span class="text-danger">*</span>
                                             </label>
@@ -450,10 +466,10 @@ if (isset($_SESSION['user_id'])) {
                                             </label>
                                             <div class="col-lg-6">
                                                 <select type="text" class="form-control" id="val-gender" name="val-gender">
-                                                    <option value="<?php echo $gender; ?>"><?php echo $gender; ?></option>
-                                                    <option value="male">Male</option>
-                                                    <option value="female">Female</option>
-                                                    <option value="others">Others</option>
+                                                    <option value="">SELECT GENDER</option>
+                                                    <option value="Male">Male</option>
+                                                    <option value="Female">Female</option>
+                                                    <option value="Others">Others</option>
 
                                                 </select>
                                             </div>
@@ -533,78 +549,28 @@ if (isset($_SESSION['user_id'])) {
                                                 <input type="date" class="form-control" id="val-date-of-birth" name="val-date-of-birth" value="<?php echo $date_of_birth; ?>" />
                                             </div>
                                         </div>
-                                        <div class="form-group row">
+                                        <!-- <div class="form-group row">
                                             <label class="col-lg-4 col-form-label text-right text-dark" for="val-occupation">Occupation <span class="text-danger">*</span>
                                             </label>
                                             <div class="col-lg-6">
                                                 <input type="text" class="form-control" id="val-occupation" name="val-occupation" placeholder="Enter member's occupation here." value="<?php echo $occupation; ?>" />
                                             </div>
-                                        </div>
+                                        </div> -->
                                         <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label text-right text-dark" for="val-member-category">Member category <span class="text-danger">*</span>
+                                            <label class="col-lg-4 col-form-label text-right text-dark" for="val-user-category">User category <span class="text-danger">*</span>
                                             </label>
                                             <div class="col-lg-6">
 
-                                                <select class="form-control" id="val-member-category" name="val-member-category">
-                                                    <option value="<?php echo $consumer_type; ?>"><?php echo $consumer_type; ?></option>
-                                                    <option value="director">Dirctor</option>
+                                                <select class="form-control" id="val-user-category" name="val-user-category">
+                                                    <option value="">SELECT USER CATEGORY</option>
+                                                    <option value="super admin">Super admin</option>
                                                     <option value="admin">Administrator</option>
-                                                    <option value="member">Member</option>
+                                                    <option value="data entrant">Data entrant</option>
                                                 </select>
                                             </div>
                                         </div>
 
-                                        <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label text-right text-dark" for="val-estimated-acreage">Estimated acreage <span class="text-danger"></span>
-                                            </label>
-                                            <div class="col-lg-6">
-                                                <input type="number" class="form-control" id="val-estimated-acreage" name="val-estimated-acreage" placeholder="Enter estiamted acreage." value="<?php echo $estimated_acreage; ?>" />
-                                            </div>
-                                        </div>
 
-                                        <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label text-right text-dark" for="val-major-economic-activity">Major economic activity <span class="text-danger"></span>
-                                            </label>
-                                            <div class="col-lg-6">
-                                                <input type="text" class="form-control" id="val-major-economic-activity" name="val-major-economic-activity" placeholder="Enter major economic activity." value="<?php echo $major_economic_activity; ?>" />
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label text-right text-dark" for="val-estimated-monthly-income">Estimated monthly income <span class="text-danger"></span>
-                                            </label>
-                                            <div class="col-lg-6">
-                                                <input type="number" class="form-control" id="val-estimated-monmthly-income" name="val-estimated-monthly-income" placeholder="Enter estimated monthly income." value="<?php echo $estimated_monthly_income; ?>" />
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label text-right text-dark" for="val-disability">Disability <span class="text-danger"></span>
-                                            </label>
-                                            <div class="col-lg-6">
-                                                <input type="text" class="form-control" id="val-disability" name="val-disability" placeholder="Enter disability." value="<?php echo $disability; ?>" />
-                                            </div>
-                                        </div>
-
-
-                                        <!-- ***** next of kin ***** -->
-                                        <h4 class="text-success text-center p-4 m-4">Next of kin</h4>
-
-                                        <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label text-right text-dark" for="val-full-name">Full name <span class="text-danger">*</span>
-                                            </label>
-                                            <div class="col-lg-6">
-                                                <input type="text" class="form-control" id="val-location" name="val-full-name" placeholder="Enter full name here..." value="<?php echo $full_name; ?>" />
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label text-right text-dark" for="val-phone-number">Phone number <span class="text-danger"></span>
-                                            </label>
-                                            <div class="col-lg-6">
-                                                <input type="text" class="form-control" id="val-disability" name="val-phone-number" placeholder="Enter phone number here..." value="<?php echo $phone_number; ?>" />
-                                            </div>
-                                        </div>
 
 
 
@@ -639,19 +605,23 @@ if (isset($_SESSION['user_id'])) {
             <div class="copyright">
                 <p>
                     Copyright &copy; Designed & Developed by
-                    <a href="https://themeforest.net/user/quixlab">Quixlab</a> 2018
+                    <a href="#">Anatoli</a> 2022
                 </p>
             </div>
         </div>
 
         <?php
 
-        if (isset($_GET['error'])) {
+        if (isset($_GET['status'])) {
         ?>
 
             <script>
                 $(() => {
-                    alert("<?php echo $_GET['error']; ?>");
+                    alert("<?php echo $_GET['message']; ?>");
+                    let status = "<?php echo $_GET['status']; ?>";
+                    if (status === "success") {
+                        window.location.href = "./branch_users.php";
+                    }
                 })
             </script>
 

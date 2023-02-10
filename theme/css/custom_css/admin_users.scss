@@ -40,7 +40,7 @@ $error_color: #d35;
     tbody {
       tr {
         #action_buttons {
-          opacity: 0;
+          visibility: hidden;
           display: flex;
           flex-direction: row;
 
@@ -57,7 +57,7 @@ $error_color: #d35;
 
       tr.active {
         #action_buttons {
-          opacity: 1;
+          visibility: visible;
         }
       }
     }

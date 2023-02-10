@@ -70,7 +70,7 @@
                                         <select class="form-control" id="user-category" name="user_category">
                                             <option value="">Select your user category</option>
                                             <option value="producer">Producer</option>
-                                            <option value="SupPlier">Supplier</option>
+                                            <option value="supplier">Supplier</option>
                                             <option value="consumer">Consumer</option>
                                         </select>
                                         <small>Error</small>

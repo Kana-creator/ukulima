@@ -109,7 +109,7 @@ function create_user(
     $profile_image,
     $target
 ) {
-    $result = $mysqli->query("SELECT * FROM user WHERE user_email='$user_email' OR user_telephone='$user_telephone'");
+    $result = $mysqli->query("SELECT * FROM User WHERE user_email='$user_email' OR user_telephone='$user_telephone'");
     if (!$result) {
         header("Location: ../pages/group_member_form.php?error=6$mysqli->error&group_id=$group_id");
         // echo "error3" . $mysqli->error;
@@ -117,19 +117,19 @@ function create_user(
         if (mysqli_num_rows($result) > 0) {
             header("Location: ../pages/group_member_form.php?error=User with the same details already saved.&group_id=$group_id");
         } else {
-            $query = $mysqli->query("INSERT INTO user(first_name, last_name, user_email, user_telephone, user_category, user_gender, user_password, profile_image) VALUES('$first_name', '$last_name', '$user_email', '$user_telephone', '$user_category', '$user_gender', '$user_password', '$profile_image')");
+            $query = $mysqli->query("INSERT INTO User(first_name, last_name, user_email, user_telephone, user_category, user_gender, user_password, profile_image) VALUES('$first_name', '$last_name', '$user_email', '$user_telephone', '$user_category', '$user_gender', '$user_password', '$profile_image')");
 
             if (!$query) {
                 header("Location: ../pages/group_member_form.php?error=7$mysqli->error&group_id=$group_id");
                 // echo "error4" . $mysqli->error;
             } else {
-                $result = $mysqli->query("SELECT user_id FROM user WHERE user_telephone='$user_telephone'");
+                $result = $mysqli->query("SELECT user_id FROM User WHERE user_telephone='$user_telephone'");
                 if (!$result) {
                     header("Location: ../pages/group_member_form.php?error=8$mysqli->error&group_id=$group_id");
                     // echo "error5" . $mysqli->error;
                 } else {
                     if (!move_uploaded_file($_FILES['val-image']['tmp_name'], $target)) {
-                        header("Location: ../pages/group_member_form.php?error=8$mysqli->error&group_id=$group_id");
+                        header("Location: ../pages/group_member_form.php?error=11$mysqli->error&group_id=$group_id");
                     } else {
 
 
@@ -255,7 +255,7 @@ function update_user(
     $profile_image,
     $target
 ) {
-    $query = $mysqli->query("UPDATE user SET first_name='$first_name', last_name='$last_name', user_email='$user_email', user_telephone='$user_telephone', user_category='$user_category', user_gender='$user_gender' WHERE user_id=$user_id");
+    $query = $mysqli->query("UPDATE User SET first_name='$first_name', last_name='$last_name', user_email='$user_email', user_telephone='$user_telephone', user_category='$user_category', user_gender='$user_gender' WHERE user_id=$user_id");
     if (!$query) {
         header("Location: ../pages/group_member_form.php?error=12$mysqli->error&group_id=$group_id&user_id=$user_id");
     } else {

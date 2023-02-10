@@ -7,7 +7,7 @@ if (isset($_SESSION['user_id'])) {
   header("Location: ../APIs/logout_api.php");
 }
 if (isset($_GET['product_id'])) {
-  $product_result = $mysqli->query("SELECT * FROM Product WHERE product_id=" . $_GET['product_id'] . "");
+  $product_result = $mysqli->query("SELECT * FROM product WHERE product_id=" . $_GET['product_id'] . "");
   $product_row = $product_result->fetch_array();
   $product_id = $product_row['product_id'];
   $brand_name = decrypt_data($product_row['brand_name']);
@@ -49,7 +49,7 @@ if (isset($_GET['product_id'])) {
   <title>Ukulima</title>
   <script src="../js/jquery.js"></script>
   <!-- Favicon icon -->
-  <link rel="icon" type="image/png" sizes="16x16" href="../assets/logo.PNG" />
+  <link rel="icon" type="image/png" sizes="16x16" href="../assets/logo.png" />
   <!-- Custom Stylesheet -->
   <link href="../css/style.css" rel="stylesheet" />
   <link href="../css/custom_css/add_product.css" rel="stylesheet" />
@@ -61,7 +61,7 @@ if (isset($_GET['product_id'])) {
     ********************-->
   <div id="preloader">
     <div class="loader">
-      <img src="../assets/logo.PNG" alt="" class="logo" />
+      <img src="../assets/logo.png" alt="" class="logo" />
       <!-- <svg class="circular" viewBox="25 25 50 50">
           <circle
             class="path"
@@ -630,9 +630,9 @@ if (isset($_GET['product_id'])) {
                           <option value="ml">Miligrams</option>
                           <option value="g">Gramms</option>
                           <option value="Kg">Killogram</option>
+                          <!-- <option value="">Select unit of measure</option>
                           <option value="">Select unit of measure</option>
-                          <option value="">Select unit of measure</option>
-                          <option value="">Select unit of measure</option>
+                          <option value="">Select unit of measure</option> -->
                         </select>
                       </div>
                     </div>
@@ -655,6 +655,19 @@ if (isset($_GET['product_id'])) {
                       </label>
                       <div class="col-lg-6 inner-group">
                         <input type="text" class="form-control" id="val-serial-number" name="val-serial-number" placeholder="Enter product serial number" value="<?php echo $serial_number; ?>" />
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label class="col-lg-4 col-form-label text-right" for="val-serial-number">Product Category<span class="text-danger">*</span>
+                      </label>
+                      <div class="col-lg-6 inner-group">
+                        <select class="form-control" id="val-product-category" name="val-product-category">">
+                          <option value="">Select product category</option>
+                          <option value="animal husbandry">Animal husbandry</option>
+                          <option value="crop husbandry">Crop husbandry</option>
+                          <option value="aquar calture ">Aquar calture</option>
+                          <option></option>
+                        </select>
                       </div>
                     </div>
                     <div class="form-group row">

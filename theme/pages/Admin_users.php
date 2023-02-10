@@ -18,7 +18,7 @@ if (isset($_SESSION['user_id'])) {
   <title>Ukulima | Users</title>
   <script src="../js/jquery.js"></script>
   <!-- Favicon icon -->
-  <link rel="icon" type="image/png" sizes="16x16" href="../assets/logo.PNG" />
+  <link rel="icon" type="image/png" sizes="16x16" href="../assets/logo.png" />
   <!-- Custom Stylesheet -->
   <link href="../plugins/tables/css/datatable/dataTables.bootstrap4.min.css" rel="stylesheet" />
   <link href="../css/bootstrap/bootstrap.min.css" rel="stylesheet" />
@@ -32,7 +32,7 @@ if (isset($_SESSION['user_id'])) {
     ********************-->
   <div id="preloader">
     <div class="loader">
-      <img src="../assets/logo.PNG" alt="" class="logo" />
+      <img src="../assets/logo.png" alt="" class="logo" />
       <!-- <svg class="circular" viewBox="25 25 50 50">
           <circle
             class="path"
@@ -326,6 +326,7 @@ if (isset($_SESSION['user_id'])) {
               <li><a href="./home.php">Home</a></li>
               <li><a href="./Admin_users.php">Users</a></li>
               <li><a href="./groups.php">Groups</a></li>
+              <li><a href="./product_report.php"><span><i class="fa"></i></span> Product reports</a></li>
               <!-- <li><a href="./orders.php">Orders</a></li> -->
             </ul>
           </li>
@@ -698,7 +699,7 @@ if (isset($_SESSION['user_id'])) {
   <script src="../js/settings.js"></script>
   <script src="../js/gleek.js"></script>
   <script src="../js/styleSwitcher.js"></script>
-  <script src="../js/custom_js/Admin_users.js"></script>
+  <script src="../js/custom_js/admin_users.js"></script>
 
   <script src="../plugins/tables/js/jquery.dataTables.min.js"></script>
   <script src="../plugins/tables/js/datatable/dataTables.bootstrap4.min.js"></script>

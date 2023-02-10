@@ -120,7 +120,7 @@ $(() => {
                             document.getElementById("message_div").classList.remove('active');
                             
                         } else {
-                            window.location.href = "/ukulima-1/theme/admin";
+                            window.location.href = "/ukulima/theme/admin";
                         }
                     })
                 }

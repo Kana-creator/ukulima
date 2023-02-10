@@ -32,7 +32,7 @@
 }
 
 .table-responsive table tbody tr #action_buttons {
-  opacity: 0;
+  visibility: hidden;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -52,7 +52,7 @@
 }
 
 .table-responsive table tbody tr.active #action_buttons {
-  opacity: 1;
+  visibility: visible;
 }
 
 #user-details {

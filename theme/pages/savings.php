@@ -20,7 +20,7 @@ if (isset($_SESSION['user_id'])) {
   $cart_row = $cart_result->fetch_array();
   $number_of_items = $cart_row['number_of_items'];
 } else {
-  header("Location: ../../index.html");
+  header("Location: ../../");
 }
 ?>
 
@@ -367,6 +367,7 @@ if (isset($_SESSION['user_id'])) {
             <ul aria-expanded="false" class="" style="background: #00FF7F">
               <li><a href="./consumer_page.php">Products</a></li>
               <li><a href="./verify_product.php">Verify product</a></li>
+              <li><a href="./product_report_form.php">Report a product</a></li>
               <li><a href="./consumer_cart.php">Orders</a></li>
             </ul>
           </li>

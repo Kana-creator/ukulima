@@ -7,18 +7,18 @@ include "../APIs/encryption_api.php";
 // include_once '../APIs/generate_qr_api.php';
 include_once '../../phpqrcode/qrlib.php';
 
-class Qrcodegenerator
-{
-  public function generate_qr($serial_number)
-  {
-    $path =  '../../phpqrcode/qr_images/';
-    $qrcode = $path . $serial_number . '.png';
-    QRcode::png($serial_number, $qrcode, 'H', 4, 4);
+// class Qrcodegenerator
+// {
+//   public function generate_qr($serial_number)
+//   {
+//     $path =  '../../phpqrcode/qr_images/';
+//     $qrcode = $path . $serial_number . '.png';
+//     QRcode::png($serial_number, $qrcode, 'H', 4, 4);
 
-    return $qrcode;
-  }
-}
-$qrcodegenerator = new Qrcodegenerator();
+//     return $qrcode;
+//   }
+// }
+// $qrcodegenerator = new Qrcodegenerator();
 
 
 
@@ -26,7 +26,7 @@ session_start();
 if (isset($_SESSION['user_id'])) {
   $user_id = $_SESSION['user_id'];
   $user_name = $_SESSION['user_name'];
-  $product_result = $mysqli->query("SELECT * FROM product WHERE user_id=$user_id");
+  $branch_result = $mysqli->query("SELECT * FROM branch WHERE user_id=$user_id");
 } else {
   header("Location: ../../index.html");
 }
@@ -187,26 +187,7 @@ if (isset($_SESSION['user_id'])) {
                 </div>
               </div>
             </li>
-            <!-- <li class="icons dropdown d-none d-md-flex">
-                <a
-                  href="javascript:void(0)"
-                  class="log-user"
-                  data-toggle="dropdown"
-                >
-                  <span>English</span>
-                  <i class="fa fa-angle-down f-s-14" aria-hidden="true"></i>
-                </a>
-                <div
-                  class="drop-down dropdown-language animated fadeIn dropdown-menu"
-                >
-                  <div class="dropdown-content-body">
-                    <ul>
-                      <li><a href="javascript:void()">English</a></li>
-                      <li><a href="javascript:void()">Dutch</a></li>
-                    </ul>
-                  </div>
-                </div>
-              </li> -->
+
             <li class="icons dropdown" title="Profile" data-toggle="tooltip" data-placement="top">
               <div class="user-img c-pointer position-relative" data-toggle="dropdown">
                 <span class="activity active"></span>
@@ -218,13 +199,7 @@ if (isset($_SESSION['user_id'])) {
                     <li>
                       <a href="#"><i class="icon-user"></i> <span><?php echo decrypt_data($user_name); ?></span></a>
                     </li>
-                    <!-- <li>
-                      <a href="email-inbox.html"><i class="icon-envelope-open"></i> <span>Inbox</span>
-                        <div class="badge gradient-3 badge-pill badge-primary">
-                          3
-                        </div>
-                      </a>
-                    </li>-->
+
 
                     <hr class="my-2" />
                     <!-- <li>
@@ -257,7 +232,7 @@ if (isset($_SESSION['user_id'])) {
               <i class="icon-speedometer menu-icon"></i><span class="nav-text">Dashboard</span>
             </a>
             <ul aria-expanded="false" class="" style="background: #00FF7F">
-              
+
               <li><a href="./products.php">Products</a></li>
               <li><a href="./orders.php">Orders</a></li>
             </ul>
@@ -268,12 +243,12 @@ if (isset($_SESSION['user_id'])) {
               <i class="icon-speedometer menu-icon"></i><span class="nav-text">Branch Management</span>
             </a>
             <ul aria-expanded="false" class="" style="background: #00FF7F">
-              
+
               <li><a href="./branches.php">Branches </a></li>
               <li><a href="./branch_users.php">Users</a></li>
             </ul>
           </li>
-          
+
         </ul>
       </div>
     </div>
@@ -304,117 +279,71 @@ if (isset($_SESSION['user_id'])) {
           <div class="col-12">
             <div class="card">
               <div class="card-body">
-                <h4 class=" card-title">Products</h4>
+                <h4 class=" card-title">Branches</h4>
                 <div class="table-responsive">
                   <div id="add_product">
-                    <a href="./Add_product.php" class="badge badge-pill gradient-1"><i class="fa fa-plus fa-2x btn btn-sm  p-2" id="" data-toggle="tooltip" data-placement="top" title="Add product"></i></a>
+                    <a href="./add_branch.php" class="badge badge-pill gradient-1"><i class="fa fa-plus fa-2x btn btn-sm  p-2" id="" data-toggle="tooltip" data-placement="top" title="Add a branch"></i></a>
                     <a href="#" class="badge badge-pill gradient-3"><i class="fa fa-upload fa-2x btn-sm p-2" id="" data-toggle="tooltip" data-placement="top" title="Upload list"></i></a>
                     <a href="#" class="badge badge-pill gradient-4"><i class="fa fa-download fa-2x btn-sm p-2" id="" data-toggle="tooltip" data-placement="top" title="Download list"></i></a>
                   </div>
                   <table class="table table-striped table-bordered zero-configuration">
                     <thead>
                       <tr>
-                        <th>QR Code</th>
-                        <th>Brand Name</th>
-                        <th>Batch number</th>
-                        <th>Serial number</th>
-                        <th>Date of manufacture</th>
-                        <th>Expiry date</th>
+                        <th>Branch Number</th>
+                        <th>Branch Name</th>
+                        <th>Branch Address</th>
+                        <th>Agency number</th>
+                        <th>Contact Name</th>
+                        <th>Contact Number</th>
+                        <th>Contact Email</th>
+                        <th>Branch Location</th>
                         <th>Action</th>
                       </tr>
                     </thead>
 
                     <tbody>
                       <?php
-                      while ($product_row = $product_result->fetch_array()) :
-                        $serial_number = decrypt_data($product_row['serial_number']);
-                        $Qrcode = $qrcodegenerator->generate_qr($serial_number);
+                      while ($branch_row = $branch_result->fetch_array()) :
 
-                        $expiry = new DateTime($product_row['product_expiry_date']);
-                        $now = new DateTime("now");
-                        $product_status = "";
-                        $status_title = "";
-                        if ($now->diff($expiry)->format('%a') <= 5) {
-                          $product_status = "#FF00F7F";
-                          $status_title = "Soon expiring";
-                        } else if ($expiry <= $now) {
-                          $product_status = "#FF007F";
-                          $status_title = "Expired";
-                        } else {
-                          $product_status = "#00FF7F";
-                          $status_title = "Current";
-                        }
                       ?>
                         <tr>
-                          <td><a href="../../phpqrcode/qr_images/<?php echo decrypt_data($product_row['serial_number']); ?>.png" target="_blank" download>download QR</a></td>
-                          <td><?php echo decrypt_data($product_row['brand_name']); ?></td>
-                          <td><?php echo decrypt_data($product_row['batch_number']); ?></td>
-                          <td><?php echo decrypt_data($product_row['serial_number']); ?></td>
-                          <td><?php echo $product_row['date_of_manufacture']; ?></td>
-                          <td class="badge-pill text-center" data-toggle="tooltip" data-placement="top" title="<?php echo $status_title; ?>" style="color: <?php echo $product_status; ?>">
-                            <?php echo $product_row['product_expiry_date']; ?>
-                          </td>
+                          <td><?php echo decrypt_data($branch_row['branch_number']); ?></td>
+                          <td><?php echo decrypt_data($branch_row['branch_name']); ?></td>
+                          <td><?php echo decrypt_data($branch_row['branch_address']); ?></td>
+                          <td><?php echo decrypt_data($branch_row['agency_number']); ?></td>
+                          <td><?php echo decrypt_data($branch_row['contact_name']); ?></td>
+                          <td><?php echo decrypt_data($branch_row['contact_number']); ?></td>
+                          <td><?php echo decrypt_data($branch_row['email_address']); ?></td>
+                          <td><?php echo $branch_row['branch_location']; ?></td>
+
                           <td id="action_buttons">
-                            <i class="fa fa-info btn btn-info" id="show-user-details<?php echo $product_row['product_id']; ?>" data-toggle="tooltip" data-placement="top" title="Details"></i>
-                            <a href="./Add_product.php?product_id=<?php echo $product_row['product_id']; ?>"><i class="fa fa-pencil btn btn-primary" data-toggle="tooltip" data-placement="top" title="Edit"></i></a>
-                            <i class="fa fa-trash btn btn-danger" data-toggle="tooltip" data-placement="top" title="Delete" id="delete_product<?php echo $product_row['product_id']; ?>"></i>
+                            <i class="fa fa-info btn btn-info" id="show-user-details<?php echo $branch_row['branch_id']; ?>" data-toggle="tooltip" data-placement="top" title="Details"></i>
+                            <a href="./add_branch.php?edit_branch&branch_id=<?php echo $branch_row['branch_id']; ?>"><i class="fa fa-pencil btn btn-primary" data-toggle="tooltip" data-placement="top" title="Edit"></i></a>
+                            <i class="fa fa-trash btn btn-danger" data-toggle="tooltip" data-placement="top" title="Delete" id="delete_branch<?php echo $branch_row['branch_id']; ?>"></i>
                           </td>
                         </tr>
 
                         <script>
                           $(() => {
-                            $("#show-user-details<?php echo $product_row['product_id']; ?>").on('click', function() {
-                              $("#product-details").addClass("show");
-                              $("#p_product_id").text("Prod-<?php echo $product_row['product_id']; ?>");
-                              $("#p_brand_name").text("<?php echo decrypt_data($product_row['brand_name']); ?>");
-                              $("#p_manufacturer").text("<?php echo decrypt_data($product_row['product_manufacturer']); ?>");
-                              $("#p_supplier").text("<?php echo decrypt_data($product_row['product_supplier']); ?>");
-                              $("#p_point_of_origin").text("<?php echo decrypt_data($product_row['point_of_origin']); ?>");
-                              $("#p_date_of_manufacture").text("<?php echo $product_row['date_of_manufacture']; ?>");
-                              $("#p_expiry_date").text("<?php echo $product_row['product_expiry_date']; ?>");
-                              $("#p_unit_of_measure").text("<?php echo decrypt_data($product_row['unit_of_measure']); ?>");
-                              $("#p_batch_number").text("<?php echo decrypt_data($product_row['batch_number']); ?>");
-                              $("#p_serial_number").text("<?php echo decrypt_data($product_row['serial_number']); ?>");
-                              $("#p_product_category").text("<?php echo decrypt_data($product_row['product_category']); ?>");
-                              $("#p_user_guid").text("<?php echo decrypt_data($product_row['user_guid']); ?>");
-                              $("#p_unit_cost").text("Ugx. <?php echo  number_format(decrypt_data($product_row['unit_cost']), 1); ?>/=");
-
-                              $("#product_image").attr("src", "../assets/product_images/<?php echo decrypt_data($product_row['product_image']); ?>");
-
-
-                              $("#qrcode").attr("src", "../../phpqrcode/qr_images/<?php echo decrypt_data($product_row['serial_number']) . ".png"; ?>");
-
-
-
-                            })
-
-                            $("#close-user").on('click', () => {
-                              $("#product-details").removeClass("show");
-                            })
-
-
-                            $("#delete_product<?php echo $product_row['product_id']; ?>").on('click', () => {
-                              var choise = confirm("Confirm to delete this product!");
-                              if (choise === true) {
+                            $("#delete_branch<?php echo $branch_row['branch_id']; ?>").on('click', function() {
+                              var confirm_delete = confirm("Are you sure you want to delete brannch with number <?php $branch_row['branch_number']; ?>");
+                              if (confirm_delete === true) {
                                 $.ajax({
-                                  url: "../APIs/products_api.php",
+                                  url: "../APIs/branches_api.php",
                                   type: "POST",
                                   dataType: "JSON",
                                   data: {
-                                    delete_product: "delete_product",
-                                    product_id: "<?php echo $product_row['product_id']; ?>",
+                                    delete_branch: "",
+                                    branch_id: "<?php echo $branch_row['branch_id']; ?>"
                                   },
                                   Cache: false,
-                                  success: (res) => {
-                                    $("#message_div").addClass("active");
-                                    $("#alert_msg").text("Product deleted successfully");
-                                    $("#ok").on('click', () => {
-                                      $("#message_div").removeClass("active");
-                                      window.location.href = "./products.php";
-                                    })
-                                  },
+                                  success: res => {
+                                    alert(res['message']);
+                                    window.location.href = "./branches.php";
+                                  }
                                 })
                               }
+
                             })
                           })
                         </script>
@@ -425,12 +354,14 @@ if (isset($_SESSION['user_id'])) {
                     </tbody>
                     <tfoot>
                       <tr>
-                        <th>QR Code</th>
-                        <th>Brand Name</th>
-                        <th>Batch number</th>
-                        <th>Serial number</th>
-                        <th>Date of manufacture</th>
-                        <th>Expiry date</th>
+                        <th>Branch Number</th>
+                        <th>Branch Name</th>
+                        <th>Branch Address</th>
+                        <th>Agency number</th>
+                        <th>Contact Name</th>
+                        <th>Contact Number</th>
+                        <th>Contact Email</th>
+                        <th>Branch Location</th>
                         <th>Action</th>
                       </tr>
                     </tfoot>
