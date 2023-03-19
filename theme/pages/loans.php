@@ -12,7 +12,7 @@ if (isset($_SESSION['user_id'])) {
 
   $consumer_result = $mysqli->query("SELECT * FROM consumer INNER JOIN User ON consumer.user_id = User.user_id WHERE group_id=$group_id");
 
-  $cart_result = $mysqli->query("SELECT SUM(number_of_items) AS number_of_items FROM user_order WHERE user_id=$user_id AND check_out_status=0");
+  $cart_result = $mysqli->query("SELECT SUM(number_of_items) AS number_of_items FROM user_order WHERE user_id=$user_id AND check_out_status=0 ");
 
   $cart_row = $cart_result->fetch_array();
   $number_of_items = $cart_row['number_of_items'];
@@ -464,65 +464,67 @@ if (isset($_SESSION['user_id'])) {
                     // $group_row = $group_result->fetch_array();
                     $consumer_id = $consumer_row['consumer_id'];
                     $consumer_name = $consumer_row['first_name'];
-                    $savings_result = $mysqli->query("SELECT * FROM loan WHERE consumer_id=$consumer_id");
+                    $savings_result = $mysqli->query("SELECT * FROM loan WHERE consumer_id=$consumer_id ORDER BY savings_date DESC");
 
                     $total_result = $mysqli->query("SELECT SUM(savings_amount) AS total FROM loan WHERE consumer_id=$consumer_id");
                     $total_row = $total_result->fetch_array();
 
                   ?>
-                    <div class="d-flex justify-space-between mt-4 alert alert-info" style="justify-content: space-between; align-items: center;">
-                      <h6><?php echo decrypt_data($consumer_row['first_name']) . " " . decrypt_data($consumer_row['last_name']) . " : " . decrypt_data($consumer_row['user_telephone']); ?></h6>
-                      <h6>Total loan <?php echo " : " . number_format($total_row['total']); ?></h6>
-                      <i class="fa fa-angle-right btn" style="font-size: 19px;color: black"></i>
-                    </div>
-                    <div id="consumer_group">
-                      <table class="table table-bordered zero-configuration">
-                        <thead>
-                          <tr>
-                            <th>Date</th>
-                            <th>Amount</th>
-                            <th>Taken by (name)</th>
-                            <th>Taken by (phone number)</th>
-                            <th>savings</th>
-                            <!-- <th>Loan</th> -->
-                            <!-- <th>Action</th> -->
-                            <!-- <th>Age</th>
+                    <div style="border: .3px solid green; padding: 0 0 5px 0; margin: 50px 0; border-radius: 5px">
+                      <div class="d-flex justify-space-between alert alert-info" style="justify-content: space-between; align-items: center;">
+                        <h6><?php echo decrypt_data($consumer_row['first_name']) . " " . decrypt_data($consumer_row['last_name']) . " : " . decrypt_data($consumer_row['user_telephone']); ?></h6>
+                        <h6>Total loan <?php echo " : " . number_format($total_row['total']); ?></h6>
+                        <i class="fa fa-angle-right btn" style="font-size: 19px;color: black"></i>
+                      </div>
+                      <div id="consumer_group">
+                        <table class="table table-bordered zero-configuration">
+                          <thead>
+                            <tr>
+                              <th>Date</th>
+                              <th>Amount</th>
+                              <th>Taken by (name)</th>
+                              <th>Taken by (phone number)</th>
+                              <!-- <th>savings</th> -->
+                              <!-- <th>Loan</th> -->
+                              <!-- <th>Action</th> -->
+                              <!-- <th>Age</th>
                           <th>Start date</th>
                           <th>Salary</th> -->
-                          </tr>
-                        </thead>
+                            </tr>
+                          </thead>
 
-                        <tbody>
-                          <?php while ($savings_row = $savings_result->fetch_array()) : ?>
-                            <tr>
-                              <td><?php echo $savings_row['savings_date']; ?></td>
-                              <td><?php echo number_format($savings_row['savings_amount']); ?></td>
-                              <td><?php echo decrypt_data($savings_row['brought_by_name']); ?></td>
-                              <td><?php echo decrypt_data($savings_row['brought_by_phone']); ?></td>
-                              <td>0</td>
-                              <!-- <td>Online</td> -->
-                              <!-- <td id="action_buttons">
+                          <tbody>
+                            <?php while ($savings_row = $savings_result->fetch_array()) : ?>
+                              <tr>
+                                <td><?php echo $savings_row['savings_date']; ?></td>
+                                <td><?php echo number_format($savings_row['savings_amount']); ?></td>
+                                <td><?php echo decrypt_data($savings_row['brought_by_name']); ?></td>
+                                <td><?php echo decrypt_data($savings_row['brought_by_phone']); ?></td>
+                                <!-- <td>0</td> -->
+                                <!-- <td>Online</td> -->
+                                <!-- <td id="action_buttons">
                                                                 <i class="fa fa-info btn btn-info" id="show-user-details<?php echo $user_row['user_id']; ?>" data-toggle="tooltip" data-placement="top" title="Details"></i>
                                                                 <a href="./group_member_form.php?edit_member=2&user_id=<?php echo $user_row['user_id']; ?>&group_id=<?php echo $user_row['group_id']; ?>"><i class="fa fa-pencil btn btn-primary" data-toggle="tooltip" data-placement="top" title="Edit"></i></a>
                                                                 <i class="fa fa-trash btn btn-danger" data-toggle="tooltip" data-placement="top" title="Delete" id="delete_member<?php echo $user_row['user_id']; ?>"></i>
                                                             </td> -->
+                              </tr>
+
+
+                            <?php endwhile; ?>
+                          </tbody>
+                          <tfoot>
+                            <tr>
+                              <th>Date</th>
+                              <th>Amount</th>
+                              <th>Taken by (name)</th>
+                              <th>Taken by (phone number)</th>
+                              <!-- <th>Savings</th> -->
+                              <!-- <th>Loan</th> -->
+                              <!-- <th>Action</th> -->
                             </tr>
-
-
-                          <?php endwhile; ?>
-                        </tbody>
-                        <tfoot>
-                          <tr>
-                            <th>Date</th>
-                            <th>Amount</th>
-                            <th>Taken by (name)</th>
-                            <th>Taken by (phone number)</th>
-                            <th>Savings</th>
-                            <!-- <th>Loan</th> -->
-                            <!-- <th>Action</th> -->
-                          </tr>
-                        </tfoot>
-                      </table>
+                          </tfoot>
+                        </table>
+                      </div>
                     </div>
                   <?php endwhile; ?>
 
@@ -541,28 +543,28 @@ if (isset($_SESSION['user_id'])) {
               <div class="form-group row">
                 <label>Member's phone number <span class="text-danger">*</span></label>
                 <input class="form-control" id="phone_number" />
-                <small>error</small>
+                <small></small>
               </div>
               <div class="form-group row">
                 <label>Amount <span class="text-danger">*</span></label>
                 <input type="number" class="form-control" id="savings_amount" />
-                <small>error</small>
+                <small></small>
               </div>
               <div class="form-group row">
                 <label>Date <span class="text-danger">*</span></label>
                 <input type="date" class=" form-control" id="savings_date" />
-                <small>error</small>
+                <small></small>
               </div>
               <h4 class="text-success text-center my-4" id="next_of_kin">Signed by</h4>
               <div class="form-group row">
                 <label>Full name <span class="text-danger">*</span></label>
                 <input class="form-control" id="brought_full_name" />
-                <small>error</small>
+                <small></small>
               </div>
               <div class="form-group row">
                 <label>Phone number <span class="text-danger">*</span></label>
                 <input class="form-control" id="brought_phone_number" />
-                <small>error</small>
+                <small></small>
               </div>
               <div class="form-group row">
                 <input type="submit" class="form-control btn btn-success btn-sm" id="save_saving" />

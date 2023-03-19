@@ -19,7 +19,20 @@ function register_group($mysqli, $user_id, $group_name, $registration_type, $reg
             if (!$query) {
                 echo json_encode(array($mysqli->error));
             } else {
-                echo json_encode(array("Group has been successfully registered."));
+                $group_result = $mysqli->query("SELECT group_id, FROM consumer_group WHERE user_id=$user_id");
+
+                if (!$group_result) {
+                    echo json_encode(array($mysqli->error));
+                } else {
+                    $group_row = $group_result->fetch_arrar();
+                    $group_id = $group_row['group_id'];
+                    $consumer_query = $mysqli->query("INSERT INTO consumer(user_id, group_id, consumer_type) VALUES($user_id, $group_id, 'admin')");
+                    if (!$consumer_query) {
+                        echo json_encode(array($mysqli->error));
+                    } else {
+                        echo json_encode(array("Group has been successfully registered."));
+                    }
+                }
             }
         }
     }

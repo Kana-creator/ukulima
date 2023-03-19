@@ -467,65 +467,67 @@ if (isset($_SESSION['user_id'])) {
                     // $group_row = $group_result->fetch_array();
                     $consumer_id = $consumer_row['consumer_id'];
                     $consumer_name = $consumer_row['first_name'];
-                    $savings_result = $mysqli->query("SELECT * FROM savings WHERE consumer_id=$consumer_id");
+                    $savings_result = $mysqli->query("SELECT * FROM savings WHERE consumer_id=$consumer_id ORDER BY savings_date DESC");
 
                     $total_result = $mysqli->query("SELECT SUM(savings_amount) AS total FROM savings WHERE consumer_id=$consumer_id");
                     $total_row = $total_result->fetch_array();
 
                   ?>
-                    <div class="d-flex justify-space-between my-4 alert alert-info" style="justify-content: space-between; align-items: center;">
-                      <h6><?php echo decrypt_data($consumer_row['first_name']) . " " . decrypt_data($consumer_row['last_name']) . " : " . decrypt_data($consumer_row['user_telephone']); ?></h6>
-                      <h6>Total savings <?php echo " : " . number_format($total_row['total']); ?></h6>
-                      <i class="fa fa-angle-right btn" style="font-size: 19px;color: black"></i>
-                    </div>
-                    <div id="consumer_group">
-                      <table class="table table-bordered zero-configuration">
-                        <thead>
-                          <tr>
-                            <th>Date</th>
-                            <th>Amount</th>
-                            <th>Brought by (name)</th>
-                            <th>Brought by (phone number)</th>
-                            <th>savings</th>
-                            <!-- <th>Loan</th> -->
-                            <!-- <th>Action</th> -->
-                            <!-- <th>Age</th>
+                    <div style="border: .3px solid green; padding: 0 0 5px 0; margin: 50px 0; border-radius: 5px">
+                      <div class="d-flex justify-space-between alert alert-info" style="justify-content: space-between; align-items: center;">
+                        <h6><?php echo decrypt_data($consumer_row['first_name']) . " " . decrypt_data($consumer_row['last_name']) . " : " . decrypt_data($consumer_row['user_telephone']); ?></h6>
+                        <h6>Total savings <?php echo " : " . number_format($total_row['total']); ?></h6>
+                        <i class="fa fa-angle-right btn" style="font-size: 19px;color: black"></i>
+                      </div>
+                      <div id="consumer_group">
+                        <table class="table table-bordered zero-configuration">
+                          <thead>
+                            <tr>
+                              <th>Date</th>
+                              <th>Amount</th>
+                              <th>Brought by (name)</th>
+                              <th>Brought by (phone number)</th>
+                              <!-- <th>savings</th>s -->
+                              <!-- <th>Loan</th> -->
+                              <!-- <th>Action</th> -->
+                              <!-- <th>Age</th>
                           <th>Start date</th>
                           <th>Salary</th> -->
-                          </tr>
-                        </thead>
+                            </tr>
+                          </thead>
 
-                        <tbody>
-                          <?php while ($savings_row = $savings_result->fetch_array()) : ?>
-                            <tr>
-                              <td><?php echo $savings_row['savings_date']; ?></td>
-                              <td><?php echo number_format($savings_row['savings_amount']); ?></td>
-                              <td><?php echo decrypt_data($savings_row['brought_by_name']); ?></td>
-                              <td><?php echo decrypt_data($savings_row['brought_by_phone']); ?></td>
-                              <td>0</td>
-                              <!-- <td>Online</td> -->
-                              <!-- <td id="action_buttons">
+                          <tbody>
+                            <?php while ($savings_row = $savings_result->fetch_array()) : ?>
+                              <tr>
+                                <td><?php echo $savings_row['savings_date']; ?></td>
+                                <td><?php echo number_format($savings_row['savings_amount']); ?></td>
+                                <td><?php echo decrypt_data($savings_row['brought_by_name']); ?></td>
+                                <td><?php echo decrypt_data($savings_row['brought_by_phone']); ?></td>
+                                <!-- <td>0</td> -->
+                                <!-- <td>Online</td> -->
+                                <!-- <td id="action_buttons">
                                                                 <i class="fa fa-info btn btn-info" id="show-user-details<?php echo $user_row['user_id']; ?>" data-toggle="tooltip" data-placement="top" title="Details"></i>
                                                                 <a href="./group_member_form.php?edit_member=2&user_id=<?php echo $user_row['user_id']; ?>&group_id=<?php echo $user_row['group_id']; ?>"><i class="fa fa-pencil btn btn-primary" data-toggle="tooltip" data-placement="top" title="Edit"></i></a>
                                                                 <i class="fa fa-trash btn btn-danger" data-toggle="tooltip" data-placement="top" title="Delete" id="delete_member<?php echo $user_row['user_id']; ?>"></i>
                                                             </td> -->
+                              </tr>
+
+
+                            <?php endwhile; ?>
+                          </tbody>
+                          <tfoot>
+                            <tr>
+                              <th>Date</th>
+                              <th>Amount</th>
+                              <th>Brought by (name)</th>
+                              <th>Brought by (phone number)</th>
+                              <!-- <th>Savings</th> -->
+                              <!-- <th>Loan</th> -->
+                              <!-- <th>Action</th> -->
                             </tr>
-
-
-                          <?php endwhile; ?>
-                        </tbody>
-                        <tfoot>
-                          <tr>
-                            <th>Date</th>
-                            <th>Amount</th>
-                            <th>Brought by (name)</th>
-                            <th>Brought by (phone number)</th>
-                            <th>Savings</th>
-                            <!-- <th>Loan</th> -->
-                            <!-- <th>Action</th> -->
-                          </tr>
-                        </tfoot>
-                      </table>
+                          </tfoot>
+                        </table>
+                      </div>
                     </div>
                   <?php endwhile; ?>
 
@@ -601,7 +603,7 @@ if (isset($_SESSION['user_id'])) {
     <div class="copyright">
       <p>
         Copyright &copy; Designed & Developed by
-        <a href="https://themeforest.net/user/quixlab">Anatoli</a> 2022
+        <a href="#">Anatoli</a> 2022
       </p>
     </div>
   </div>

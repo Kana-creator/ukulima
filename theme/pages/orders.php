@@ -318,19 +318,29 @@ if (isset($_SESSION['user_id'])) {
     <!--**********************************
             Side bar start
         ***********************************-->
-    <div class="nk-sidebar bg-success" style="background-color: #00FF7F">
-      <div class="nk-nav-scroll" style="background-color: #00FF7F">
-        <ul class="metismenu" id="menu" style="background-color: #00FF7F">
-          <li class="nav-label">Dashboard</li>
+    <div class="nk-sidebar" style="background: #00FF7F">
+      <div class="nk-nav-scroll" style="background: #00FF7F">
+        <ul class="metismenu" id="menu" style="background: #00FF7F">
+          <!-- <li class="nav-label">Dashboard</li> -->
           <li>
-            <a class="has-arrow" href="javascript:void()" aria-expanded="fals" style="background-color: #00FF7F">
+            <a class="has-arrow" href="javascript:void()" aria-expanded="fals" style="background: #00FF7F">
               <i class="icon-speedometer menu-icon"></i><span class="nav-text">Dashboard</span>
             </a>
-            <ul aria-expanded="false" class="" style="background-color: #00FF7F">
-              <!-- <li><a href="./consumer_page.php">Home</a></li> -->
-              <!-- <li><a href="./Admin_users.php">Users</a></li> -->
+            <ul aria-expanded="false" class="" style="background: #00FF7F">
+
               <li><a href="./products.php">Products</a></li>
               <li><a href="./orders.php">Orders</a></li>
+            </ul>
+          </li>
+
+          <li>
+            <a class="has-arrow" href="javascript:void()" aria-expanded="fals" style="background: #00FF7F">
+              <i class="icon-speedometer menu-icon"></i><span class="nav-text">Branch Management</span>
+            </a>
+            <ul aria-expanded="false" class="" style="background: #00FF7F">
+
+              <li><a href="./branches.php">Branches </a></li>
+              <li><a href="./branch_users.php">Users</a></li>
             </ul>
           </li>
 

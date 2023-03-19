@@ -10,10 +10,10 @@ if (isset($_SESSION['user_id'])) {
   $user_category = $_SESSION['user_category'];
 
   if ($user_category == "producer") {
-    $user_result = $mysqli->query("SELECT * FROM branch INNER JOIN producer ON branch.branch_id=producer.branch_id INNER JOIN User ON producer.user_id=User.user_id");
+    $user_result = $mysqli->query("SELECT * FROM branch INNER JOIN producer ON branch.branch_id=producer.branch_id INNER JOIN User ON producer.user_id=User.user_id WHERE branch.user_id=$user_id");
   } else {
     // $user_result = $mysqli->query("SELECT * FROM User INNER JOIN supplier ON User.user_id=supplier.user_id");
-    $user_result = $mysqli->query("SELECT * FROM branch INNER JOIN supplier ON branch.branch_id=supplier.branch_id INNER JOIN User ON supplier.user_id=User.user_id");
+    $user_result = $mysqli->query("SELECT * FROM branch INNER JOIN supplier ON branch.branch_id=supplier.branch_id INNER JOIN User ON supplier.user_id=User.user_id WHERE branch.user_id=$user_id");
   }
 } else {
   header("Location: ../../index.html");

@@ -48,7 +48,7 @@ function delete_supplier($mysqli, $user_id, $admin_id)
 }
 
 // FUNCTION FOR UPDATING USER INFO
-function update_user($mysqli, $user_id, $first_name, $last_name, $user_email, $user_telephone, $user_category, $user_gender, $user_password, $profile_image, $branch_number, $user_type, $user_address, $nationality, $marital_status, $identity_type, $identity_number, $date_of_birth)
+function update_user($mysqli, $user_id, $first_name, $last_name, $user_email, $user_telephone, $user_category, $user_gender, $profile_image, $branch_number, $user_type, $user_address, $nationality, $marital_status, $identity_type, $identity_number, $date_of_birth)
 {
     $result = $mysqli->query("SELECT branch_id FROM branch WHERE branch_number='$branch_number'");
     if (!$result) {
@@ -59,27 +59,32 @@ function update_user($mysqli, $user_id, $first_name, $last_name, $user_email, $u
         } else {
             $row = $result->fetch_array();
             $branch_id = $row['branch_id'];
-            if ($profile_image != NULL) {
-                $user_query = $mysqli->query("UPDATE User SET first_name='$first_name', last_name='$last_name', user_email='$user_email', user_telephone='$user_telephone', user_category='$user_category', user_gender='$user_gender', profile_image='$profile_image' WHERE user_id=$user_id");
+            $user_result = $mysqli->query("SELECT user_id FROM User WHERE (user_email='$user_email' AND user_id!=$user_id) OR (user_telephone='$user_telephone' AND user_id!=$user_id)");
+            if (mysqli_num_rows($user_result) > 0) {
+                header("Location: ../pages/add_branch_user.php?status=error&message=Email or telephone already used by another user.");
             } else {
-                $user_query = $mysqli->query("UPDATE User SET first_name='$first_name', last_name='$last_name', user_email='$user_email', user_telephone='$user_telephone', user_category='$user_category', user_gender='$user_gender' WHERE user_id=$user_id");
-            }
-            if (!$user_query) {
-                header("Location: ../pages/add_branch_user.php?status=error&message=11$mysqli->error");
-            } else {
-                if ($user_category == "producer") {
-                    $query = $mysqli->query("UPDATE producer SET branch_id=$branch_id, user_type='$user_type', user_address='$user_address', nationality='$nationality', marital_status='$marital_status', identity_type='$identity_type', identity_number='$identity_number', date_of_birth='$date_of_birth' WHERE user_id=$user_id");
-                    if (!$query) {
-                        header("Location: ../pages/add_branch_user.php?status=error&message=$mysqli->error");
-                    } else {
-                        header("Location: ../pages/add_branch_user.php?status=success&message=User info have been updated successfully.");
-                    }
+                if ($profile_image != NULL) {
+                    $user_query = $mysqli->query("UPDATE User SET first_name='$first_name', last_name='$last_name', user_email='$user_email', user_telephone='$user_telephone', user_category='$user_category', user_gender='$user_gender', profile_image='$profile_image' WHERE user_id=$user_id");
                 } else {
-                    $query = $mysqli->query("UPDATE producer SET branch_id=$branch_id, user_type='$user_type', user_address='$user_address', nationality='$nationality', marital_status='$marital_status', identity_type='$identity_type', identity_number='$identity_number', date_of_birth='$date_of_birth' WHERE user_id=$user_id");
-                    if (!$query) {
-                        header("Location: ../pages/add_branch_user.php?status=error&message=$mysqli->error");
+                    $user_query = $mysqli->query("UPDATE User SET first_name='$first_name', last_name='$last_name', user_email='$user_email', user_telephone='$user_telephone', user_category='$user_category', user_gender='$user_gender' WHERE user_id=$user_id");
+                }
+                if (!$user_query) {
+                    header("Location: ../pages/add_branch_user.php?status=error&message=11$mysqli->error");
+                } else {
+                    if ($user_category == "producer") {
+                        $query = $mysqli->query("UPDATE producer SET branch_id=$branch_id, user_type='$user_type', user_address='$user_address', nationality='$nationality', marital_status='$marital_status', identity_type='$identity_type', identity_number='$identity_number', date_of_birth='$date_of_birth' WHERE user_id=$user_id");
+                        if (!$query) {
+                            header("Location: ../pages/add_branch_user.php?status=error&message=$mysqli->error");
+                        } else {
+                            header("Location: ../pages/add_branch_user.php?status=success&message=User info have been updated successfully.");
+                        }
                     } else {
-                        header("Location: ../pages/add_branch_user.php?status=success&message=User info hav been updated successfully.");
+                        $query = $mysqli->query("UPDATE producer SET branch_id=$branch_id, user_type='$user_type', user_address='$user_address', nationality='$nationality', marital_status='$marital_status', identity_type='$identity_type', identity_number='$identity_number', date_of_birth='$date_of_birth' WHERE user_id=$user_id");
+                        if (!$query) {
+                            header("Location: ../pages/add_branch_user.php?status=error&message=$mysqli->error");
+                        } else {
+                            header("Location: ../pages/add_branch_user.php?status=success&message=User info hav been updated successfully.");
+                        }
                     }
                 }
             }
@@ -186,14 +191,12 @@ function add_user($mysqli, $user_id, $first_name, $last_name, $user_email, $user
 // FUNCTION FOR DELETING A USER
 function delete_user($mysqli, $user_id, $user_category, $admin_id)
 {
-
     if ($user_category == "producer") {
         delete_producer($mysqli, $user_id, $admin_id);
     } else {
         delete_supplier($mysqli, $user_id, $admin_id);
     }
 }
-
 
 
 
@@ -223,7 +226,7 @@ if (isset($_POST['action'])) {
 
         add_user($mysqli, $user_id, $first_name, $last_name, $user_email, $user_telephone, $user_category, $user_gender, $user_password, $profile_image, $branch_number, $branch_id, $user_type, $user_address, $nationality, $marital_status, $identity_type, $identity_number, $date_of_birth);
     } else if ($_POST['action'] == "edit_user") {
-        update_user($mysqli, $user_id, $first_name, $last_name, $user_email, $user_telephone, $user_category, $user_gender, $user_password, $profile_image, $branch_number, $user_type, $user_address, $nationality, $marital_status, $identity_type, $identity_number, $date_of_birth);
+        update_user($mysqli, $user_id, $first_name, $last_name, $user_email, $user_telephone, $user_category, $user_gender, $profile_image, $branch_number, $user_type, $user_address, $nationality, $marital_status, $identity_type, $identity_number, $date_of_birth);
 
         echo json_encode(array("status" => "error", "message" => "yes"));
 

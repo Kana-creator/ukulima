@@ -342,11 +342,11 @@ if (isset($_SESSION['user_id'])) {
                                     $("#p_manufacturer").text("<?php echo decrypt_data($product_row['product_manufacturer']) ?>");
                                     $("#p_supplier").text("<?php echo decrypt_data($product_row['product_supplier']); ?>");
                                     $("#p_point_of_origin").text("<?php echo decrypt_data($product_row['point_of_origin']); ?>");
-                                    $("#p_date_of_manufacture").text("<?php echo $product_row['date_of_manufacture']; ?>");
-                                    $("#p_expiry_date").text("<?php echo $product_row['product_expiry_date']; ?>");
+                                    // $("#p_date_of_manufacture").text("<?php echo $product_row['date_of_manufacture']; ?>");
+                                    // $("#p_expiry_date").text("<?php echo $product_row['product_expiry_date']; ?>");
                                     $("#p_unit_of_measure").text("<?php echo decrypt_data($product_row['unit_of_measure']); ?>");
-                                    $("#p_batch_number").text("<?php echo decrypt_data($product_row['batch_number']); ?>");
-                                    $("#p_serial_number").text("<?php echo decrypt_data($product_row['serial_number']); ?>");
+                                    // $("#p_batch_number").text("<?php echo decrypt_data($product_row['batch_number']); ?>");
+                                    // $("#p_serial_number").text("<?php echo decrypt_data($product_row['serial_number']); ?>");
                                     $("#p_product_category").text("<?php echo decrypt_data($product_row['product_category']); ?>");
                                     $("#p_unit_cost").text("Ugx. <?php echo number_format(decrypt_data($product_row['unit_cost'])); ?>/=");
                                     $("#product_id").text("<?php echo decrypt_data($product_row['serial_number']); ?>");
@@ -426,11 +426,11 @@ if (isset($_SESSION['user_id'])) {
                                 <p><b>Manufacturer: </b></p>
                                 <p><b>Registered supplier: </b></p>
                                 <p><b>Point of origin: </b></p>
-                                <p><b>Date of manufacture: </b></p>
-                                <p><b>Expiry date: </b></p>
+                                <!-- <p><b>Date of manufacture: </b></p> -->
+                                <!-- <p><b>Expiry date: </b></p> -->
                                 <p><b>Unit of measure: </b></p>
-                                <p><b>Batch number: </b></p>
-                                <p><b>Serial number: </b></p>
+                                <!-- <p><b>Batch number: </b></p> -->
+                                <!-- <p><b>Serial number: </b></p> -->
                                 <p><b>Product category: </b></p>
                                 <p><b>Unit cost: </b></p>
                                 <p><b>E-Extension: </b></p>
@@ -441,22 +441,17 @@ if (isset($_SESSION['user_id'])) {
                                 <p id="p_manufacturer">Kakoola Ug ltd</p>
                                 <p id="p_supplier">K&M Traders</p>
                                 <p id="p_point_of_origin">Mukono industrial Area</p>
-                                <p id="p_date_of_manufacture">25th/06/2022</p>
-                                <p id="p_expiry_date">23th/06/2023</p>
+                                <!-- <p id="p_date_of_manufacture">25th/06/2022</p> -->
+                                <!-- <p id="p_expiry_date">23th/06/2023</p> -->
                                 <p id="p_unit_of_measure">1.5ltr</p>
-                                <p id="p_batch_number">44545Y64</p>
-                                <p id="p_serial_number">RUE4466564RTT56</p>
+                                <!-- <p id="p_batch_number">44545Y64</p> -->
+                                <!-- <p id="p_serial_number">RUE4466564RTT56</p> -->
                                 <p id="p_product_category">Plant husbandry</p>
                                 <p id="p_unit_cost">UGX. 17500</p>
                                 <p id="p_user_guid">ddd</p>
 
                                 <p id="p_user_guid">
-                                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                                    Voluptatem sapiente, consectetur dicta nostrum quas porro ex
-                                    explicabo, earum maiores dolore repudiandae sit nulla sequi
-                                    fugit, qui iure velit ratione! Exercitationem veritatis
-                                    accusantium, ab eius eum aliquam ea alias sed quod obcaecati
-                                    maxime dicta quae quas ratione nobis debitis corporis ullam.
+
                                 </p>
                             </div>
                         </div>

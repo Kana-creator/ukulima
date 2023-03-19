@@ -36,7 +36,7 @@ if (!isset($_SESSION['user_id'])) {
     ********************-->
   <div id="preloader">
     <div class="loader">
-      <img src="../assets/logo.PNG" alt="" class="logo" />
+      <img src="../assets/logo.png" alt="" class="logo" />
 
       <!-- <svg class="circular" viewBox="25 25 50 50">
           <circle
@@ -73,7 +73,7 @@ if (!isset($_SESSION['user_id'])) {
             justify-content: center;
             align-items: center;
           ">
-        <a href="/home.php">
+        <a href="./home.php">
           <b class="logo-abbr"><img src="../assets/logo.png" alt="" style="height: 60px; width: 60px" />
           </b>
           <span class="logo-compact"><img src="../assets/logo.png" alt="" style="height: 60px; width: 60px" /></span>
@@ -103,7 +103,7 @@ if (!isset($_SESSION['user_id'])) {
               <span class="input-group-text bg-transparent border-0 pr-2 pr-sm-3" id="basic-addon1"><i class="mdi mdi-magnify"></i></span>
             </div>
             <input type="search" class="form-control" placeholder="Search Dashboard" aria-label="Search Dashboard" />
-            <div class="drop-down animated flipInX d-md-none">
+            <div class="drop-down d-md-none">
               <form action="#">
                 <input type="text" class="form-control" placeholder="Search" />
               </form>
@@ -112,91 +112,15 @@ if (!isset($_SESSION['user_id'])) {
         </div>
         <div class="header-right">
           <ul class="clearfix">
-            <li class="icons dropdown">
-              <!-- <a href="javascript:void(0)" data-toggle="dropdown">
-                <i class="mdi mdi-email-outline"></i>
-                <span class="badge badge-pill gradient-1">3</span>
-              </a> -->
-              <div class="drop-down animated fadeIn dropdown-menu">
-                <div class="dropdown-content-heading d-flex justify-content-between">
-                  <span class="">3 New Messages</span>
-                  <a href="javascript:void()" class="d-inline-block">
-                    <span class="badge badge-pill gradient-1">3</span>
-                  </a>
-                </div>
-                <div class="dropdown-content-body">
-                  <ul>
-                    <li class="notification-unread">
-                      <a href="javascript:void()">
-                        <img class="float-left mr-3 avatar-img" src="../images/avatar/1.jpg" alt="" />
-                        <div class="notification-content">
-                          <div class="notification-heading">Saiful Islam</div>
-                          <div class="notification-timestamp">
-                            08 Hours ago
-                          </div>
-                          <div class="notification-text">
-                            Hi Teddy, Just wanted to let you ...
-                          </div>
-                        </div>
-                      </a>
-                    </li>
-                    <li class="notification-unread">
-                      <a href="javascript:void()">
-                        <img class="float-left mr-3 avatar-img" src="../images/avatar/2.jpg" alt="" />
-                        <div class="notification-content">
-                          <div class="notification-heading">Adam Smith</div>
-                          <div class="notification-timestamp">
-                            08 Hours ago
-                          </div>
-                          <div class="notification-text">
-                            Can you do me a favour?
-                          </div>
-                        </div>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="javascript:void()">
-                        <img class="float-left mr-3 avatar-img" src="../images/avatar/3.jpg" alt="" />
-                        <div class="notification-content">
-                          <div class="notification-heading">Barak Obama</div>
-                          <div class="notification-timestamp">
-                            08 Hours ago
-                          </div>
-                          <div class="notification-text">
-                            Hi Teddy, Just wanted to let you ...
-                          </div>
-                        </div>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="javascript:void()">
-                        <img class="float-left mr-3 avatar-img" src="../images/avatar/4.jpg" alt="" />
-                        <div class="notification-content">
-                          <div class="notification-heading">
-                            Hilari Clinton
-                          </div>
-                          <div class="notification-timestamp">
-                            08 Hours ago
-                          </div>
-                          <div class="notification-text">Hello</div>
-                        </div>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </li>
+
             <li class="icons dropdown">
               <!-- <a href="javascript:void(0)" data-toggle="dropdown">
                 <i class="mdi mdi-bell-outline"></i>
-                <span class="badge badge-pill gradient-2">3</span>
+                <span class="badge badge-pill gradient-2 badge-primary">3</span>
               </a> -->
               <div class="drop-down animated fadeIn dropdown-menu dropdown-notfication">
                 <div class="dropdown-content-heading d-flex justify-content-between">
                   <span class="">2 New Notifications</span>
-                  <a href="javascript:void()" class="d-inline-block">
-                    <span class="badge badge-pill gradient-2">5</span>
-                  </a>
                 </div>
                 <div class="dropdown-content-body">
                   <ul>
@@ -255,7 +179,7 @@ if (!isset($_SESSION['user_id'])) {
                 </a>
                 <div
                   class="drop-down dropdown-language animated fadeIn dropdown-menu"
-                 >
+                >
                   <div class="dropdown-content-body">
                     <ul>
                       <li><a href="javascript:void()">English</a></li>
@@ -269,16 +193,15 @@ if (!isset($_SESSION['user_id'])) {
                 <span class="activity active"></span>
                 <img src="../images/user/1.png" height="40" width="40" alt="" />
               </div>
-              <div class="drop-down dropdown-profile animated fadeIn dropdown-menu">
+              <div class="drop-down dropdown-profile dropdown-menu">
                 <div class="dropdown-content-body">
                   <ul>
                     <li>
-                      <a href="app-profile.html"><i class="icon-user"></i> <span><?php echo decrypt_data($_SESSION['user_name']); ?></span></a>
+                      <a href="#"><i class="icon-user"></i> <span><?php echo decrypt_data($user_name); ?></span></a>
                     </li>
                     <!-- <li>
-                      <a href="javascript:void()">
-                        <i class="icon-envelope-open"></i> <span>Inbox</span>
-                        <div class="badge gradient-3 badge-pill gradient-1">
+                      <a href="email-inbox.html"><i class="icon-envelope-open"></i> <span>Inbox</span>
+                        <div class="badge gradient-3 badge-pill badge-primary">
                           3
                         </div>
                       </a>
@@ -306,20 +229,20 @@ if (!isset($_SESSION['user_id'])) {
     <!--**********************************
             Sidebar start
         ***********************************-->
-    <div class="nk-sidebar text-light" style="background-color: #00FF7F;">
-      <div class="nk-nav-scroll text-light" style="background-color: #00FF7F;">
-        <ul class="metismenu txt-light" id="menu" style="background-color: #00FF7F;">
-          <!-- <li class="nav-label">Dashboard</li> -->
+    <div class="nk-sidebar" style="background-color: #00FF7F">
+      <div class="nk-nav-scroll" style="background-color: #00FF7F">
+        <ul class="metismenu" id="menu" style="background-color: #00FF7F">
+          <li class="nav-label">Dashboard</li>
           <li>
-            <a class="has-arrow" href="javascript:void()" aria-expanded="fals" style="background-color: #00FF7F;">
+            <a class="has-arrow" href="javascript:void()" aria-expanded="fals" style="background-color: #00FF7F">
               <i class="icon-speedometer menu-icon"></i><span class="nav-text">Dashboard</span>
             </a>
-            <ul aria-expanded="false" class="" style="background-color: #00FF7F;">
-              <li><a href="./home.php"><span><i class="fa"></i></span> Home</a></li>
-              <li><a href="./Admin_users.php"><span><i class="fa"></i></span> Users</a></li>
-              <li><a href="./groups.php"><span><i class="fa"></i></span> Groups</a></li>
+            <ul aria-expanded="false" class="" style="background-color: #00FF7F">
+              <li><a href="./home.php">Home</a></li>
+              <li><a href="./Admin_users.php">Users</a></li>
+              <li><a href="./groups.php">Groups</a></li>
               <li><a href="./product_report.php"><span><i class="fa"></i></span> Product reports</a></li>
-              <!-- <li><a href="./orders.php"><span><i class="fab fa-basket"></i></span> Orders</a></li> -->
+              <!-- <li><a href="./orders.php">Orders</a></li> -->
             </ul>
           </li>
           <!-- <li class="mega-menu mega-menu-sm">
@@ -1185,7 +1108,37 @@ if (!isset($_SESSION['user_id'])) {
   <script src="../plugins/chartist/js/chartist.min.js"></script>
   <script src="../plugins/chartist-plugin-tooltips/js/chartist-plugin-tooltip.min.js"></script>
 
+
+
+
+
   <script src="../js/dashboard/dashboard-1.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!-- <script src="../plugins/common/common.min.js"></script> -->
+  <!-- <script src="../js/custom.min.js"></script> -->
+  <script src="../js/bootstrap/bootstrap.min.js"></script>
+  <!-- <script src="../js/settings.js"></script> -->
+  <!-- <script src="../js/gleek.js"></script> -->
+  <!-- <script src="../js/styleSwitcher.js"></script> -->
+  <script src="../js/custom_js/admin_users.js"></script>
+
+  <script src="../plugins/tables/js/jquery.dataTables.min.js"></script>
+  <script src="../plugins/tables/js/datatable/dataTables.bootstrap4.min.js"></script>
+  <script src="../plugins/tables/js/datatable-init/datatable-basic.min.js"></script>
 </body>
 
 </html>

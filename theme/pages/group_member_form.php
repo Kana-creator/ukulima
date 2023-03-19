@@ -361,27 +361,25 @@ if (isset($_SESSION['user_id'])) {
                             <i class="icon-speedometer menu-icon"></i><span class="nav-text">Dashboard</span>
                         </a>
                         <ul aria-expanded="false" class="" style="background: #00FF7F">
-
-                            <li><a href="./products.php">Products</a></li>
-                            <li><a href="./orders.php">Orders</a></li>
+                            <li><a href="./consumer_page.php">Products</a></li>
+                            <li><a href="./verify_product.php">Verify product</a></li>
+                            <li><a href="./product_report_form.php">Report a product</a></li>
+                            <li><a href="./consumer_cart.php">Orders</a></li>
                         </ul>
                     </li>
-
                     <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="fals" style="background: #00FF7F">
-                            <i class="icon-speedometer menu-icon"></i><span class="nav-text">Branch Management</span>
+                            <i class="fa fa-group menu-icon"></i><span class="nav-text">Group Management</span>
                         </a>
                         <ul aria-expanded="false" class="" style="background: #00FF7F">
-
-                            <li><a href="./branches.php">Branches </a></li>
-                            <li><a href="./branch_users.php">Users</a></li>
+                            <li><a href="./consumer_group.php">Group Members</a></li>
+                            <li><a href="./savings.php">Savings</a></li>
+                            <li><a href="./loans.php">Loans</a></li>
                         </ul>
                     </li>
-
                 </ul>
             </div>
         </div>
-
         <!--**********************************
             Sidebar end
         ***********************************-->

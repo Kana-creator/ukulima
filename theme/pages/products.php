@@ -257,9 +257,10 @@ if (isset($_SESSION['user_id'])) {
               <i class="icon-speedometer menu-icon"></i><span class="nav-text">Dashboard</span>
             </a>
             <ul aria-expanded="false" class="" style="background: #00FF7F">
-              
+
               <li><a href="./products.php">Products</a></li>
               <li><a href="./orders.php">Orders</a></li>
+              <li><a href="./verify_product.php">Veriify product</a></li>
             </ul>
           </li>
 
@@ -268,12 +269,12 @@ if (isset($_SESSION['user_id'])) {
               <i class="icon-speedometer menu-icon"></i><span class="nav-text">Branch Management</span>
             </a>
             <ul aria-expanded="false" class="" style="background: #00FF7F">
-              
+
               <li><a href="./branches.php">Branches </a></li>
               <li><a href="./branch_users.php">Users</a></li>
             </ul>
           </li>
-          
+
         </ul>
       </div>
     </div>

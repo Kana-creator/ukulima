@@ -37,11 +37,11 @@ function add_branch($mysqli, $user_id, $user_category, $branch_name, $branch_add
                                 if (!$query) {
                                     header("Location: ../pages/add_branch.php?status=error&message=$mysqli->error");
                                 } else {
-                                    header("Location: ../pages/branch_users.php?status=success&message=Branch has been added successfully.");
+                                    header("Location: ../pages/branches.php?status=success&message=Branch has been added successfully.");
                                 }
                             }
                         } else {
-                            header("Location: ../pages/branch_users.php?status=success&message=Branch has been added successfully.");
+                            header("Location: ../pages/branches.php?status=success&message=Branch has been added successfully.");
                         }
                     }
                 } else {
@@ -61,11 +61,11 @@ function add_branch($mysqli, $user_id, $user_category, $branch_name, $branch_add
                                 if (!$query) {
                                     header("Location: ../pages/add_branch.php?status=error&message=$mysqli->error");
                                 } else {
-                                    header("Location: ../pages/branch_users.php?status=success&message=Branch has been added successfully.");
+                                    header("Location: ../pages/branches.php?status=success&message=Branch has been added successfully.");
                                 }
                             }
                         } else {
-                            header("Location: ../pages/branch_users.php?status=success&message=Branch has been added successfully.");
+                            header("Location: ../pages/branches.php?status=success&message=Branch has been added successfully.");
                         }
                     }
                 }
@@ -82,7 +82,7 @@ function update_branch($mysqli, $branch_id, $branch_name, $branch_address, $bran
     if (!$query) {
         header("Location: ../pages/add_branch.php?status=error&message=$mysqli->error");
     } else {
-        header("Location: ../pages/add_branch.php?status=success&message=Branch info has been updated successfully.");
+        header("Location: ../pages/branches.php?status=success&message=Branch info has been updated successfully.");
     }
 }
 

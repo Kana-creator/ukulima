@@ -159,7 +159,7 @@ if (isset($_POST['add_product'])) {
         $_POST['val-serial-number'],
         $_POST['val-product-category'],
         $_POST['val-unit-cost'],
-        $_POST['val-e-extension']
+        mysqli_real_escape_string($mysqli, $_POST['val-e-extension'])
     );
     $product_properties = $product->get_properties();
     // session_start();
@@ -216,7 +216,7 @@ if (isset($_POST['add_product'])) {
         $_POST['val-serial-number'],
         $_POST['val-product-category'],
         $_POST['val-unit-cost'],
-        $_POST['val-e-extension']
+       mysqli_real_escape_string($mysqli, $_POST['val-e-extension'])
     );
     $product_properties = $product->get_properties();
 
